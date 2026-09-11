@@ -34,11 +34,7 @@ import { site } from '../site';
           <div class="d1-media-shade"></div>
           <p class="d1-media-script">Same skin.<br/>More truth.</p>
           <span class="d1-media-corner-tag">TEXTURES TELL<br/>STORIES TOO.</span>
-          <div class="d1-media-center">
-            <div class="d1-play-btn" aria-hidden="true">&#9654;</div>
-            <span class="d1-play-label">WATCH THE TEXTURE</span>
-          </div>
-          <span class="d1-media-bottom-tag">A CLOSER LOOK AT WHAT WORKS</span>
+          <span class="d1-media-bottom-tag">REAL TEXTURE &middot; NO FILTER</span>
         </div>
       </div>
     </div>
@@ -397,7 +393,9 @@ import { site } from '../site';
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.8s ease;
   }
+  .d1-media-box:hover .d1-hero-video { transform: scale(1.025); }
   .d1-media-shade {
     position: absolute;
     inset: 0;
@@ -426,37 +424,6 @@ import { site } from '../site';
     text-align: right;
     line-height: 1.5;
     z-index: 2;
-  }
-  .d1-media-center {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    align-self: center;
-  }
-  .d1-play-btn {
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .d1-media-box:hover .d1-play-btn { transform:scale(1.08); }
-  .d1-play-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--d1-ink);
   }
   .d1-media-bottom-tag {
     position: relative;
