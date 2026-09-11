@@ -21,7 +21,7 @@
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Sizing & Layout */
-  --max: 76rem;
+  --max: 96rem;
   --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -63,6 +63,22 @@ a {
   transition: color var(--trans), opacity var(--trans);
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .wrap {
   width: min(var(--max), calc(100% - 3rem));
   margin-inline: auto;
@@ -82,7 +98,7 @@ a {
 }
 
 .header-inner {
-  height: 4.75rem;
+  height: 4.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
