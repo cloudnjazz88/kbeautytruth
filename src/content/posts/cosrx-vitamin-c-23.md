@@ -1,10 +1,10 @@
 ---
-title: "COSRX Vitamin C 23% Review on Dry-Leaning, Somewhat Sensitive Skin"
+title: "COSRX Vitamin C 23% Review on Dry, Somewhat Sensitive Skin"
 description: "Kay is currently using COSRX Advanced Pure Vitamin C 23% Serum with Vitamin E & Glutathione. This draft is a single-product note, not a comparison, until another vitamin C has confirmed use details."
 slug: cosrx-vitamin-c-23
 category: reviews
 author: Kay
-skinType: Dry-Leaning / Somewhat Sensitive
+skinType: Dry / Somewhat Sensitive
 status: using
 draft: true
 relatedPosts:
@@ -16,7 +16,7 @@ repurchase: unknown
 
 ## What this page is
 
-I am currently using COSRX Advanced Pure Vitamin C 23% Serum with Vitamin E & Glutathione. I have dry-leaning, somewhat sensitive skin.
+I am currently using COSRX Advanced Pure Vitamin C 23% Serum with Vitamin E & Glutathione. I have dry, somewhat sensitive skin.
 
 This is not a comparison, and I am not picking a winner against The Ordinary or any other vitamin C. I do not have a confirmed product name or use history for a second serum.
 
@@ -58,7 +58,7 @@ A comparison needs two used products, two timeframes, and notes I can stand behi
 
 ## Who it may suit
 
-I can only say I am a dry-leaning, somewhat sensitive-skinned person who chose to use this serum. That is not a match score for anyone else.
+I can only say I am a dry, somewhat sensitive-skinned person who chose to use this serum. That is not a match score for anyone else.
 
 ## Who should be cautious
 

@@ -4,7 +4,7 @@ description: "Kay bought Medicube Collagen Jelly Cream expecting to like it, the
 slug: medicube-collagen-jelly-cream
 category: breakouts
 author: Kay
-skinType: Dry-Leaning / Somewhat Sensitive
+skinType: Dry / Somewhat Sensitive
 status: discontinued
 draft: true
 relatedPosts:

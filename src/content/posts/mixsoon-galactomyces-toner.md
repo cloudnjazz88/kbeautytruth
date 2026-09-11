@@ -1,11 +1,11 @@
 ---
 title: "I’m on My Second Bottle of mixsoon Galactomyces Toner: An Honest Sensitive Skin Review"
-description: "My experience using mixsoon Galactomyces Toner every day on dry-leaning, somewhat sensitive skin, including its watery texture, quick absorption, hydrating finish, and why I plan to repurchase it again."
+description: "My experience using mixsoon Galactomyces Toner every day on dry, somewhat sensitive skin, including its watery texture, quick absorption, hydrating finish, and why I plan to repurchase it again."
 slug: mixsoon-galactomyces-toner
 category: reviews
 author: Kay
 featured: false
-skinType: Dry-Leaning / Somewhat Sensitive
+skinType: Dry / Somewhat Sensitive
 testedFor: "Second Bottle; Used Daily"
 status: repurchased
 draft: true
@@ -23,7 +23,7 @@ That probably says more about my experience than an elaborate claim could. If it
 
 ## My skin and how I use it
 
-I have dry-leaning, somewhat sensitive skin. I use this toner as the first step of my routine, after cleansing and before any essence or serum.
+I have dry, somewhat sensitive skin. I use this toner as the first step of my routine, after cleansing and before any essence or serum.
 
 Because the bottle is large and the texture is so light, I do not measure out a careful number of drops. I apply it generously. It feels almost exactly like water, spreads easily, and absorbs quickly instead of sitting on top of my skin.
 
@@ -87,6 +87,6 @@ It suits my skin, feels effortless to use, and gives me the combination of quick
 
 ## Final verdict
 
-**mixsoon Galactomyces Toner is an everyday repurchase for me, not a miracle-product story.** It is watery, fast-absorbing, comfortable on my dry-leaning and somewhat sensitive skin, and more hydrating than its very light texture initially suggests.
+**mixsoon Galactomyces Toner is an everyday repurchase for me, not a miracle-product story.** It is watery, fast-absorbing, comfortable on my dry and somewhat sensitive skin, and more hydrating than its very light texture initially suggests.
 
 My experience is based on finishing one bottle and continuing with a second. That longer, uneventful use is exactly why I trust it enough to keep it in my routine.

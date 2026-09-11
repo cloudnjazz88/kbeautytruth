@@ -7,7 +7,7 @@ export const site = {
   locale: 'en-US',
   author: {
     name: 'Kay',
-    skinType: 'Dry-Leaning / Somewhat Sensitive',
+    skinType: 'Dry / Somewhat Sensitive',
     goals: 'Anti-aging / Barrier Support',
     shopping: 'Amazon / Olive Young',
     experience: '3+ Years With K-Beauty',
