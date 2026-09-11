@@ -1,0 +1,16 @@
+{
+  "name": "K-Beauty Truth",
+  "short_name": "KBT",
+  "description": "Honest skincare notes, mostly Korean.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF9",
+  "theme_color": "#3A5A40",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

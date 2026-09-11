@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SkinProfile from '../components/SkinProfile.astro';
+import { site } from '../site';
+---
+
+<BaseLayout
+  title="About Kay"
+  description="Who writes K-Beauty Truth, how products are chosen, and what this site will not pretend to be."
+  canonicalPath="/about/"
+>
+  <section class="stack-page">
+    <div class="wrap prose">
+      <h1 class="page-title">About Kay</h1>
+      <p>
+        {site.name} is written by Kay. She has used Korean skincare for more than three years. She
+        has combination, sensitive skin. The questions she brings to a new product are usually
+        about anti-aging and whether her barrier will tolerate it.
+      </p>
+      <p>
+        I document products I have personally purchased and used over time, from the ones I
+        finished and repurchased to the ones I stopped using because my skin did not respond well.
+      </p>
+      <p>
+        Before buying, she tends to look into whether a formula seems suitable for sensitive skin.
+        She has bought products from Amazon and Olive Young. She is willing to write about products
+        that did not suit her.
+      </p>
+      <p>
+        Kay is not a dermatologist, cosmetic chemist, esthetician, or industry expert. Nothing here
+        is a diagnosis or a treatment plan.
+      </p>
+      <SkinProfile />
+      <h2>What is on the shelf now</h2>
+      <p>These are products Kay has said she is currently using:</p>
+      <ul>
+        <li>COSRX Advanced Pure Vitamin C 23% Serum with Vitamin E &amp; Glutathione</li>
+        <li>Medicube Jelly Mist Serum with Pink PDRN Collagen</li>
+        <li>Torriden DIVE IN Cleansing Oil</li>
+        <li>A Torriden DIVE IN hyaluronic acid product, exact full name not confirmed yet</li>
+        <li>VT COSMETICS PDRN Daily Hydrating Mask, 30 Sheets</li>
+        <li>Medicube PDRN Pink Peptide Serum</li>
+        <li>Mixsoon Centella Asiatica Toner</li>
+        <li>Medicube Booster Pro X2</li>
+      </ul>
+      <h2>Finished and bought again</h2>
+      <ul>
+        <li>VT COSMETICS CICA Reedle Shot 100</li>
+        <li>AESTURA ATOBARRIER365 Cream with Ceramides</li>
+        <li>Mixsoon Cica Hyal Deep Soothing Cream</li>
+      </ul>
+      <h2>Stopped</h2>
+      <p>
+        Medicube Collagen Jelly Cream with Collagen &amp; Niacinamide. Kay used it, her skin broke
+        out, and she is not using it now. That is her result, not a claim that the cream breaks
+        everyone out.
+      </p>
+      <p><a href="/editorial-policy/">How these notes are written</a></p>
+    </div>
+  </section>
+</BaseLayout>

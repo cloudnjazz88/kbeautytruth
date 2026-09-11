@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../site';
+---
+
+<BaseLayout
+  title="Affiliate Disclosure"
+  description="How K-Beauty Truth will label affiliate links and paid relationships."
+  canonicalPath="/affiliate-disclosure/"
+>
+  <section class="stack-page">
+    <div class="wrap prose">
+      <h1 class="page-title">Affiliate Disclosure</h1>
+      <p>
+        {site.name} may later include affiliate links. If you buy through one of those links, the
+        site may earn a commission. That does not change the price you pay.
+      </p>
+      {
+        site.features.affiliateNetwork ? (
+          <p>Affiliate links on this site are active and labeled on the pages that use them.</p>
+        ) : (
+          <p>
+            No affiliate network is connected in the current site settings. Product names on these
+            pages are not click-to-earn links unless a page says otherwise.
+          </p>
+        )
+      }
+      <p>
+        Kay buys the products she writes about unless a page clearly says a product was provided
+        for free. A commission, if one exists later, is not a reason to invent a good result.
+      </p>
+      <p>
+        Questions: <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

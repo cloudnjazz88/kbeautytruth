@@ -1,0 +1,22 @@
+{
+  "name": "k-beauty-truth",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run check:content && astro build && npm run check:dist",
+    "preview": "astro preview",
+    "lint": "astro check",
+    "typecheck": "astro check",
+    "check:content": "node scripts/check-experience-needed.mjs",
+    "check:dist": "node scripts/check-dist.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2",
+    "typescript": "^6.0.3"
+  }
+}

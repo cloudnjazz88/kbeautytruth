@@ -1,0 +1,32 @@
+---
+import { site } from '../site';
+
+interface Props {
+  skinType?: string;
+  testedFor?: string;
+}
+
+const { skinType, testedFor } = Astro.props;
+---
+
+<section class="skin-profile" aria-labelledby="skin-profile-title">
+  <h2 class="skin-profile-title" id="skin-profile-title">My Skin Profile</h2>
+  <dl>
+    <dt>Skin Type</dt>
+    <dd>{skinType ?? site.author.skinType}</dd>
+    <dt>Goals</dt>
+    <dd>{site.author.goals}</dd>
+    <dt>Shopping</dt>
+    <dd>{site.author.shopping}</dd>
+    <dt>Experience</dt>
+    <dd>{site.author.experience}</dd>
+    {
+      testedFor && (
+        <>
+          <dt>Tested For</dt>
+          <dd>{testedFor}</dd>
+        </>
+      )
+    }
+  </dl>
+</section>

@@ -1,0 +1,785 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../site';
+import { getPublishedPosts } from '../lib/posts';
+
+const published = await getPublishedPosts();
+---
+
+<BaseLayout
+  title={site.name}
+  description={site.tagline}
+  canonicalPath="/"
+>
+  <!-- HERO: 2-column split -->
+  <section class="d1-hero">
+    <div class="d1-wrap d1-hero-grid">
+      <!-- Left: Text -->
+      <div class="d1-hero-left">
+        <p class="d1-kicker">REAL TESTS. REAL SKIN. A CALMER TRUTH.</p>
+        <h1 class="d1-hero-title">Tested on sensitive&nbsp;skin.<br/>Told honestly.</h1>
+        <p class="d1-hero-desc">
+          A personal, evidence-in-use journal for K-beauty.
+          Thoughtful tests, real-life results, and what I'd actually buy again.
+        </p>
+        <a class="d1-btn-terra" href="/about/">Explore My Journal &rarr;</a>
+        <p class="d1-hero-subline">
+          <span class="d1-subline-dash"></span>
+          SAME SKIN &nbsp;/&nbsp; MORE ANSWERS &nbsp;/&nbsp; KINDER BEAUTY
+        </p>
+      </div>
+      <!-- Right: Media placeholder box -->
+      <div class="d1-hero-right">
+        <div class="d1-media-box">
+          <p class="d1-media-script">Same skin.<br/>More truth.</p>
+          <span class="d1-media-corner-tag">TEXTURES TELL<br/>STORIES TOO.</span>
+          <div class="d1-media-center">
+            <div class="d1-play-btn">&#9654;</div>
+            <span class="d1-play-label">WATCH THE TEXTURE</span>
+          </div>
+          <span class="d1-media-bottom-tag">A CLOSER LOOK AT WHAT WORKS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MY SKIN PROFILE BAR -->
+  <div class="d1-wrap">
+    <div class="d1-profile-bar">
+      <div class="d1-profile-brand">
+        <h2 class="d1-profile-title">My Skin Profile</h2>
+        <p class="d1-profile-tagline">BECAUSE CONTEXT MATTERS</p>
+      </div>
+      <div class="d1-profile-items">
+        <div class="d1-profile-item">
+          <span class="d1-profile-icon">🌿</span>
+          <div>
+            <div class="d1-profile-item-label">Combination + Sensitive</div>
+            <div class="d1-profile-item-value">Oily T-zone, drier cheeks, easily reactive</div>
+          </div>
+        </div>
+        <div class="d1-profile-item">
+          <span class="d1-profile-icon">☀️</span>
+          <div>
+            <div class="d1-profile-item-label">Main Concerns</div>
+            <div class="d1-profile-item-value">Dehydration, uneven texture, congestion</div>
+          </div>
+        </div>
+        <div class="d1-profile-item">
+          <span class="d1-profile-icon">💧</span>
+          <div>
+            <div class="d1-profile-item-label">Skin Goals</div>
+            <div class="d1-profile-item-value">Calm, balanced, healthy-looking skin</div>
+          </div>
+        </div>
+      </div>
+      <a class="d1-profile-btn" href="/about/">Edit Profile &rarr;</a>
+    </div>
+  </div>
+
+  <!-- TABS + CARDS SECTION -->
+  <div class="d1-wrap d1-cards-section">
+    <!-- Tab Bar -->
+    <div class="d1-tab-bar">
+      <div class="d1-tabs">
+        <span class="d1-tab d1-tab-active">Repurchased</span>
+        <span class="d1-tab">Breakouts</span>
+        <span class="d1-tab">Routines</span>
+      </div>
+      <span class="d1-tab-right-label">REAL EXPERIENCE. REPEAT WORTHY.</span>
+    </div>
+
+    <!-- 4 Product Cards + 1 Quote Banner -->
+    <div class="d1-cards-grid">
+      <!-- Card 1 -->
+      <a class="d1-prod-card" href="/reviews/vt-cica-reedle-shot-100/">
+        <div class="d1-prod-img">
+          <span class="d1-prod-img-text">VT REEDLE SHOT 100</span>
+        </div>
+        <div class="d1-prod-body">
+          <div class="d1-prod-meta-row">
+            <span class="d1-prod-kicker">CALMS MY SKIN</span>
+            <span>🌿</span>
+          </div>
+          <h3 class="d1-prod-title">VT CICA Reedle Shot 100</h3>
+          <p class="d1-prod-desc">Absorption-boosting serum. Finished one bottle and repurchased — my skin texture improved noticeably.</p>
+        </div>
+        <div class="d1-prod-arrow">&#8594;</div>
+      </a>
+
+      <!-- Card 2 -->
+      <a class="d1-prod-card" href="/about/">
+        <div class="d1-prod-img">
+          <span class="d1-prod-img-text">AESTURA ATOBARRIER</span>
+        </div>
+        <div class="d1-prod-body">
+          <div class="d1-prod-meta-row">
+            <span class="d1-prod-kicker">ALWAYS A REORDER</span>
+            <span>🌿</span>
+          </div>
+          <h3 class="d1-prod-title">AESTURA ATOBARRIER365 Cream</h3>
+          <p class="d1-prod-desc">Reliable ceramide barrier cream. My skin feels steadier whenever I use this consistently.</p>
+        </div>
+        <div class="d1-prod-arrow">&#8594;</div>
+      </a>
+
+      <!-- Card 3 -->
+      <a class="d1-prod-card" href="/about/">
+        <div class="d1-prod-img">
+          <span class="d1-prod-img-text">MIXSOON CICA HYAL</span>
+        </div>
+        <div class="d1-prod-body">
+          <div class="d1-prod-meta-row">
+            <span class="d1-prod-kicker">SOOTHES & SUPPORTS</span>
+            <span>🌿</span>
+          </div>
+          <h3 class="d1-prod-title">Mixsoon Cica Hyal Deep Cream</h3>
+          <p class="d1-prod-desc">Simple, calming, and never irritates my sensitive skin. A constant repurchase for a reason.</p>
+        </div>
+        <div class="d1-prod-arrow">&#8594;</div>
+      </a>
+
+      <!-- Card 4 -->
+      <a class="d1-prod-card" href="/about/">
+        <div class="d1-prod-img">
+          <span class="d1-prod-img-text">TORRIDEN DIVE IN</span>
+        </div>
+        <div class="d1-prod-body">
+          <div class="d1-prod-meta-row">
+            <span class="d1-prod-kicker">REPLENISHES WELL</span>
+            <span>🌿</span>
+          </div>
+          <h3 class="d1-prod-title">Torriden DIVE IN HA</h3>
+          <p class="d1-prod-desc">Lightweight but deeply hydrating. A constant repurchase for a reason.</p>
+        </div>
+        <div class="d1-prod-arrow">&#8594;</div>
+      </a>
+
+      <!-- 5th: Editorial Quote Banner -->
+      <div class="d1-quote-banner">
+        <h3 class="d1-quote-text">Good skin is a long-term relationship.</h3>
+        <p class="d1-quote-footer">SAME PRODUCTS. A CALMER YOU.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM: Compare + Latest Notes -->
+  <div class="d1-wrap d1-bottom-grid">
+    <div class="d1-compare-banner">
+      <div class="d1-compare-left">
+        <h3 class="d1-compare-title">Compare Products</h3>
+        <p class="d1-compare-desc">See how your top picks stack up side by side.</p>
+        <a class="d1-btn-dark" href="/reviews/">Start a Comparison &rarr;</a>
+      </div>
+      <div class="d1-compare-visual">
+        <div class="d1-bottle-placeholder"></div>
+        <div class="d1-vs-circle">VS</div>
+        <div class="d1-bottle-placeholder"></div>
+      </div>
+    </div>
+
+    <div class="d1-latest-box">
+      <div class="d1-latest-header">
+        <h3 class="d1-latest-title">Latest Notes</h3>
+        <a class="d1-latest-viewall" href="/reviews/">View All &rarr;</a>
+      </div>
+      <div class="d1-latest-list">
+        <a class="d1-latest-item" href="/reviews/vt-cica-reedle-shot-100/">
+          <div class="d1-latest-thumb">📝</div>
+          <div>
+            <div class="d1-latest-item-title">VT CICA Reedle Shot 100: Why I Repurchased</div>
+            <div class="d1-latest-meta">Sep 10, 2026 &bull; Review Note</div>
+          </div>
+        </a>
+        <a class="d1-latest-item" href="/breakouts/">
+          <div class="d1-latest-thumb">⚠️</div>
+          <div>
+            <div class="d1-latest-item-title">Medicube Jelly Cream Broke Me Out</div>
+            <div class="d1-latest-meta">Coming Soon &bull; Skin Note</div>
+          </div>
+        </a>
+        <a class="d1-latest-item" href="/routines/">
+          <div class="d1-latest-thumb">🌿</div>
+          <div>
+            <div class="d1-latest-item-title">My Barrier Routine for Sensitive Skin</div>
+            <div class="d1-latest-meta">Coming Soon &bull; Routine Note</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* ===== TOKENS ===== */
+  :root {
+    --d1-bg: #FAFAFA;
+    --d1-card: #FFFFFF;
+    --d1-subtle: #F3F3F0;
+    --d1-ink: #1A1A1A;
+    --d1-ink2: #4A4A4A;
+    --d1-muted: #8A8A8A;
+    --d1-line: #E8E8E4;
+    --d1-line2: #F0F0EC;
+    --d1-terra: #A64B2A;
+    --d1-terra-h: #8D3C1F;
+    --d1-sage: #2F4F38;
+    --d1-sage-l: #E7EFE9;
+    --d1-serif: "Playfair Display", "Newsreader", Georgia, serif;
+    --d1-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+    --d1-ease: cubic-bezier(0.16,1,0.3,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { margin:0; background:var(--d1-bg); color:var(--d1-ink); font-family:var(--d1-sans); font-size:1rem; line-height:1.65; }
+  a { color:inherit; text-decoration:none; }
+  img { max-width:100%; height:auto; }
+
+  /* ===== LAYOUT ===== */
+  .d1-wrap {
+    width: min(76rem, calc(100% - 3rem));
+    margin-inline: auto;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(249,247,242,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--d1-line2);
+  }
+  .header-inner {
+    height: 4.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: min(76rem, calc(100% - 3rem));
+    margin-inline: auto;
+  }
+  .header-left { display:flex; align-items:center; gap:2.5rem; }
+  .logo {
+    font-family: var(--d1-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--d1-ink);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .logo-leaf { font-size:1rem; }
+  .nav-links {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--d1-ink2);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color:var(--d1-ink); font-weight:600; }
+  .header-right { display:flex; align-items:center; gap:1rem; }
+  .header-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--d1-card);
+    border: 1px solid var(--d1-line);
+    padding: 0.45rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    color: var(--d1-muted);
+    width: 13rem;
+  }
+  .btn-header-journal {
+    display: inline-block;
+    background: var(--d1-sage);
+    color: #fff !important;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.55rem 1.25rem;
+    border-radius: 9999px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-header-journal:hover { background:#1e3825; transform:translateY(-1px); }
+  .nav-toggle { display:none; }
+
+  /* ===== HERO ===== */
+  .d1-hero { padding: 3.5rem 0 2.5rem; }
+  .d1-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .d1-kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--d1-muted);
+    margin: 0 0 1.25rem;
+  }
+  .d1-hero-title {
+    font-family: var(--d1-serif);
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    margin: 0 0 1.25rem;
+    color: var(--d1-ink);
+  }
+  .d1-hero-desc {
+    font-size: 1.1rem;
+    color: var(--d1-ink2);
+    line-height: 1.65;
+    margin: 0 0 2rem;
+    max-width: 30rem;
+  }
+  .d1-btn-terra {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--d1-terra);
+    color: #fff !important;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.85rem 1.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 14px rgba(166,75,42,0.25);
+    transition: all 0.25s var(--d1-ease);
+  }
+  .d1-btn-terra:hover { background:var(--d1-terra-h); transform:translateY(-2px); }
+  .d1-hero-subline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--d1-muted);
+  }
+  .d1-subline-dash { display:inline-block; width:2rem; height:1px; background:var(--d1-muted); }
+
+  /* Media placeholder box */
+  .d1-media-box {
+    background: linear-gradient(145deg, #EDEDEA 0%, #E0E0DC 100%);
+    border-radius: 20px;
+    aspect-ratio: 4/3;
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(25,27,26,0.08);
+    overflow: hidden;
+  }
+  .d1-media-script {
+    font-family: var(--d1-serif);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: rgba(25,27,26,0.65);
+    line-height: 1.25;
+    margin: 0;
+  }
+  .d1-media-corner-tag {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(25,27,26,0.5);
+    text-align: right;
+    line-height: 1.5;
+  }
+  .d1-media-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: center;
+  }
+  .d1-play-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--d1-ink);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .d1-media-box:hover .d1-play-btn { transform:scale(1.08); }
+  .d1-play-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--d1-ink);
+  }
+  .d1-media-bottom-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(25,27,26,0.5);
+  }
+
+  /* ===== SKIN PROFILE BAR ===== */
+  .d1-profile-bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: var(--d1-card);
+    border: 1px solid var(--d1-line);
+    border-radius: 14px;
+    padding: 1.5rem 2rem;
+    margin: 1.75rem 0 3rem;
+    box-shadow: 0 2px 8px rgba(25,27,26,0.04);
+  }
+  .d1-profile-brand {
+    border-right: 1px solid var(--d1-line);
+    padding-right: 2rem;
+    flex-shrink: 0;
+  }
+  .d1-profile-title {
+    font-family: var(--d1-serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem;
+    color: var(--d1-ink);
+  }
+  .d1-profile-tagline {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--d1-muted);
+    margin: 0;
+  }
+  .d1-profile-items {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  .d1-profile-item { display:flex; align-items:flex-start; gap:0.75rem; }
+  .d1-profile-icon { font-size:1.35rem; line-height:1; margin-top:0.1rem; }
+  .d1-profile-item-label { font-size:0.875rem; font-weight:700; color:var(--d1-ink); }
+  .d1-profile-item-value { font-size:0.78rem; color:var(--d1-muted); line-height:1.4; }
+  .d1-profile-btn {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--d1-ink2);
+    border: 1px solid var(--d1-line);
+    padding: 0.5rem 1.1rem;
+    border-radius: 9999px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .d1-profile-btn:hover { background:var(--d1-subtle); color:var(--d1-ink); }
+
+  /* ===== TAB BAR ===== */
+  .d1-cards-section { margin-bottom: 4rem; }
+  .d1-tab-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--d1-line);
+    margin-bottom: 2rem;
+    padding-bottom: 0;
+  }
+  .d1-tabs { display:flex; gap:2rem; }
+  .d1-tab {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--d1-muted);
+    padding: 0.85rem 0;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s;
+  }
+  .d1-tab-active {
+    color: var(--d1-sage);
+    border-bottom-color: var(--d1-sage);
+  }
+  .d1-tab-right-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--d1-muted);
+  }
+
+  /* ===== CARDS GRID (4 product + 1 quote) ===== */
+  .d1-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 0.82fr;
+    gap: 1.25rem;
+  }
+  .d1-prod-card {
+    background: var(--d1-card);
+    border: 1px solid var(--d1-line);
+    border-radius: 14px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(25,27,26,0.04);
+    transition: transform 0.28s var(--d1-ease), box-shadow 0.28s var(--d1-ease);
+    cursor: pointer;
+  }
+  .d1-prod-card:hover { transform:translateY(-5px); box-shadow:0 12px 28px rgba(25,27,26,0.09); }
+  .d1-prod-img {
+    background: var(--d1-subtle);
+    border-radius: 10px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.1rem;
+    overflow: hidden;
+  }
+  .d1-prod-img-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--d1-muted);
+    text-align: center;
+    padding: 0.5rem;
+  }
+  .d1-prod-body { flex: 1; }
+  .d1-prod-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+  .d1-prod-kicker {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--d1-muted);
+  }
+  .d1-prod-title {
+    font-family: var(--d1-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 0.45rem;
+    color: var(--d1-ink);
+    transition: color 0.2s;
+  }
+  .d1-prod-card:hover .d1-prod-title { color:var(--d1-sage); }
+  .d1-prod-desc {
+    font-size: 0.8rem;
+    color: var(--d1-ink2);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .d1-prod-arrow {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var(--d1-terra);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    align-self: flex-end;
+    transition: transform 0.2s;
+  }
+  .d1-prod-card:hover .d1-prod-arrow { transform:scale(1.1); }
+
+  /* Quote Banner (5th column) */
+  .d1-quote-banner {
+    background: linear-gradient(160deg, #E8DDD0 0%, #DDD1BC 100%);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(25,27,26,0.04);
+  }
+  .d1-quote-text {
+    font-family: var(--d1-serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--d1-ink);
+    margin: 0 0 2rem;
+  }
+  .d1-quote-footer {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(25,27,26,0.5);
+    border-top: 1px solid rgba(25,27,26,0.18);
+    padding-top: 1rem;
+    margin: 0;
+  }
+
+  /* ===== BOTTOM: COMPARE + LATEST NOTES ===== */
+  .d1-bottom-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    padding-bottom: 5rem;
+  }
+  .d1-compare-banner {
+    background: var(--d1-card);
+    border: 1px solid var(--d1-line);
+    border-radius: 14px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    box-shadow: 0 2px 8px rgba(25,27,26,0.04);
+  }
+  .d1-compare-title {
+    font-family: var(--d1-serif);
+    font-size: 1.65rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+  }
+  .d1-compare-desc { font-size:0.9rem; color:var(--d1-muted); margin:0 0 1.5rem; }
+  .d1-btn-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--d1-sage);
+    color: #fff !important;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.7rem 1.4rem;
+    border-radius: 9999px;
+    transition: all 0.2s;
+  }
+  .d1-btn-dark:hover { background:#1e3825; transform:translateY(-1px); }
+  .d1-compare-visual {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+  .d1-bottle-placeholder {
+    width: 4rem;
+    height: 7rem;
+    background: var(--d1-subtle);
+    border-radius: 20px;
+  }
+  .d1-vs-circle {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--d1-sage);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  /* Latest Notes box */
+  .d1-latest-box {
+    background: var(--d1-card);
+    border: 1px solid var(--d1-line);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 8px rgba(25,27,26,0.04);
+  }
+  .d1-latest-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--d1-line2);
+    margin-bottom: 1.1rem;
+  }
+  .d1-latest-title {
+    font-family: var(--d1-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .d1-latest-viewall { font-size:0.78rem; font-weight:600; color:var(--d1-muted); }
+  .d1-latest-viewall:hover { color:var(--d1-terra); }
+  .d1-latest-list { display:flex; flex-direction:column; gap:0.1rem; }
+  .d1-latest-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--d1-line2);
+    transition: opacity 0.2s;
+  }
+  .d1-latest-item:last-child { border-bottom:none; }
+  .d1-latest-item:hover { opacity:0.75; }
+  .d1-latest-thumb {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 10px;
+    background: var(--d1-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  .d1-latest-item-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--d1-ink);
+    margin-bottom: 0.2rem;
+    transition: color 0.2s;
+  }
+  .d1-latest-item:hover .d1-latest-item-title { color:var(--d1-terra); }
+  .d1-latest-meta { font-size:0.72rem; color:var(--d1-muted); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1100px) {
+    .d1-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .d1-quote-banner { grid-column: span 2; flex-direction: row; align-items: center; }
+    .d1-bottom-grid { grid-template-columns: 1fr; }
+    .header-search { display:none; }
+  }
+  @media (max-width: 720px) {
+    .d1-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .d1-hero-right { display:none; }
+    .d1-cards-grid { grid-template-columns: 1fr; }
+    .d1-quote-banner { grid-column: span 1; }
+    .nav-links { display:none; }
+    .d1-profile-bar { flex-direction:column; align-items:flex-start; }
+    .d1-profile-brand { border-right:none; border-bottom:1px solid var(--d1-line); padding-right:0; padding-bottom:1rem; width:100%; }
+    .d1-profile-items { flex-direction:column; gap:1rem; }
+    .d1-compare-banner { flex-direction:column; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+  }
+</style>

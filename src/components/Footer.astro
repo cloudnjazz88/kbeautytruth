@@ -1,0 +1,30 @@
+---
+import { site } from '../site';
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="logo">{site.name}</p>
+        <p class="footer-note">{site.tagline}</p>
+        <p class="footer-note">
+          Notes on this site are {site.author.name}'s personal experience, not medical advice.
+          Skin responds differently from person to person.
+        </p>
+        <p class="footer-note">
+          Some pages may include affiliate links. If a purchase is made through one of those links,
+          the site may earn a commission at no extra cost to the reader.
+        </p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+        <li><a href="/editorial-policy/">Editorial Policy</a></li>
+      </ul>
+    </div>
+    <p class="copyright">&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+  </div>
+</footer>

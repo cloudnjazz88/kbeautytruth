@@ -1,0 +1,22 @@
+---
+import { getPostUrl, type Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+  headingLevel?: 2 | 3;
+}
+
+const { post, headingLevel = 3 } = Astro.props;
+const href = getPostUrl(post);
+const Heading = headingLevel === 2 ? 'h2' : 'h3';
+const categoryLabel = post.data.category.replaceAll('-', ' ');
+---
+
+<a class="post-card" href={href}>
+  <div class="post-card-meta">
+    <span class="post-card-badge">{categoryLabel}</span>
+    {post.data.status === 'repurchased' && <span>• Repurchased</span>}
+  </div>
+  <Heading class="post-card-title">{post.data.title}</Heading>
+  <p class="post-card-excerpt">{post.data.description}</p>
+</a>

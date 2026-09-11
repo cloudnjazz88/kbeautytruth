@@ -1,0 +1,35 @@
+---
+import { categories, site } from '../site';
+
+const path = Astro.url.pathname;
+---
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="header-left">
+      <a class="logo" href="/">
+        K-Beauty Truth <span class="logo-leaf">🌿</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Journal</a></li>
+          <li><a href="/reviews/" aria-current={path.startsWith('/reviews') ? 'page' : undefined}>Products</a></li>
+          <li><a href="/routines/" aria-current={path.startsWith('/routines') ? 'page' : undefined}>Routines</a></li>
+          <li><a href="/breakouts/" aria-current={path.startsWith('/breakouts') ? 'page' : undefined}>Breakouts</a></li>
+          <li><a href="/about/" aria-current={path === '/about/' ? 'page' : undefined}>About</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="header-right">
+      <div class="header-search">
+        <span>🔍</span>
+        <span>Search notes, products...</span>
+      </div>
+      <a class="btn-header-journal" href="/about/">My Journal</a>
+    </div>
+  </div>
+</header>

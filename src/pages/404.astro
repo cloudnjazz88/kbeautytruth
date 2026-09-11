@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../site';
+---
+
+<BaseLayout
+  title="Page not found"
+  description={`This address is not a published page on ${site.name}.`}
+  canonicalPath="/"
+  noindex={true}
+>
+  <section class="stack-page">
+    <div class="wrap prose">
+      <h1 class="page-title">This page is not here</h1>
+      <p>The link may be typed wrong, or the note was never published.</p>
+      <p><a href="/">Back to the homepage</a></p>
+    </div>
+  </section>
+</BaseLayout>

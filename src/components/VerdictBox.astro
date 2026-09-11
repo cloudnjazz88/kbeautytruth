@@ -1,0 +1,16 @@
+---
+interface Props {
+  verdict?: string;
+}
+
+const { verdict } = Astro.props;
+---
+
+{
+  verdict && (
+    <section class="verdict" aria-labelledby="verdict-title">
+      <h2 class="verdict-title" id="verdict-title">Verdict</h2>
+      <p>{verdict}</p>
+    </section>
+  )
+}

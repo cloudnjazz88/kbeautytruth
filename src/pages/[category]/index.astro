@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import {
+  getPostsByCategory,
+  getPublishedPosts,
+  getRepurchasedPosts,
+  type Post,
+} from '../../lib/posts';
+import { postCategories, type PostCategory } from '../../site';
+
+export function getStaticPaths() {
+  return [...postCategories, 'repurchased'].map((category) => ({
+    params: { category },
+  }));
+}
+
+const { category } = Astro.params;
+if (!category) {
+  throw new Error('Missing category');
+}
+
+const copy: Record<string, { title: string; description: string; intro: string }> = {
+  reviews: {
+    title: 'Reviews',
+    description: 'Personal notes on K-beauty products Kay bought and used.',
+    intro: 'Reviews stay unpublished until Kay can fill in the use details she actually remembers.',
+  },
+  breakouts: {
+    title: 'Breakouts',
+    description: 'Products Kay stopped using after her skin reacted poorly.',
+    intro: 'These notes are about her skin only. A breakout here is not a verdict on every skin type.',
+  },
+  comparisons: {
+    title: 'Comparisons',
+    description: 'Side-by-side notes written only after both products have been used.',
+    intro: 'A comparison page will not go up until both products have confirmed use notes.',
+  },
+  routines: {
+    title: 'Routines',
+    description: 'How Kay actually uses the products on her shelf.',
+    intro: 'Routine pages wait until morning and night order can be written without guesswork.',
+  },
+  'beyond-k-beauty': {
+    title: 'Beyond K-Beauty',
+    description: 'Notes on non-Korean products, labeled separately from K-beauty reviews.',
+    intro:
+      'This section exists so non-Korean products are not mixed into Korean review lists. There are no published notes here yet.',
+  },
+  repurchased: {
+    title: 'Repurchased',
+    description: 'Products Kay finished and bought again.',
+    intro: 'A repurchase note is only listed after the review is published.',
+  },
+};
+
+const page = copy[category];
+if (!page) {
+  throw new Error(`Unknown category: ${category}`);
+}
+
+let posts: Post[] = [];
+if (category === 'repurchased') {
+  posts = await getRepurchasedPosts();
+} else if ((postCategories as readonly string[]).includes(category)) {
+  posts = await getPostsByCategory(category as PostCategory);
+} else {
+  posts = await getPublishedPosts();
+}
+---
+
+<BaseLayout title={page.title} description={page.description} canonicalPath={`/${category}/`}>
+  <section class="stack-page">
+    <div class="wrap">
+      <h1 class="page-title">{page.title}</h1>
+      <p class="lede">{page.intro}</p>
+      {
+        posts.length > 0 ? (
+          <div class="card-grid" style="margin-top: 2rem;">
+            {posts.map((post) => (
+              <PostCard post={post} headingLevel={2} />
+            ))}
+          </div>
+        ) : (
+          <p class="empty-copy">No published notes in this section yet.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

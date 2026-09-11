@@ -1,0 +1,132 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import AuthorBio from '../components/AuthorBio.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+import SkinProfile from '../components/SkinProfile.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import VerdictBox from '../components/VerdictBox.astro';
+import { getPostUrl, getRelatedPosts, type Post } from '../lib/posts';
+import { site } from '../site';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  post: Post;
+  headings: Heading[];
+}
+
+const { post, headings } = Astro.props;
+const { data } = post;
+const path = getPostUrl(post);
+const related = await getRelatedPosts(post);
+const categoryLabel = data.category.replaceAll('-', ' ');
+
+const articleLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  author: {
+    '@type': 'Person',
+    name: data.author,
+    url: `${site.url}/about/`,
+  },
+  mainEntityOfPage: new URL(path, site.url).href,
+  publisher: {
+    '@type': 'Person',
+    name: site.author.name,
+  },
+};
+
+if (data.publishedAt) {
+  articleLd.datePublished = data.publishedAt.toISOString();
+}
+if (data.updatedAt) {
+  articleLd.dateModified = data.updatedAt.toISOString();
+}
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${site.url}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: categoryLabel,
+      item: `${site.url}/${data.category}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: data.title,
+      item: new URL(path, site.url).href,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  canonicalPath={path}
+  ogType="article"
+  jsonLd={[articleLd, breadcrumbLd]}
+  noindex={data.draft}
+>
+  <article class="wrap">
+    <header class="article-header">
+      <p class="section-kicker">{categoryLabel}</p>
+      <h1 class="article-title">{data.title}</h1>
+      <p class="article-meta">
+        By {data.author}
+        {
+          data.publishedAt && (
+            <>
+              {' '}
+              · <time datetime={data.publishedAt.toISOString()}>
+                {data.publishedAt.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+            </>
+          )
+        }
+      </p>
+      {
+        import.meta.env.DEV && !data.heroImage && (
+          <p class="dev-note">Development only: add a real product photo before publishing. No image is shown on the public page.</p>
+        )
+      }
+      {
+        data.heroImage && (
+          <img src={data.heroImage} alt={data.heroImageAlt ?? ''} />
+        )
+      }
+    </header>
+
+    <div class="article-body prose">
+      <p class="disclosure">
+        This is a personal-use note, not medical advice. {data.author} bought this product herself.
+        If this page later includes affiliate links, that will be stated here. Skin responses vary.
+      </p>
+      <SkinProfile skinType={data.skinType} testedFor={data.testedFor} />
+      <VerdictBox verdict={data.verdict} />
+      <TableOfContents headings={headings} />
+      <slot />
+      <AuthorBio />
+    </div>
+    <RelatedPosts posts={related} />
+  </article>
+</BaseLayout>
