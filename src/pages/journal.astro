@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getPublishedPosts } from '../lib/posts';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout
+  title="Journal"
+  description="The complete K-Beauty Truth journal: product reviews, routines, ingredient columns, comparisons, and honest notes on what did not work."
+  canonicalPath="/journal/"
+>
+  <section class="stack-page">
+    <div class="wrap">
+      <p class="eyebrow">ALL NOTES, IN ORDER</p>
+      <h1 class="page-title">Journal</h1>
+      <p class="lede">
+        Every published note in one place, from products I used and repurchased to routines,
+        ingredient columns, and the things that did not work for my skin.
+      </p>
+      {
+        posts.length > 0 ? (
+          <div class="card-grid" style="margin-top: 2rem;">
+            {posts.map((post) => <PostCard post={post} headingLevel={2} />)}
+          </div>
+        ) : (
+          <p class="empty-copy">No published notes yet.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

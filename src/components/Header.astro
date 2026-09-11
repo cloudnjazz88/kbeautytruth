@@ -13,9 +13,10 @@ const path = Astro.url.pathname;
 
       <nav class="site-nav" aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Journal</a></li>
+          <li><a href="/journal/" aria-current={path.startsWith('/journal') ? 'page' : undefined}>Journal</a></li>
           <li><a href="/reviews/" aria-current={path.startsWith('/reviews') ? 'page' : undefined}>Products</a></li>
           <li><a href="/routines/" aria-current={path.startsWith('/routines') ? 'page' : undefined}>Routines</a></li>
+          <li><a href="/ingredients/" aria-current={path.startsWith('/ingredients') ? 'page' : undefined}>Ingredients</a></li>
           <li><a href="/breakouts/" aria-current={path.startsWith('/breakouts') ? 'page' : undefined}>What Didn’t Work</a></li>
           <li><a href="/about/" aria-current={path === '/about/' ? 'page' : undefined}>About</a></li>
         </ul>

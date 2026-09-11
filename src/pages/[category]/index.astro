@@ -41,6 +41,12 @@ const copy: Record<string, { title: string; description: string; intro: string }
     description: 'How Kay actually uses the products on her shelf.',
     intro: 'Routine pages wait until morning and night order can be written without guesswork.',
   },
+  ingredients: {
+    title: 'Ingredients',
+    description: 'Clear, practical columns about skincare ingredients and how they fit into a routine.',
+    intro:
+      'Ingredient notes look beyond trend-driven claims to explain what an ingredient is, why it appears in skincare, and what to consider when adding it to a routine.',
+  },
   'beyond-k-beauty': {
     title: 'Beyond K-Beauty',
     description: 'Notes on non-Korean products, labeled separately from K-beauty reviews.',
@@ -60,6 +66,7 @@ if (!page) {
 }
 
 let posts: Post[] = [];
+const ingredientTopics = ['PDRN', 'Retinol', 'Niacinamide', 'Copper Peptides'];
 if (category === 'repurchased') {
   posts = await getRepurchasedPosts();
 } else if ((postCategories as readonly string[]).includes(category)) {
@@ -81,6 +88,16 @@ if (category === 'repurchased') {
               <PostCard post={post} headingLevel={2} />
             ))}
           </div>
+        ) : category === 'ingredients' ? (
+          <div class="ingredient-topic-grid">
+            {ingredientTopics.map((topic) => (
+              <article class="ingredient-topic-card">
+                <span>PLANNED COLUMN</span>
+                <h2>{topic}</h2>
+                <p>What it is, what to realistically expect, and where it may fit in a routine.</p>
+              </article>
+            ))}
+          </div>
         ) : (
           <p class="empty-copy">No published notes in this section yet.</p>
         )
@@ -88,3 +105,48 @@ if (category === 'repurchased') {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .ingredient-topic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .ingredient-topic-card {
+    min-height: 13rem;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+  }
+
+  .ingredient-topic-card span {
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .ingredient-topic-card h2 {
+    margin: 2.2rem 0 0.6rem;
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+  }
+
+  .ingredient-topic-card p {
+    margin: 0;
+    color: var(--ink-secondary);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 900px) {
+    .ingredient-topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 560px) {
+    .ingredient-topic-grid { grid-template-columns: 1fr; }
+  }
+</style>

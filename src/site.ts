@@ -25,6 +25,7 @@ export const categories = [
   { slug: 'repurchased', label: 'Repurchased', path: '/repurchased/' },
   { slug: 'breakouts', label: "What Didn't Work", path: '/breakouts/' },
   { slug: 'routines', label: 'Routines', path: '/routines/' },
+  { slug: 'ingredients', label: 'Ingredients', path: '/ingredients/' },
   { slug: 'beyond-k-beauty', label: 'Beyond K-Beauty', path: '/beyond-k-beauty/' },
 ] as const;
 
@@ -33,6 +34,7 @@ export const postCategories = [
   'breakouts',
   'comparisons',
   'routines',
+  'ingredients',
   'beyond-k-beauty',
 ] as const;
 
@@ -43,6 +45,7 @@ export const categoryLabels: Record<PostCategory, string> = {
   breakouts: "What Didn't Work",
   comparisons: 'Comparisons',
   routines: 'Routines',
+  ingredients: 'Ingredients',
   'beyond-k-beauty': 'Beyond K-Beauty',
 };
 
