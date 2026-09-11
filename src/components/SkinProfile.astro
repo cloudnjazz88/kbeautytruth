@@ -27,7 +27,11 @@ const { skinType, testedFor } = Astro.props;
     </div>
     <div class="profile-fact">
       <dt>K-beauty use</dt>
-      <dd>{site.author.experience}</dd>
+      <dd>
+        {site.author.experience}
+        <br />
+        {site.author.experienceSupporting}
+      </dd>
     </div>
     {
       testedFor && (

@@ -10,7 +10,8 @@ export const site = {
     skinType: 'Dry / Somewhat Sensitive',
     goals: 'Anti-aging / Barrier Support',
     shopping: 'Amazon / Olive Young',
-    experience: '3+ Years With K-Beauty',
+    experience: 'K-Beauty, All My Life',
+    experienceSupporting: 'Born in Korea and raised with Korean skincare',
   },
   features: {
     adsense: false,
