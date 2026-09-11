@@ -1,9 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getPostUrl, getPublishedPosts } from '../lib/posts';
+import {
+  getPostUrl,
+  getPublishedPosts,
+  getRepurchasedPosts,
+  type Post,
+} from '../lib/posts';
 import { site } from '../site';
 
-const latestPosts = (await getPublishedPosts()).slice(0, 3);
+const publishedPosts = await getPublishedPosts();
+const finishedPosts = (await getRepurchasedPosts()).slice(0, 3);
+
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
   day: 'numeric',
@@ -19,6 +26,52 @@ const noteLabels: Record<string, string> = {
   trends: 'Trend Column',
   'beyond-k-beauty': 'Beauty Note',
 };
+
+type HomeTabId = 'all' | 'reviews' | 'ingredients' | 'trends' | 'routines';
+
+const homeTabs: {
+  id: HomeTabId;
+  label: string;
+  viewAllHref: string;
+  emptyMessage: string;
+  posts: Post[];
+}[] = [
+  {
+    id: 'all',
+    label: 'All',
+    viewAllHref: '/journal/',
+    emptyMessage: 'No published notes yet.',
+    posts: publishedPosts.slice(0, 4),
+  },
+  {
+    id: 'reviews',
+    label: 'Reviews',
+    viewAllHref: '/reviews/',
+    emptyMessage: 'No product reviews published yet.',
+    posts: publishedPosts.filter((post) => post.data.category === 'reviews').slice(0, 4),
+  },
+  {
+    id: 'ingredients',
+    label: 'Ingredients',
+    viewAllHref: '/ingredients/',
+    emptyMessage: 'No ingredient notes published yet.',
+    posts: publishedPosts.filter((post) => post.data.category === 'ingredients').slice(0, 4),
+  },
+  {
+    id: 'trends',
+    label: 'Trends',
+    viewAllHref: '/trends/',
+    emptyMessage: 'No trend notes published yet.',
+    posts: publishedPosts.filter((post) => post.data.category === 'trends').slice(0, 4),
+  },
+  {
+    id: 'routines',
+    label: 'Routines',
+    viewAllHref: '/routines/',
+    emptyMessage: 'No routine notes published yet.',
+    posts: publishedPosts.filter((post) => post.data.category === 'routines').slice(0, 4),
+  },
+];
 ---
 
 <BaseLayout
@@ -92,88 +145,82 @@ const noteLabels: Record<string, string> = {
     </div>
   </div>
 
-  <!-- TABS + CARDS SECTION -->
+  <!-- LATEST NOTES -->
   <div class="d1-wrap d1-cards-section">
-    <!-- Tab Bar -->
+    <div class="d1-latest-section-head">
+      <h2 class="d1-latest-section-title">Latest Notes</h2>
+      <div class="d1-latest-section-meta">
+        <span class="d1-tab-right-label">NEW NOTES, HONESTLY DOCUMENTED.</span>
+        <a class="d1-latest-viewall" data-home-view-all href="/journal/">View All &rarr;</a>
+      </div>
+    </div>
+
     <div class="d1-tab-bar">
-      <div class="d1-tabs">
-        <span class="d1-tab d1-tab-active">Repurchased</span>
-        <span class="d1-tab">What Didn’t Work</span>
-        <span class="d1-tab">Routines</span>
-      </div>
-      <span class="d1-tab-right-label">REAL EXPERIENCE. REPEAT WORTHY.</span>
-    </div>
-
-    <!-- 4 Product Cards + 1 Quote Banner -->
-    <div class="d1-cards-grid">
-      <!-- Card 1 -->
-      <a class="d1-prod-card" href="/reviews/vt-cica-reedle-shot-100/">
-        <div class="d1-prod-body">
-          <div class="d1-prod-meta-row">
-            <span class="d1-prod-kicker">CALMS MY SKIN</span>
-            <span>🌿</span>
-          </div>
-          <h3 class="d1-prod-title">VT CICA Reedle Shot 100</h3>
-          <p class="d1-prod-desc">Absorption-boosting serum. Finished one bottle and repurchased — my skin texture improved noticeably.</p>
-        </div>
-        <div class="d1-prod-arrow">&#8594;</div>
-      </a>
-
-      <!-- Card 2 -->
-      <a class="d1-prod-card" href="/about/">
-        <div class="d1-prod-body">
-          <div class="d1-prod-meta-row">
-            <span class="d1-prod-kicker">ALWAYS A REORDER</span>
-            <span>🌿</span>
-          </div>
-          <h3 class="d1-prod-title">AESTURA ATOBARRIER365 Cream</h3>
-          <p class="d1-prod-desc">Reliable ceramide barrier cream. My skin feels steadier whenever I use this consistently.</p>
-        </div>
-        <div class="d1-prod-arrow">&#8594;</div>
-      </a>
-
-      <!-- Card 3 -->
-      <a class="d1-prod-card" href="/reviews/mixsoon-galactomyces-toner/">
-        <div class="d1-prod-img">
-          <img src="/media/products/mixsoon-galactomyces-toner/front.jpg" alt="mixsoon Galactomyces Toner held in hand" loading="lazy" />
-        </div>
-        <div class="d1-prod-body">
-          <div class="d1-prod-meta-row">
-            <span class="d1-prod-kicker">SOOTHES & SUPPORTS</span>
-            <span>🌿</span>
-          </div>
-          <h3 class="d1-prod-title">mixsoon Galactomyces Toner</h3>
-          <p class="d1-prod-desc">Watery, quick to absorb, and comfortable enough that I am already on my second bottle.</p>
-        </div>
-        <div class="d1-prod-arrow">&#8594;</div>
-      </a>
-
-      <!-- Card 4 -->
-      <a class="d1-prod-card" href="/reviews/torriden-dive-in-serum/">
-        <div class="d1-prod-img">
-          <img src="/media/products/torriden-dive-in-serum/front.jpg" alt="Half-used Torriden DIVE-IN Serum bottle held in hand" loading="lazy" />
-        </div>
-        <div class="d1-prod-body">
-          <div class="d1-prod-meta-row">
-            <span class="d1-prod-kicker">REPLENISHES WELL</span>
-            <span>🌿</span>
-          </div>
-          <h3 class="d1-prod-title">Torriden DIVE-IN Serum</h3>
-          <p class="d1-prod-desc">Light, fast-absorbing hydration that helps my dry skin stay comfortable beneath makeup.</p>
-        </div>
-        <div class="d1-prod-arrow">&#8594;</div>
-      </a>
-
-      <!-- 5th: Editorial Quote Banner -->
-      <div class="d1-quote-banner">
-        <h3 class="d1-quote-text">Good skin is a long-term relationship.</h3>
-        <span class="d1-quote-rule" aria-hidden="true"></span>
-        <p class="d1-quote-footer">SAME PRODUCTS. A CALMER YOU.</p>
+      <div class="d1-tabs" role="tablist" aria-label="Latest notes categories">
+        {homeTabs.map((tab, index) => (
+          <button
+            type="button"
+            class:list={['d1-tab', { 'd1-tab-active': index === 0 }]}
+            role="tab"
+            id={`home-tab-${tab.id}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-controls={`home-panel-${tab.id}`}
+            tabindex={index === 0 ? 0 : -1}
+            data-home-tab={tab.id}
+            data-view-href={tab.viewAllHref}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
     </div>
+
+    {homeTabs.map((tab, index) => (
+      <div
+        class="d1-home-panel"
+        role="tabpanel"
+        id={`home-panel-${tab.id}`}
+        aria-labelledby={`home-tab-${tab.id}`}
+        data-home-panel={tab.id}
+        hidden={index !== 0}
+      >
+        {tab.posts.length > 0 ? (
+          <div class="d1-cards-grid">
+            {tab.posts.map((post) => (
+              <a class="d1-prod-card" href={getPostUrl(post)}>
+                {post.data.heroImage && (
+                  <div class="d1-prod-img">
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class="d1-prod-body">
+                  <div class="d1-prod-meta-row">
+                    <span class="d1-prod-kicker">{noteLabels[post.data.category] ?? 'Journal Note'}</span>
+                    <span class="d1-prod-date">
+                      {post.data.publishedAt
+                        ? dateFormatter.format(post.data.publishedAt)
+                        : 'Recently added'}
+                    </span>
+                  </div>
+                  <h3 class="d1-prod-title">{post.data.productName ?? post.data.title}</h3>
+                  <p class="d1-prod-desc">{post.data.description}</p>
+                </div>
+                <div class="d1-prod-arrow" aria-hidden="true">&#8594;</div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="d1-empty-notes">{tab.emptyMessage}</p>
+        )}
+      </div>
+    ))}
   </div>
 
-  <!-- BOTTOM: Compare + Latest Notes -->
+  <!-- BOTTOM: Compare + Finished & Bought Again -->
   <div class="d1-wrap d1-bottom-grid">
     <div class="d1-compare-banner">
       <div class="d1-compare-left">
@@ -190,36 +237,90 @@ const noteLabels: Record<string, string> = {
 
     <div class="d1-latest-box">
       <div class="d1-latest-header">
-        <h3 class="d1-latest-title">Latest Notes</h3>
-        <a class="d1-latest-viewall" href="/reviews/">View All &rarr;</a>
+        <h3 class="d1-latest-title">Finished &amp; Bought Again</h3>
+        <a class="d1-latest-viewall" href="/repurchased/">View All &rarr;</a>
       </div>
       <div class="d1-latest-list">
-        {latestPosts.map((post) => (
-          <a class="d1-latest-item" href={getPostUrl(post)}>
-            <div class:list={['d1-latest-thumb', { 'd1-latest-thumb-empty': !post.data.heroImage }]}>
-              {post.data.heroImage ? (
-                <img
-                  src={post.data.heroImage}
-                  alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
-                  loading="lazy"
-                />
-              ) : (
-                <span aria-hidden="true">{(post.data.productName ?? post.data.title).slice(0, 2).toUpperCase()}</span>
+        {finishedPosts.length > 0 ? (
+          finishedPosts.map((post) => (
+            <a class="d1-latest-item" href={getPostUrl(post)}>
+              {post.data.heroImage && (
+                <div class="d1-latest-thumb">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
+                    loading="lazy"
+                  />
+                </div>
               )}
-            </div>
-            <div>
-              <div class="d1-latest-item-title">{post.data.productName ?? post.data.title}</div>
-              <div class="d1-latest-meta">
-                {post.data.publishedAt ? dateFormatter.format(post.data.publishedAt) : 'Recently added'}
-                &nbsp;&bull;&nbsp; {noteLabels[post.data.category] ?? 'Journal Note'}
+              <div>
+                <div class="d1-latest-item-title">{post.data.productName ?? post.data.title}</div>
+                <div class="d1-finished-desc">{post.data.description}</div>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))
+        ) : (
+          <p class="d1-empty-notes d1-empty-notes-compact">No repurchase notes published yet.</p>
+        )}
       </div>
     </div>
   </div>
 </BaseLayout>
+
+<script is:inline>
+  const tablist = document.querySelector('[role="tablist"][aria-label="Latest notes categories"]');
+  const tabs = [...document.querySelectorAll('[data-home-tab]')];
+  const panels = [...document.querySelectorAll('[data-home-panel]')];
+  const viewAll = document.querySelector('[data-home-view-all]');
+
+  function selectTab(next) {
+    const id = next.dataset.homeTab;
+    if (!id) return;
+
+    tabs.forEach((tab) => {
+      const selected = tab === next;
+      tab.classList.toggle('d1-tab-active', selected);
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.tabIndex = selected ? 0 : -1;
+    });
+
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.homePanel !== id;
+    });
+
+    if (viewAll && next.dataset.viewHref) {
+      viewAll.href = next.dataset.viewHref;
+    }
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => selectTab(tab));
+  });
+
+  tablist?.addEventListener('keydown', (event) => {
+    const currentIndex = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+    if (currentIndex < 0) return;
+
+    let nextIndex = currentIndex;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = (currentIndex + 1) % tabs.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = tabs.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    const next = tabs[nextIndex];
+    if (!next) return;
+    selectTab(next);
+    next.focus();
+  });
+</script>
 
 <style is:global>
   /* ===== TOKENS ===== */
@@ -473,6 +574,35 @@ const noteLabels: Record<string, string> = {
   }
   .d1-profile-btn:hover { background:var(--d1-subtle); color:var(--d1-ink); }
 
+  /* ===== LATEST NOTES SECTION HEAD ===== */
+  .d1-latest-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--d1-line);
+    margin-bottom: 0.35rem;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+  .d1-latest-section-title {
+    font-family: var(--d1-serif);
+    font-size: 1.65rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0.85rem 0;
+    color: var(--d1-sage);
+    border-bottom: 2px solid var(--d1-sage);
+    margin-bottom: -1px;
+  }
+  .d1-latest-section-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.85rem;
+    min-width: 0;
+  }
+
   /* ===== TAB BAR ===== */
   .d1-cards-section { margin-bottom: 2rem; min-width: 0; }
   .d1-tab-bar {
@@ -484,21 +614,29 @@ const noteLabels: Record<string, string> = {
     margin-bottom: 2rem;
     padding-bottom: 0;
     min-width: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
   .d1-tabs {
     display: flex;
     gap: 2rem;
     min-width: 0;
     max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
   .d1-tab {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    font: inherit;
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--d1-muted);
     padding: 0.85rem 0;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: color 0.2s;
     white-space: nowrap;
@@ -519,11 +657,22 @@ const noteLabels: Record<string, string> = {
     text-transform: uppercase;
     color: var(--d1-muted);
   }
+  .d1-home-panel { min-width: 0; }
+  .d1-empty-notes {
+    margin: 0;
+    padding: 1.5rem 0 0.5rem;
+    color: var(--d1-muted);
+    font-size: 0.95rem;
+  }
+  .d1-empty-notes-compact {
+    padding: 0.5rem 0 0;
+    font-size: 0.85rem;
+  }
 
-  /* ===== CARDS GRID (4 product + 1 quote) ===== */
+  /* ===== CARDS GRID ===== */
   .d1-cards-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 0.82fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.25rem;
   }
   .d1-prod-card {
@@ -587,6 +736,11 @@ const noteLabels: Record<string, string> = {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--d1-muted);
+  }
+  .d1-prod-date {
+    font-size: 0.68rem;
+    color: var(--d1-muted);
+    white-space: nowrap;
   }
   .d1-prod-title {
     font-family: var(--d1-serif);
@@ -790,6 +944,15 @@ const noteLabels: Record<string, string> = {
   }
   .d1-latest-item:hover .d1-latest-item-title { color:var(--d1-terra); }
   .d1-latest-meta { font-size:0.72rem; color:var(--d1-muted); }
+  .d1-finished-desc {
+    font-size: 0.72rem;
+    color: var(--d1-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1199px) {
@@ -801,7 +964,8 @@ const noteLabels: Record<string, string> = {
     .d1-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .d1-quote-banner { grid-column: span 2; min-height:20rem; }
     .d1-bottom-grid { grid-template-columns: 1fr; }
-    .d1-tab-right-label { width: 100%; order: 2; margin-bottom: 0.35rem; }
+    .d1-latest-section-meta { width: 100%; order: 2; }
+    .d1-tab-right-label { flex: 1; min-width: 0; }
   }
   @media (max-width: 768px) {
     .d1-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -815,18 +979,21 @@ const noteLabels: Record<string, string> = {
     .d1-profile-items { flex-direction:column; gap:1rem; }
     .d1-compare-banner { flex-direction:column; }
     .d1-tab-right-label { display: none; }
+    .d1-latest-section-meta {
+      width: 100%;
+      justify-content: flex-start;
+      padding-bottom: 0.65rem;
+    }
     .d1-tabs {
       width: 100%;
       max-width: 100%;
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      -webkit-overflow-scrolling: touch;
       gap: 1.25rem;
-      scrollbar-width: thin;
     }
     .d1-prod-card,
     .d1-prod-title,
-    .d1-prod-desc {
+    .d1-prod-desc,
+    .d1-finished-desc,
+    .d1-latest-item-title {
       max-width: 100%;
       min-width: 0;
       overflow-wrap: anywhere;
