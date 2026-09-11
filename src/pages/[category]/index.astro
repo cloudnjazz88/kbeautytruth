@@ -82,7 +82,12 @@ if (category === 'repurchased') {
 }
 ---
 
-<BaseLayout title={page.title} description={page.description} canonicalPath={`/${category}/`}>
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  canonicalPath={`/${category}/`}
+  noindex={posts.length === 0}
+>
   <section class="stack-page">
     <div class="wrap">
       <h1 class="page-title">{page.title}</h1>

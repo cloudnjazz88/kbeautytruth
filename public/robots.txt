@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /search/
+Disallow: /preview/
+Disallow: /drafts/
 
-Sitemap: https://kbeautytruth.com/sitemap-index.xml
+Sitemap: https://kbeautytruth.com/sitemap.xml

@@ -24,6 +24,12 @@ async function walk(dir) {
 const files = await walk(distDir);
 const htmlFiles = files.filter((file) => file.endsWith('.html'));
 const failures = [];
+const sitemap = await readFile(path.join(distDir, 'sitemap.xml'), 'utf8');
+const robots = await readFile(path.join(distDir, 'robots.txt'), 'utf8');
+
+if (!robots.includes('Sitemap: https://kbeautytruth.com/sitemap.xml')) {
+  failures.push('robots.txt: missing the production sitemap URL');
+}
 
 for (const file of htmlFiles) {
   const text = await readFile(file, 'utf8');
@@ -66,6 +72,32 @@ for (const file of htmlFiles) {
     if (!exists[0] && !exists[1]) {
       failures.push(`${rel}: broken internal link ${href}`);
     }
+  }
+
+  const canonical = text.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+  const ogUrl = text.match(/<meta property="og:url" content="([^"]+)"/)?.[1];
+  const requiredHeadMarkers = [
+    '<title>',
+    '<meta name="description"',
+    '<meta property="og:title"',
+    '<meta property="og:description"',
+  ];
+
+  for (const marker of requiredHeadMarkers) {
+    if (!text.includes(marker)) failures.push(`${rel}: missing ${marker}`);
+  }
+  if (!canonical) failures.push(`${rel}: missing canonical URL`);
+  if (!ogUrl) failures.push(`${rel}: missing Open Graph URL`);
+  if (canonical && ogUrl && canonical !== ogUrl) {
+    failures.push(`${rel}: canonical and Open Graph URL do not match`);
+  }
+
+  const isNoindex = text.includes('<meta name="robots" content="noindex, follow"');
+  if (rel !== '404.html' && canonical && isNoindex && sitemap.includes(`<loc>${canonical}</loc>`)) {
+    failures.push(`${rel}: noindex URL is present in sitemap.xml`);
+  }
+  if (canonical && !isNoindex && !sitemap.includes(`<loc>${canonical}</loc>`)) {
+    failures.push(`${rel}: indexable canonical is missing from sitemap.xml`);
   }
 }
 

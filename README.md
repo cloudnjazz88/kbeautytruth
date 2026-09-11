@@ -21,7 +21,7 @@ npm run typecheck
 npm run build
 ```
 
-`npm run build` refuses to ship a published post that still contains `[EXPERIENCE NEEDED]`. Draft posts are left out of the production output, homepage, sitemap, and RSS.
+`npm run build` refuses to ship a published post that still contains `[EXPERIENCE NEEDED]`. Draft posts are left out of the production output, homepage, sitemap, and RSS. Empty category pages remain available for ongoing work, but receive `noindex` and are omitted from `sitemap.xml` until they contain a published post.
 
 ## Publishing a post
 
@@ -33,4 +33,4 @@ npm run build
 
 ## Notes
 
-A previous static “K-beauty Insider” sample still sits in this folder as leftover HTML/CSS. It is not part of the Astro build. Cloudflare should publish the `dist` directory from `astro build`.
+Cloudflare Pages should run `npm run build` and publish the `dist` directory.
