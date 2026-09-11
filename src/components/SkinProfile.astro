@@ -10,22 +10,31 @@ const { skinType, testedFor } = Astro.props;
 ---
 
 <section class="skin-profile" aria-labelledby="skin-profile-title">
-  <h2 class="skin-profile-title" id="skin-profile-title">My Skin Profile</h2>
-  <dl>
-    <dt>Skin Type</dt>
-    <dd>{skinType ?? site.author.skinType}</dd>
-    <dt>Goals</dt>
-    <dd>{site.author.goals}</dd>
-    <dt>Shopping</dt>
-    <dd>{site.author.shopping}</dd>
-    <dt>Experience</dt>
-    <dd>{site.author.experience}</dd>
+  <p class="snapshot-kicker">The context</p>
+  <h2 class="skin-profile-title" id="skin-profile-title">My skin &amp; test</h2>
+  <dl class="profile-facts">
+    <div class="profile-fact">
+      <dt>Skin</dt>
+      <dd>{skinType ?? site.author.skinType}</dd>
+    </div>
+    <div class="profile-fact">
+      <dt>Goals</dt>
+      <dd>{site.author.goals}</dd>
+    </div>
+    <div class="profile-fact">
+      <dt>Bought from</dt>
+      <dd>{site.author.shopping}</dd>
+    </div>
+    <div class="profile-fact">
+      <dt>K-beauty use</dt>
+      <dd>{site.author.experience}</dd>
+    </div>
     {
       testedFor && (
-        <>
+        <div class="profile-fact profile-fact-wide">
           <dt>Tested For</dt>
           <dd>{testedFor}</dd>
-        </>
+        </div>
       )
     }
   </dl>

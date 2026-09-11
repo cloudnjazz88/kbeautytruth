@@ -83,35 +83,44 @@ const breadcrumbLd = {
   jsonLd={[articleLd, breadcrumbLd]}
   noindex={data.draft}
 >
-  <article class="wrap">
-    <header class="article-header">
-      <p class="section-kicker">{categoryLabel}</p>
-      <h1 class="article-title">{data.title}</h1>
-      <p class="article-meta">
-        By {data.author}
+  <article class="article-page">
+    <header class:list={["article-header", { "article-header-with-image": data.heroImage }]}>
+      <div class="article-header-inner">
+        <div class="article-header-copy">
+          <p class="section-kicker">Honest review · {categoryLabel}</p>
+          <h1 class="article-title">{data.title}</h1>
+          <p class="article-dek">{data.description}</p>
+          <p class="article-meta">
+            Tested and written by {data.author}
+            {
+              data.publishedAt && (
+                <>
+                  {' '}
+                  · <time datetime={data.publishedAt.toISOString()}>
+                    {data.publishedAt.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                </>
+              )
+            }
+          </p>
+          {data.repurchase === 'yes' && <span class="article-status">Repurchased</span>}
+        </div>
         {
-          data.publishedAt && (
-            <>
-              {' '}
-              · <time datetime={data.publishedAt.toISOString()}>
-                {data.publishedAt.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
-            </>
+          data.heroImage && (
+            <figure class="article-hero-media">
+              <img src={data.heroImage} alt={data.heroImageAlt ?? ''} />
+              <figcaption>Photographed from my own shelf.</figcaption>
+            </figure>
           )
         }
-      </p>
+      </div>
       {
         import.meta.env.DEV && !data.heroImage && (
           <p class="dev-note">Development only: add a real product photo before publishing. No image is shown on the public page.</p>
-        )
-      }
-      {
-        data.heroImage && (
-          <img src={data.heroImage} alt={data.heroImageAlt ?? ''} />
         )
       }
     </header>
@@ -121,8 +130,10 @@ const breadcrumbLd = {
         This is a personal-use note, not medical advice. {data.author} bought this product herself.
         If this page later includes affiliate links, that will be stated here. Skin responses vary.
       </p>
-      <SkinProfile skinType={data.skinType} testedFor={data.testedFor} />
-      <VerdictBox verdict={data.verdict} />
+      <div class="review-snapshot">
+        <SkinProfile skinType={data.skinType} testedFor={data.testedFor} />
+        <VerdictBox verdict={data.verdict} />
+      </div>
       <TableOfContents headings={headings} />
       <slot />
       <AuthorBio />

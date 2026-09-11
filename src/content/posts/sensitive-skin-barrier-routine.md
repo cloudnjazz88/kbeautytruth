@@ -1,10 +1,10 @@
 ---
-title: "My Barrier-Focused Routine for Sensitive Combination Skin"
+title: "My Barrier-Focused Routine for Dry-Leaning, Somewhat Sensitive Skin"
 description: "Products Kay is using or has repurchased, written as a shelf list until morning and night order are confirmed. This is not a numbered step routine yet."
 slug: sensitive-skin-barrier-routine
 category: routines
 author: Kay
-skinType: Combination / Sensitive
+skinType: Dry-Leaning / Somewhat Sensitive
 status: routine
 draft: true
 relatedPosts:
@@ -79,7 +79,7 @@ Some items on this list were repurchased: Reedle Shot 100, AESTURA ATOBARRIER365
 
 ## Who it may suit
 
-This list belongs to my combination, sensitive skin and my interest in barrier support and anti-aging. It is not a template.
+This list belongs to my dry-leaning, somewhat sensitive skin and my interest in barrier support and anti-aging. It is not a template.
 
 ## Who should be cautious
 

@@ -1,11 +1,11 @@
 ---
-title: "VT CICA Reedle Shot 100 Review: Why I Repurchased It for My Sensitive Combination Skin"
-description: "How I used VT CICA Reedle Shot 100 on sensitive combination skin, why it tingles more when layering subsequent products, and why I repurchased it after finishing a bottle."
+title: "VT CICA Reedle Shot 100 Review: Why I Repurchased It for My Dry-Leaning, Somewhat Sensitive Skin"
+description: "How I used VT CICA Reedle Shot 100 on dry-leaning, somewhat sensitive skin, why it tingles more when layering subsequent products, and why I repurchased it after finishing a bottle."
 slug: vt-cica-reedle-shot-100
 category: reviews
 author: Kay
 featured: true
-skinType: Combination / Sensitive
+skinType: Dry-Leaning / Somewhat Sensitive
 testedFor: "3-4 Months (1 Full Bottle Finished)"
 status: repurchased
 draft: false
@@ -13,11 +13,11 @@ publishedAt: 2026-09-10
 relatedPosts:
   - sensitive-skin-barrier-routine
   - medicube-collagen-jelly-cream
-verdict: "A solid booster that enhances the absorption of subsequent skincare steps. The prickling sensation is real—and intensifies when layering toner and creams—but for my combination, sensitive skin, it made my entire routine work harder."
+verdict: "A solid booster that enhances the absorption of subsequent skincare steps. The prickling sensation is real—and intensifies when layering toner and creams—but for my dry-leaning, somewhat sensitive skin, it made my entire routine work harder."
 repurchase: yes
 ---
 
-I bought VT COSMETICS CICA Reedle Shot 100 myself after seeing countless recommendations advising beginners to start with the 100 strength rather than jumping straight into higher concentrations. I have combination, sensitive skin and tend to be cautious before trying anything active or stimulating. 
+I bought VT COSMETICS CICA Reedle Shot 100 myself after seeing countless recommendations advising beginners to start with the 100 strength rather than jumping straight into higher concentrations. I have dry-leaning, somewhat sensitive skin and tend to be cautious before trying anything active or stimulating.
 
 I finished that entire first bottle over roughly 3 to 4 months, and I repurchased it. Here is my honest experience with how it felt, how I layered it, and why I decided it was worth buying a second time.
 
@@ -68,7 +68,7 @@ Even though I love this product and repurchased it, there are a few realities yo
 
 The reason I bought a second bottle came down to cost-per-benefit:
 
-It suited my sensitive combination skin without triggering breakouts, and by significantly improving the absorption and performance of my subsequent toners, serums, and barrier creams, **one single bottle made three or four other skincare products perform noticeably better.** That made it well worth the repurchase.
+It suited my dry-leaning, somewhat sensitive skin without triggering breakouts, and by significantly improving the absorption and performance of my subsequent toners, serums, and barrier creams, **one single bottle made three or four other skincare products perform noticeably better.** That made it well worth the repurchase.
 
 ## Who It May Suit
 * Those who feel their current skincare products sit on top of their skin without absorbing deeply.

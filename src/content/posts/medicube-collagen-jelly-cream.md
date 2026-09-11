@@ -4,7 +4,7 @@ description: "Kay bought Medicube Collagen Jelly Cream expecting to like it, the
 slug: medicube-collagen-jelly-cream
 category: breakouts
 author: Kay
-skinType: Combination / Sensitive
+skinType: Dry-Leaning / Somewhat Sensitive
 status: discontinued
 draft: true
 relatedPosts:
@@ -18,7 +18,7 @@ repurchase: no
 
 I bought Medicube Collagen Jelly Cream with Collagen & Niacinamide because I expected to like it. I used it. My skin broke out. I stopped completely. I am not using it now.
 
-That is my experience. It is not a statement that this cream is wrong for every combination or sensitive face, and I am not blaming a single ingredient.
+That is my experience. It is not a statement that this cream is wrong for every dry or sensitive face, and I am not blaming a single ingredient.
 
 I am not attaching a “day four” story. I do not have a confirmed start date for the breakout.
 
