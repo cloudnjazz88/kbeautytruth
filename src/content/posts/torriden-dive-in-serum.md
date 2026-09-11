@@ -14,6 +14,7 @@ publishedAt: 2026-09-11T23:30:00Z
 heroImage: /media/products/torriden-dive-in-serum/front.jpg
 heroImageAlt: "A half-used bottle of Torriden DIVE-IN Low Molecular Hyaluronic Acid Serum held in hand"
 relatedPosts:
+  - torriden-dive-in-soothing-cream
   - mixsoon-galactomyces-toner
   - sensitive-skin-barrier-routine
 verdict: "A light, slightly slippery hydration serum that absorbs quickly without stickiness. It helps my dry skin feel comfortable for longer, but I still need a cream on top to hold onto that moisture."
