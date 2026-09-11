@@ -313,8 +313,8 @@ import { site } from '../site';
 
   /* ===== HERO ===== */
   .d1-hero {
-    padding: 1.7rem 0 1.35rem;
-    background: #FFFFFF;
+    padding: 1.25rem 0 1.05rem;
+    background: var(--d1-profile);
     border-bottom: 1px solid var(--d1-line2);
   }
   .d1-hero-grid {
@@ -380,7 +380,7 @@ import { site } from '../site';
   .d1-media-box {
     background: #d9d6ce;
     border-radius: 13px;
-    aspect-ratio: 1.91 / 1;
+    aspect-ratio: 2.05 / 1;
     padding: 2rem;
     position: relative;
     display: flex;
@@ -789,6 +789,7 @@ import { site } from '../site';
   }
   @media (max-width: 720px) {
     .d1-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .d1-media-box { aspect-ratio: 1.5 / 1; }
     .d1-hero-title { font-size:clamp(2.6rem, 13vw, 3.5rem); }
     .d1-hero-right { display:block; }
     .d1-cards-grid { grid-template-columns: 1fr; }
