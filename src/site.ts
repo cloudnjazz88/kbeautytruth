@@ -23,7 +23,7 @@ export const site = {
 export const categories = [
   { slug: 'reviews', label: 'Reviews', path: '/reviews/' },
   { slug: 'repurchased', label: 'Repurchased', path: '/repurchased/' },
-  { slug: 'breakouts', label: 'Breakouts', path: '/breakouts/' },
+  { slug: 'breakouts', label: "What Didn't Work", path: '/breakouts/' },
   { slug: 'routines', label: 'Routines', path: '/routines/' },
   { slug: 'beyond-k-beauty', label: 'Beyond K-Beauty', path: '/beyond-k-beauty/' },
 ] as const;
@@ -37,6 +37,18 @@ export const postCategories = [
 ] as const;
 
 export type PostCategory = (typeof postCategories)[number];
+
+export const categoryLabels: Record<PostCategory, string> = {
+  reviews: 'Reviews',
+  breakouts: "What Didn't Work",
+  comparisons: 'Comparisons',
+  routines: 'Routines',
+  'beyond-k-beauty': 'Beyond K-Beauty',
+};
+
+export function getCategoryLabel(category: PostCategory): string {
+  return categoryLabels[category];
+}
 
 export function categoryPath(category: PostCategory): string {
   return `/${category}/`;

@@ -6,7 +6,7 @@ import SkinProfile from '../components/SkinProfile.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import VerdictBox from '../components/VerdictBox.astro';
 import { getPostUrl, getRelatedPosts, type Post } from '../lib/posts';
-import { site } from '../site';
+import { getCategoryLabel, site } from '../site';
 
 interface Heading {
   depth: number;
@@ -23,7 +23,7 @@ const { post, headings } = Astro.props;
 const { data } = post;
 const path = getPostUrl(post);
 const related = await getRelatedPosts(post);
-const categoryLabel = data.category.replaceAll('-', ' ');
+const categoryLabel = getCategoryLabel(data.category);
 
 const articleLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
