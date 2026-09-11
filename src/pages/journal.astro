@@ -1,33 +1,178 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PostCard from '../components/PostCard.astro';
-import { getPublishedPosts } from '../lib/posts';
+import { getPostUrl, getPublishedPosts, type Post } from '../lib/posts';
 
 const posts = await getPublishedPosts();
+const groups = [
+  {
+    title: 'Products',
+    description: 'Products I bought and used myself.',
+    href: '/reviews/',
+    posts: posts.filter((post) => post.data.category === 'reviews').slice(0, 6),
+  },
+  {
+    title: 'Ingredients',
+    description: 'Clear guides to what is inside a formula.',
+    href: '/ingredients/',
+    posts: posts.filter((post) => post.data.category === 'ingredients').slice(0, 6),
+  },
+  {
+    title: 'Trends',
+    description: 'New ideas, launches, and beauty conversations.',
+    href: '/trends/',
+    posts: posts.filter((post) => post.data.category === 'trends').slice(0, 6),
+  },
+] satisfies Array<{ title: string; description: string; href: string; posts: Post[] }>;
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
 ---
 
 <BaseLayout
   title="Journal"
-  description="The complete K-Beauty Truth journal: product reviews, routines, ingredient columns, comparisons, and honest notes on what did not work."
+  description="Browse the latest K-Beauty Truth product reviews, ingredient guides, and beauty trend columns."
   canonicalPath="/journal/"
 >
-  <section class="stack-page">
+  <section class="journal-page">
     <div class="wrap">
-      <p class="eyebrow">ALL NOTES, IN ORDER</p>
-      <h1 class="page-title">Journal</h1>
-      <p class="lede">
-        Every published note in one place, from products I used and repurchased to routines,
-        ingredient columns, and the things that did not work for my skin.
-      </p>
-      {
-        posts.length > 0 ? (
-          <div class="card-grid" style="margin-top: 2rem;">
-            {posts.map((post) => <PostCard post={post} headingLevel={2} />)}
-          </div>
-        ) : (
-          <p class="empty-copy">No published notes yet.</p>
-        )
-      }
+      <p class="journal-eyebrow">THE K-BEAUTY TRUTH ARCHIVE</p>
+      <h1 class="journal-title">Journal</h1>
+      <p class="journal-intro">The newest notes, organized by subject so you can go straight to what you need.</p>
+
+      <div class="journal-columns">
+        {groups.map((group) => (
+          <section class="journal-column">
+            <div class="journal-column-head">
+              <h2>{group.title}</h2>
+              <p>{group.description}</p>
+            </div>
+
+            {group.posts.length > 0 ? (
+              <ol class="journal-list">
+                {group.posts.map((post) => (
+                  <li>
+                    <a href={getPostUrl(post)}>
+                      <span class="journal-date">
+                        {post.data.publishedAt ? dateFormatter.format(post.data.publishedAt) : 'New'}
+                      </span>
+                      <span class="journal-post-title">{post.data.productName ?? post.data.title}</span>
+                      <span class="journal-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p class="journal-empty">The first column is being prepared.</p>
+            )}
+
+            <a class="journal-view-all" href={group.href}>View all {group.title} &rarr;</a>
+          </section>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .journal-page {
+    padding: clamp(3.5rem, 7vw, 6.5rem) 0 6rem;
+    background: #fff;
+  }
+  .journal-eyebrow {
+    margin: 0 0 0.75rem;
+    color: var(--sage-dark);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+  .journal-title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .journal-intro {
+    max-width: 38rem;
+    margin: 1.2rem 0 3.5rem;
+    color: var(--ink-secondary);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+  }
+  .journal-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+  .journal-column { min-width: 0; }
+  .journal-column-head {
+    min-height: 6.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .journal-column h2 {
+    margin: 0 0 0.45rem;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+  .journal-column-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+  .journal-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .journal-list li { border-bottom: 1px solid var(--line-subtle); }
+  .journal-list a {
+    display: grid;
+    grid-template-columns: 5.6rem minmax(0, 1fr) auto;
+    gap: 0.8rem;
+    align-items: start;
+    padding: 1.05rem 0;
+  }
+  .journal-date {
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+  .journal-post-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .journal-arrow { color: var(--terracotta); }
+  .journal-list a:hover .journal-post-title { color: var(--sage-dark); }
+  .journal-empty {
+    min-height: 8rem;
+    margin: 0;
+    padding: 1.1rem 0;
+    color: var(--muted);
+    font-family: var(--font-serif);
+    font-style: italic;
+    border-bottom: 1px solid var(--line-subtle);
+  }
+  .journal-view-all {
+    display: inline-block;
+    margin-top: 1.25rem;
+    color: var(--sage-dark);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+  .journal-view-all:hover { color: var(--terracotta); }
+  @media (max-width: 980px) {
+    .journal-columns { grid-template-columns: 1fr; }
+    .journal-column-head { min-height: 0; }
+  }
+  @media (max-width: 560px) {
+    .journal-list a { grid-template-columns: 4.8rem minmax(0, 1fr) auto; }
+  }
+</style>
