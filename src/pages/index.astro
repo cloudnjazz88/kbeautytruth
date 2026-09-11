@@ -155,6 +155,7 @@ import { site } from '../site';
       <!-- 5th: Editorial Quote Banner -->
       <div class="d1-quote-banner">
         <h3 class="d1-quote-text">Good skin is a long-term relationship.</h3>
+        <span class="d1-quote-rule" aria-hidden="true"></span>
         <p class="d1-quote-footer">SAME PRODUCTS. A CALMER YOU.</p>
       </div>
     </div>
@@ -532,9 +533,11 @@ import { site } from '../site';
     background: var(--d1-card);
     border: 1px solid var(--d1-line);
     border-radius: 14px;
-    padding: 1.25rem;
+    padding: 0;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
     box-shadow: 0 2px 8px rgba(25,27,26,0.04);
     transition: transform 0.28s var(--d1-ease), box-shadow 0.28s var(--d1-ease);
     cursor: pointer;
@@ -542,13 +545,13 @@ import { site } from '../site';
   .d1-prod-card:hover { transform:translateY(-5px); box-shadow:0 12px 28px rgba(25,27,26,0.09); }
   .d1-prod-img {
     background: var(--d1-subtle);
-    border-radius: 10px;
-    aspect-ratio: 1;
+    aspect-ratio: 1.05;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.1rem;
     overflow: hidden;
+    width: 100%;
+    flex-shrink: 0;
   }
   .d1-prod-img-text {
     font-size: 0.7rem;
@@ -564,7 +567,10 @@ import { site } from '../site';
     height: 100%;
     object-fit: cover;
   }
-  .d1-prod-body { flex: 1; }
+  .d1-prod-body {
+    flex: 1;
+    padding: 1rem 1rem 3.4rem;
+  }
   .d1-prod-meta-row {
     display: flex;
     align-items: center;
@@ -604,29 +610,42 @@ import { site } from '../site';
     align-items: center;
     justify-content: center;
     font-size: 0.85rem;
-    margin-top: 1rem;
-    align-self: flex-end;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
     transition: transform 0.2s;
   }
   .d1-prod-card:hover .d1-prod-arrow { transform:scale(1.1); }
 
   /* Quote Banner (5th column) */
   .d1-quote-banner {
-    background: linear-gradient(160deg, #E8DDD0 0%, #DDD1BC 100%);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(244,236,222,0.08)),
+      url('/media/editorial/good-skin-quote-bg.webp') center / cover no-repeat;
     border-radius: 14px;
-    padding: 2rem 1.5rem;
+    padding: 2.1rem 1.35rem 1.65rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-start;
     box-shadow: 0 2px 8px rgba(25,27,26,0.04);
+    overflow: hidden;
+    min-height: 100%;
   }
   .d1-quote-text {
     font-family: var(--d1-serif);
-    font-size: 1.4rem;
+    font-size: clamp(1.35rem, 1.55vw, 1.75rem);
     font-weight: 500;
     line-height: 1.3;
     color: var(--d1-ink);
-    margin: 0 0 2rem;
+    margin: 0;
+    max-width: 9ch;
+  }
+  .d1-quote-rule {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: rgba(25,27,26,0.65);
+    margin-top: 1.25rem;
   }
   .d1-quote-footer {
     font-size: 0.65rem;
@@ -634,9 +653,9 @@ import { site } from '../site';
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: rgba(25,27,26,0.5);
-    border-top: 1px solid rgba(25,27,26,0.18);
-    padding-top: 1rem;
-    margin: 0;
+    margin: auto 0 0;
+    max-width: 11rem;
+    line-height: 1.55;
   }
 
   /* ===== BOTTOM: COMPARE + LATEST NOTES ===== */
@@ -764,7 +783,7 @@ import { site } from '../site';
     .d1-wrap, .header-inner { width:min(100% - 2.5rem, 96rem); }
     .d1-hero-grid { grid-template-columns: minmax(23rem, 0.85fr) minmax(0, 1.15fr); gap:2.5rem; }
     .d1-cards-grid { grid-template-columns: repeat(2, 1fr); }
-    .d1-quote-banner { grid-column: span 2; flex-direction: row; align-items: center; }
+    .d1-quote-banner { grid-column: span 2; min-height:20rem; }
     .d1-bottom-grid { grid-template-columns: 1fr; }
     .header-search { display:none; }
   }
@@ -773,7 +792,7 @@ import { site } from '../site';
     .d1-hero-title { font-size:clamp(2.6rem, 13vw, 3.5rem); }
     .d1-hero-right { display:block; }
     .d1-cards-grid { grid-template-columns: 1fr; }
-    .d1-quote-banner { grid-column: span 1; }
+    .d1-quote-banner { grid-column: span 1; min-height:28rem; }
     .nav-links { display:none; }
     .d1-profile-bar { flex-direction:column; align-items:flex-start; }
     .d1-profile-brand { border-right:none; border-bottom:1px solid var(--d1-line); padding-right:0; padding-bottom:1rem; width:100%; }
