@@ -8,10 +8,11 @@ const path = Astro.url.pathname;
   <div class="wrap header-inner">
     <div class="header-left">
       <a class="logo" href="/">
-        K-Beauty Truth <span class="logo-leaf">🌿</span>
+        <span class="logo-text">K-Beauty Truth</span>
+        <span class="logo-leaf" aria-hidden="true">🌿</span>
       </a>
 
-      <nav class="site-nav" aria-label="Primary">
+      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary">
         <ul class="nav-links">
           <li><a href="/journal/" aria-current={path.startsWith('/journal') ? 'page' : undefined}>Journal</a></li>
           <li><a href="/reviews/" aria-current={path.startsWith('/reviews') ? 'page' : undefined}>Products</a></li>
@@ -25,11 +26,94 @@ const path = Astro.url.pathname;
     </div>
 
     <div class="header-right">
-      <div class="header-search">
-        <span>🔍</span>
-        <span>Search notes, products...</span>
+      <div class="header-search" data-header-search>
+        <button
+          type="button"
+          class="header-search-toggle"
+          data-search-toggle
+          aria-expanded="false"
+          aria-controls="header-search-panel"
+          aria-label="Open search"
+        >
+          <span aria-hidden="true">🔍</span>
+        </button>
+        <div class="header-search-panel" id="header-search-panel" data-search-panel hidden>
+          <label class="visually-hidden" for="header-search-input">Search notes and products</label>
+          <input
+            id="header-search-input"
+            class="header-search-input"
+            type="search"
+            placeholder="Search notes, products..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="header-search-desktop" aria-hidden="true">
+          <span>🔍</span>
+          <span>Search notes, products...</span>
+        </div>
       </div>
       <a class="btn-header-journal" href="/about/">My Journal</a>
+      <button
+        type="button"
+        class="nav-toggle"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </header>
+
+<script>
+  const nav = document.querySelector('[data-site-nav]');
+  const navToggle = document.querySelector('[data-nav-toggle]');
+  const searchRoot = document.querySelector('[data-header-search]');
+  const searchToggle = document.querySelector('[data-search-toggle]');
+  const searchPanel = document.querySelector('[data-search-panel]');
+  const searchInput = document.querySelector('#header-search-input');
+
+  function setNavOpen(open: boolean) {
+    nav?.classList.toggle('is-open', open);
+    navToggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
+
+  function setSearchOpen(open: boolean) {
+    searchRoot?.classList.toggle('is-open', open);
+    if (searchPanel instanceof HTMLElement) {
+      searchPanel.hidden = !open;
+    }
+    searchToggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    searchToggle?.setAttribute('aria-label', open ? 'Close search' : 'Open search');
+    if (open && searchInput instanceof HTMLInputElement) {
+      searchInput.focus();
+    }
+  }
+
+  navToggle?.addEventListener('click', () => {
+    const open = !nav?.classList.contains('is-open');
+    setNavOpen(open);
+    if (open) setSearchOpen(false);
+  });
+
+  searchToggle?.addEventListener('click', () => {
+    const open = !searchRoot?.classList.contains('is-open');
+    setSearchOpen(open);
+    if (open) setNavOpen(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setNavOpen(false);
+      setSearchOpen(false);
+    }
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setNavOpen(false));
+  });
+</script>

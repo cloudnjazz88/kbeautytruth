@@ -108,9 +108,6 @@ const noteLabels: Record<string, string> = {
     <div class="d1-cards-grid">
       <!-- Card 1 -->
       <a class="d1-prod-card" href="/reviews/vt-cica-reedle-shot-100/">
-        <div class="d1-prod-img">
-          <span class="d1-prod-img-text">VT REEDLE SHOT 100</span>
-        </div>
         <div class="d1-prod-body">
           <div class="d1-prod-meta-row">
             <span class="d1-prod-kicker">CALMS MY SKIN</span>
@@ -124,9 +121,6 @@ const noteLabels: Record<string, string> = {
 
       <!-- Card 2 -->
       <a class="d1-prod-card" href="/about/">
-        <div class="d1-prod-img">
-          <span class="d1-prod-img-text">AESTURA ATOBARRIER</span>
-        </div>
         <div class="d1-prod-body">
           <div class="d1-prod-meta-row">
             <span class="d1-prod-kicker">ALWAYS A REORDER</span>
@@ -260,75 +254,36 @@ const noteLabels: Record<string, string> = {
     margin-inline: auto;
   }
 
-  /* ===== HEADER ===== */
+  /* ===== HEADER (homepage visual overrides; layout/responsive live in global.css) ===== */
   .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
     background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--d1-line2);
   }
   .header-inner {
-    height: 4.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
     width: min(96rem, calc(100% - 4rem));
     margin-inline: auto;
   }
-  .header-left { display:flex; align-items:center; gap:2.5rem; }
   .logo {
-    font-family: var(--d1-serif);
     font-size: 1.7rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--d1-ink);
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
   }
   .logo-leaf { font-size:1rem; }
-  .nav-links {
-    display: flex;
-    gap: 1.75rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
   .nav-links a {
     font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--d1-ink2);
-    transition: color 0.2s;
   }
-  .nav-links a:hover, .nav-links a[aria-current="page"] { color:var(--d1-ink); font-weight:600; }
-  .header-right { display:flex; align-items:center; gap:1rem; }
-  .header-search {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .header-search-desktop {
     background: var(--d1-card);
-    border: 1px solid var(--d1-line);
-    padding: 0.45rem 0.9rem;
-    border-radius: 9999px;
-    font-size: 0.82rem;
+    border-color: var(--d1-line);
     color: var(--d1-muted);
     width: 13rem;
+    font-size: 0.82rem;
   }
   .btn-header-journal {
-    display: inline-block;
     background: var(--d1-sage);
-    color: #fff !important;
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.55rem 1.25rem;
-    border-radius: 9999px;
-    transition: background 0.2s, transform 0.2s;
   }
-  .btn-header-journal:hover { background:#1e3825; transform:translateY(-1px); }
-  .nav-toggle { display:none; }
+  .btn-header-journal:hover { background:#1e3825; }
+  .site-nav {
+    background: rgba(255,255,255,0.98);
+  }
 
   /* ===== HERO ===== */
   .d1-hero {
@@ -338,7 +293,7 @@ const noteLabels: Record<string, string> = {
   }
   .d1-hero-grid {
     display: grid;
-    grid-template-columns: minmax(28rem, 0.78fr) minmax(0, 1.22fr);
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
     gap: clamp(3rem, 5vw, 5rem);
     align-items: center;
   }
@@ -510,16 +465,24 @@ const noteLabels: Record<string, string> = {
   .d1-profile-btn:hover { background:var(--d1-subtle); color:var(--d1-ink); }
 
   /* ===== TAB BAR ===== */
-  .d1-cards-section { margin-bottom: 2rem; }
+  .d1-cards-section { margin-bottom: 2rem; min-width: 0; }
   .d1-tab-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     border-bottom: 1px solid var(--d1-line);
     margin-bottom: 2rem;
     padding-bottom: 0;
+    min-width: 0;
+    flex-wrap: wrap;
   }
-  .d1-tabs { display:flex; gap:2rem; }
+  .d1-tabs {
+    display: flex;
+    gap: 2rem;
+    min-width: 0;
+    max-width: 100%;
+  }
   .d1-tab {
     font-size: 1.1rem;
     font-weight: 600;
@@ -529,6 +492,12 @@ const noteLabels: Record<string, string> = {
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: color 0.2s;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .d1-tab:focus-visible {
+    outline: 2px solid var(--d1-terra);
+    outline-offset: 3px;
   }
   .d1-tab-active {
     color: var(--d1-sage);
@@ -545,7 +514,7 @@ const noteLabels: Record<string, string> = {
   /* ===== CARDS GRID (4 product + 1 quote) ===== */
   .d1-cards-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr) 0.82fr;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 0.82fr);
     gap: 1.25rem;
   }
   .d1-prod-card {
@@ -560,6 +529,9 @@ const noteLabels: Record<string, string> = {
     box-shadow: 0 2px 8px rgba(25,27,26,0.04);
     transition: transform 0.28s var(--d1-ease), box-shadow 0.28s var(--d1-ease);
     cursor: pointer;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
   .d1-prod-card:hover { transform:translateY(-5px); box-shadow:0 12px 28px rgba(25,27,26,0.09); }
   .d1-prod-img {
@@ -589,6 +561,10 @@ const noteLabels: Record<string, string> = {
   .d1-prod-body {
     flex: 1;
     padding: 1rem 1rem 3.4rem;
+    min-width: 0;
+  }
+  .d1-prod-card:not(:has(.d1-prod-img)) .d1-prod-body {
+    padding-top: 1.15rem;
   }
   .d1-prod-meta-row {
     display: flex;
@@ -807,26 +783,45 @@ const noteLabels: Record<string, string> = {
   .d1-latest-meta { font-size:0.72rem; color:var(--d1-muted); }
 
   /* ===== RESPONSIVE ===== */
-  @media (max-width: 1100px) {
+  @media (max-width: 1199px) {
     .d1-wrap, .header-inner { width:min(100% - 2.5rem, 96rem); }
-    .d1-hero-grid { grid-template-columns: minmax(23rem, 0.85fr) minmax(0, 1.15fr); gap:2.5rem; }
-    .d1-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .d1-hero-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 2.5rem;
+    }
+    .d1-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .d1-quote-banner { grid-column: span 2; min-height:20rem; }
     .d1-bottom-grid { grid-template-columns: 1fr; }
-    .header-search { display:none; }
+    .d1-tab-right-label { width: 100%; order: 2; margin-bottom: 0.35rem; }
   }
-  @media (max-width: 720px) {
+  @media (max-width: 768px) {
     .d1-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
     .d1-media-box { aspect-ratio: 1.5 / 1; }
     .d1-hero-title { font-size:clamp(2.6rem, 13vw, 3.5rem); }
     .d1-hero-right { display:block; }
-    .d1-cards-grid { grid-template-columns: 1fr; }
+    .d1-cards-grid { grid-template-columns: minmax(0, 1fr); }
     .d1-quote-banner { grid-column: span 1; min-height:28rem; }
-    .nav-links { display:none; }
     .d1-profile-bar { flex-direction:column; align-items:flex-start; }
     .d1-profile-brand { border-right:none; border-bottom:1px solid var(--d1-line); padding-right:0; padding-bottom:1rem; width:100%; }
     .d1-profile-items { flex-direction:column; gap:1rem; }
     .d1-compare-banner { flex-direction:column; }
+    .d1-tab-right-label { display: none; }
+    .d1-tabs {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      gap: 1.25rem;
+      scrollbar-width: thin;
+    }
+    .d1-prod-card,
+    .d1-prod-title,
+    .d1-prod-desc {
+      max-width: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation:none !important; transition:none !important; }
