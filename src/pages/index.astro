@@ -1,6 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPostUrl, getPublishedPosts } from '../lib/posts';
 import { site } from '../site';
+
+const latestPosts = (await getPublishedPosts()).slice(0, 3);
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+});
+const noteLabels: Record<string, string> = {
+  reviews: 'Review Note',
+  breakouts: 'Skin Note',
+  comparisons: 'Comparison Note',
+  routines: 'Routine Note',
+  'beyond-k-beauty': 'Beauty Note',
+};
 ---
 
 <BaseLayout
@@ -182,27 +197,28 @@ import { site } from '../site';
         <a class="d1-latest-viewall" href="/reviews/">View All &rarr;</a>
       </div>
       <div class="d1-latest-list">
-        <a class="d1-latest-item" href="/reviews/vt-cica-reedle-shot-100/">
-          <div class="d1-latest-thumb">📝</div>
-          <div>
-            <div class="d1-latest-item-title">VT CICA Reedle Shot 100: Why I Repurchased</div>
-            <div class="d1-latest-meta">Sep 10, 2026 &bull; Review Note</div>
-          </div>
-        </a>
-        <a class="d1-latest-item" href="/breakouts/">
-          <div class="d1-latest-thumb">⚠️</div>
-          <div>
-            <div class="d1-latest-item-title">Medicube Jelly Cream Broke Me Out</div>
-            <div class="d1-latest-meta">Coming Soon &bull; Skin Note</div>
-          </div>
-        </a>
-        <a class="d1-latest-item" href="/routines/">
-          <div class="d1-latest-thumb">🌿</div>
-          <div>
-            <div class="d1-latest-item-title">My Barrier Routine for Sensitive Skin</div>
-            <div class="d1-latest-meta">Coming Soon &bull; Routine Note</div>
-          </div>
-        </a>
+        {latestPosts.map((post) => (
+          <a class="d1-latest-item" href={getPostUrl(post)}>
+            <div class:list={['d1-latest-thumb', { 'd1-latest-thumb-empty': !post.data.heroImage }]}>
+              {post.data.heroImage ? (
+                <img
+                  src={post.data.heroImage}
+                  alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
+                  loading="lazy"
+                />
+              ) : (
+                <span aria-hidden="true">{(post.data.productName ?? post.data.title).slice(0, 2).toUpperCase()}</span>
+              )}
+            </div>
+            <div>
+              <div class="d1-latest-item-title">{post.data.productName ?? post.data.title}</div>
+              <div class="d1-latest-meta">
+                {post.data.publishedAt ? dateFormatter.format(post.data.publishedAt) : 'Recently added'}
+                &nbsp;&bull;&nbsp; {noteLabels[post.data.category] ?? 'Journal Note'}
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </div>
@@ -766,6 +782,15 @@ import { site } from '../site';
     justify-content: center;
     font-size: 1.25rem;
     flex-shrink: 0;
+    overflow: hidden;
+  }
+  .d1-latest-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .d1-latest-thumb-empty span {
+    font-family: var(--d1-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--d1-sage);
   }
   .d1-latest-item-title {
     font-size: 0.875rem;

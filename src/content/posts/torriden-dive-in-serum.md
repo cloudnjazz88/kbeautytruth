@@ -1,5 +1,6 @@
 ---
 title: "Torriden DIVE-IN Serum Review: My Everyday Hydration Step for Dry Skin"
+productName: "Torriden DIVE-IN Serum"
 description: "My honest experience using Torriden DIVE-IN Low Molecular Hyaluronic Acid Serum on dry, somewhat sensitive skin, including texture, layering, makeup-day tightness, and why I would buy it again."
 slug: torriden-dive-in-serum
 category: reviews
@@ -8,7 +9,8 @@ featured: false
 skinType: Dry / Somewhat Sensitive
 testedFor: "Half of First Bottle; Usually Used at Night"
 status: using
-draft: true
+draft: false
+publishedAt: 2026-09-11T23:30:00Z
 heroImage: /media/products/torriden-dive-in-serum/front.jpg
 heroImageAlt: "A half-used bottle of Torriden DIVE-IN Low Molecular Hyaluronic Acid Serum held in hand"
 relatedPosts:
