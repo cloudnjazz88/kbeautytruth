@@ -27,7 +27,7 @@ const noteLabels: Record<string, string> = {
   'beyond-k-beauty': 'Beauty Note',
 };
 
-type HomeTabId = 'all' | 'reviews' | 'ingredients' | 'trends' | 'routines';
+type HomeTabId = 'all' | 'reviews' | 'ingredients' | 'trends';
 
 const homeTabs: {
   id: HomeTabId;
@@ -63,13 +63,6 @@ const homeTabs: {
     viewAllHref: '/trends/',
     emptyMessage: 'No trend notes published yet.',
     posts: publishedPosts.filter((post) => post.data.category === 'trends').slice(0, 4),
-  },
-  {
-    id: 'routines',
-    label: 'Routines',
-    viewAllHref: '/routines/',
-    emptyMessage: 'No routine notes published yet.',
-    posts: publishedPosts.filter((post) => post.data.category === 'routines').slice(0, 4),
   },
 ];
 ---
@@ -623,10 +616,7 @@ const homeTabs: {
     gap: 2rem;
     min-width: 0;
     max-width: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    overflow: visible;
   }
   .d1-tab {
     appearance: none;
@@ -1002,6 +992,15 @@ const homeTabs: {
       max-width: 100%;
       min-width: 0;
       overflow-wrap: anywhere;
+    }
+  }
+  /* Only allow horizontal tab scrolling when four labels cannot fit. */
+  @media (max-width: 360px) {
+    .d1-tabs {
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
     }
   }
   @media (prefers-reduced-motion: reduce) {
