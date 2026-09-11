@@ -184,38 +184,40 @@ const homeTabs: {
         data-home-panel={tab.id}
         hidden={index !== 0}
       >
-        {tab.posts.length > 0 ? (
-          <div class="d1-cards-grid">
-            {tab.posts.map((post) => (
-              <a class="d1-prod-card" href={getPostUrl(post)}>
-                {post.data.heroImage && (
-                  <div class="d1-prod-img">
-                    <img
-                      src={post.data.heroImage}
-                      alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-                <div class="d1-prod-body">
-                  <div class="d1-prod-meta-row">
-                    <span class="d1-prod-kicker">{noteLabels[post.data.category] ?? 'Journal Note'}</span>
-                    <span class="d1-prod-date">
-                      {post.data.publishedAt
-                        ? dateFormatter.format(post.data.publishedAt)
-                        : 'Recently added'}
-                    </span>
-                  </div>
-                  <h3 class="d1-prod-title">{post.data.productName ?? post.data.title}</h3>
-                  <p class="d1-prod-desc">{post.data.description}</p>
+        {tab.posts.length === 0 && <p class="d1-empty-notes">{tab.emptyMessage}</p>}
+        <div class="d1-cards-grid">
+          {tab.posts.map((post) => (
+            <a class="d1-prod-card" href={getPostUrl(post)}>
+              {post.data.heroImage && (
+                <div class="d1-prod-img">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
+                    loading="lazy"
+                  />
                 </div>
-                <div class="d1-prod-arrow" aria-hidden="true">&#8594;</div>
-              </a>
-            ))}
+              )}
+              <div class="d1-prod-body">
+                <div class="d1-prod-meta-row">
+                  <span class="d1-prod-kicker">{noteLabels[post.data.category] ?? 'Journal Note'}</span>
+                  <span class="d1-prod-date">
+                    {post.data.publishedAt
+                      ? dateFormatter.format(post.data.publishedAt)
+                      : 'Recently added'}
+                  </span>
+                </div>
+                <h3 class="d1-prod-title">{post.data.productName ?? post.data.title}</h3>
+                <p class="d1-prod-desc">{post.data.description}</p>
+              </div>
+              <div class="d1-prod-arrow" aria-hidden="true">&#8594;</div>
+            </a>
+          ))}
+          <div class="d1-quote-banner" aria-hidden="true">
+            <h3 class="d1-quote-text">Good skin is a long-term relationship.</h3>
+            <span class="d1-quote-rule" aria-hidden="true"></span>
+            <p class="d1-quote-footer">SAME PRODUCTS. A CALMER YOU.</p>
           </div>
-        ) : (
-          <p class="d1-empty-notes">{tab.emptyMessage}</p>
-        )}
+        </div>
       </div>
     ))}
   </div>
@@ -669,10 +671,10 @@ const homeTabs: {
     font-size: 0.85rem;
   }
 
-  /* ===== CARDS GRID ===== */
+  /* ===== CARDS GRID (4 notes + 1 quote) ===== */
   .d1-cards-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 0.82fr);
     gap: 1.25rem;
   }
   .d1-prod-card {
@@ -962,7 +964,7 @@ const homeTabs: {
       gap: 2.5rem;
     }
     .d1-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .d1-quote-banner { grid-column: span 2; min-height:20rem; }
+    .d1-quote-banner { grid-column: span 2; min-height: 18rem; }
     .d1-bottom-grid { grid-template-columns: 1fr; }
     .d1-latest-section-meta { width: 100%; order: 2; }
     .d1-tab-right-label { flex: 1; min-width: 0; }
@@ -973,7 +975,10 @@ const homeTabs: {
     .d1-hero-title { font-size:clamp(2.6rem, 13vw, 3.5rem); }
     .d1-hero-right { display:block; }
     .d1-cards-grid { grid-template-columns: minmax(0, 1fr); }
-    .d1-quote-banner { grid-column: span 1; min-height:28rem; }
+    .d1-quote-banner {
+      grid-column: span 1;
+      min-height: 16rem;
+    }
     .d1-profile-bar { flex-direction:column; align-items:flex-start; }
     .d1-profile-brand { border-right:none; border-bottom:1px solid var(--d1-line); padding-right:0; padding-bottom:1rem; width:100%; }
     .d1-profile-items { flex-direction:column; gap:1rem; }
