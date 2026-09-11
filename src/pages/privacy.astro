@@ -28,7 +28,11 @@ import { site } from '../site';
       </p>
       {
         site.features.analytics ? (
-          <p>This site uses analytics as configured in the site settings.</p>
+          <p>
+            This site uses Google Analytics 4 (measurement ID {site.gaMeasurementId}) to understand
+            how pages are used. Google may process usage data according to Google&apos;s privacy
+            policy.
+          </p>
         ) : (
           <p>This site does not currently embed an analytics script.</p>
         )

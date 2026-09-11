@@ -44,6 +44,9 @@ const personLd = {
 };
 
 const graph = [websiteLd, personLd, ...jsonLd];
+const enableAnalytics =
+  import.meta.env.PROD && site.features.analytics && Boolean(site.gaMeasurementId);
+const gaMeasurementId = site.gaMeasurementId;
 ---
 
 <!doctype html>
@@ -74,6 +77,25 @@ const graph = [websiteLd, personLd, ...jsonLd];
       rel="stylesheet"
     />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />
+    {
+      enableAnalytics && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+            is:inline
+          />
+          <script is:inline define:vars={{ gaMeasurementId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', gaMeasurementId);
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <Header />

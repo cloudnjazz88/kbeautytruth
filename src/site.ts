@@ -15,10 +15,12 @@ export const site = {
   },
   features: {
     adsense: false,
-    analytics: false,
+    analytics: true,
     emailSubscribe: false,
     affiliateNetwork: false,
   },
+  /** Google Analytics 4 measurement ID. Injected only in production builds. */
+  gaMeasurementId: 'G-KTF41XTVT4',
 } as const;
 
 export const categories = [
