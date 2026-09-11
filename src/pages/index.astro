@@ -210,9 +210,10 @@ import { site } from '../site';
 <style is:global>
   /* ===== TOKENS ===== */
   :root {
-    --d1-bg: #FCFBF9;
+    --d1-bg: #FFFFFF;
     --d1-card: #FFFFFF;
     --d1-subtle: #F3F3F0;
+    --d1-profile: #F7F5F1;
     --d1-ink: #1A1A1A;
     --d1-ink2: #4A4A4A;
     --d1-muted: #8A8A8A;
@@ -244,7 +245,7 @@ import { site } from '../site';
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(249,247,242,0.92);
+    background: rgba(255,255,255,0.96);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--d1-line2);
   }
@@ -312,7 +313,7 @@ import { site } from '../site';
   /* ===== HERO ===== */
   .d1-hero {
     padding: 1.7rem 0 1.35rem;
-    background: linear-gradient(90deg, #fcfbf9 0%, #faf8f4 100%);
+    background: #FFFFFF;
     border-bottom: 1px solid var(--d1-line2);
   }
   .d1-hero-grid {
@@ -438,8 +439,8 @@ import { site } from '../site';
     display: flex;
     align-items: center;
     gap: 2rem;
-    background: var(--d1-card);
-    border: 1px solid var(--d1-line);
+    background: var(--d1-profile);
+    border: 1px solid #EFEBE4;
     border-radius: 14px;
     padding: 1.5rem 2rem;
     margin: 1.15rem 0 1.35rem;
