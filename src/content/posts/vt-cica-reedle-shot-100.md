@@ -1,5 +1,6 @@
 ---
 title: "VT CICA Reedle Shot 100 Review: Why I Repurchased It for My Dry, Somewhat Sensitive Skin"
+productName: "VT COSMETICS CICA Reedle Shot 100"
 description: "How I used VT CICA Reedle Shot 100 on dry, somewhat sensitive skin, why it tingles more when layering subsequent products, and why I repurchased it after finishing a bottle."
 slug: vt-cica-reedle-shot-100
 category: reviews

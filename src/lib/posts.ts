@@ -32,7 +32,7 @@ export async function getPostsByCategory(category: PostCategory): Promise<Post[]
 
 export async function getRepurchasedPosts(): Promise<Post[]> {
   const posts = await getPublishedPosts();
-  return posts.filter((post) => post.data.status === 'repurchased' || post.data.repurchase === 'yes');
+  return posts.filter((post) => post.data.status === 'repurchased');
 }
 
 export async function getFeaturedPost(): Promise<Post | undefined> {

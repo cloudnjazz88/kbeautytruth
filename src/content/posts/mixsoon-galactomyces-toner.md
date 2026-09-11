@@ -1,5 +1,6 @@
 ---
 title: "I’m on My Second Bottle of mixsoon Galactomyces Toner: An Honest Sensitive Skin Review"
+productName: "mixsoon Galactomyces Toner"
 description: "My experience using mixsoon Galactomyces Toner every day on dry, somewhat sensitive skin, including its watery texture, quick absorption, hydrating finish, and why I plan to repurchase it again."
 slug: mixsoon-galactomyces-toner
 category: reviews
@@ -8,7 +9,8 @@ featured: false
 skinType: Dry / Somewhat Sensitive
 testedFor: "Second Bottle; Used Daily"
 status: repurchased
-draft: true
+draft: false
+publishedAt: 2026-09-11
 heroImage: /media/products/mixsoon-galactomyces-toner/front.jpg
 heroImageAlt: "A bottle of mixsoon Galactomyces Toner held in hand, showing the front label"
 relatedPosts:

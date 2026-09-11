@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkinProfile from '../components/SkinProfile.astro';
+import { getRepurchasedPosts } from '../lib/posts';
 import { site } from '../site';
+
+const repurchasedPosts = await getRepurchasedPosts();
+const repurchasedWithoutReviews = [
+  'AESTURA ATOBARRIER365 Cream with Ceramides',
+  'Mixsoon Cica Hyal Deep Soothing Cream',
+];
+const repurchasedProducts = [
+  ...repurchasedPosts.map((post) => post.data.productName ?? post.data.title),
+  ...repurchasedWithoutReviews,
+];
 ---
 
 <BaseLayout
@@ -45,9 +56,7 @@ import { site } from '../site';
       </ul>
       <h2>Finished and bought again</h2>
       <ul>
-        <li>VT COSMETICS CICA Reedle Shot 100</li>
-        <li>AESTURA ATOBARRIER365 Cream with Ceramides</li>
-        <li>Mixsoon Cica Hyal Deep Soothing Cream</li>
+        {repurchasedProducts.map((product) => <li>{product}</li>)}
       </ul>
       <h2>Stopped</h2>
       <p>
