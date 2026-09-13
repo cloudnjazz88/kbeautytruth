@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /search/
 Disallow: /preview/
 Disallow: /drafts/
 
