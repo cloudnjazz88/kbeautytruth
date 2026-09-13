@@ -9,7 +9,11 @@ import { site } from '../site';
 
 const publishedPosts = await getPublishedPosts();
 const finishedPosts = (await getRepurchasedPosts()).slice(0, 3);
-
+const compareHref = '/comparisons/torriden-dive-in-soothing-cream-vs-aestura-atobarrier365-cream/';
+const compareProducts = [
+  publishedPosts.find((post) => post.data.slug === 'torriden-dive-in-soothing-cream'),
+  publishedPosts.find((post) => post.data.slug === 'aestura-atobarrier365-cream-review'),
+].filter((post): post is NonNullable<typeof post> => Boolean(post));
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
   day: 'numeric',
@@ -189,13 +193,37 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     <div class="d1-compare-banner">
       <div class="d1-compare-left">
         <h3 class="d1-compare-title">Compare Products</h3>
-        <p class="d1-compare-desc">See how your top picks stack up side by side.</p>
-        <a class="d1-btn-dark" href="/reviews/">Start a Comparison &rarr;</a>
+        <p class="d1-compare-desc">
+          Torriden DIVE-IN Soothing Cream vs AESTURA ATOBARRIER365 Cream — which Kay reaches for, and when.
+        </p>
+        <a class="d1-btn-dark" href={compareHref}>Start a Comparison &rarr;</a>
       </div>
       <div class="d1-compare-visual">
-        <div class="d1-bottle-placeholder"></div>
-        <div class="d1-vs-circle">VS</div>
-        <div class="d1-bottle-placeholder"></div>
+        {compareProducts[0] && (
+          <a class="d1-compare-product" href={getPostUrl(compareProducts[0])}>
+            {compareProducts[0].data.heroImage && (
+              <img
+                src={compareProducts[0].data.heroImage}
+                alt={compareProducts[0].data.heroImageAlt ?? `${compareProducts[0].data.productName ?? compareProducts[0].data.title} product photo`}
+                loading="lazy"
+              />
+            )}
+            <span class="d1-compare-product-name">{compareProducts[0].data.productName ?? compareProducts[0].data.title}</span>
+          </a>
+        )}
+        {compareProducts.length > 1 && <div class="d1-vs-circle">VS</div>}
+        {compareProducts[1] && (
+          <a class="d1-compare-product" href={getPostUrl(compareProducts[1])}>
+            {compareProducts[1].data.heroImage && (
+              <img
+                src={compareProducts[1].data.heroImage}
+                alt={compareProducts[1].data.heroImageAlt ?? `${compareProducts[1].data.productName ?? compareProducts[1].data.title} product photo`}
+                loading="lazy"
+              />
+            )}
+            <span class="d1-compare-product-name">{compareProducts[1].data.productName ?? compareProducts[1].data.title}</span>
+          </a>
+        )}
       </div>
     </div>
 
@@ -825,6 +853,33 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     align-items: center;
     gap: 0.75rem;
     flex-shrink: 0;
+    min-width: 0;
+  }
+  .d1-compare-product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    width: 5.25rem;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+  .d1-compare-product img {
+    width: 4rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    background: var(--d1-subtle);
+    filter: var(--media-lift, brightness(1.24) contrast(1.06));
+  }
+  .d1-compare-product-name {
+    font-size: 0.62rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--d1-ink2);
+    overflow-wrap: anywhere;
   }
   .d1-bottle-placeholder {
     width: 4rem;
@@ -947,7 +1002,8 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     .d1-profile-bar { flex-direction:column; align-items:flex-start; }
     .d1-profile-brand { border-right:none; border-bottom:1px solid var(--d1-line); padding-right:0; padding-bottom:1rem; width:100%; }
     .d1-profile-items { flex-direction:column; gap:1rem; }
-    .d1-compare-banner { flex-direction:column; }
+    .d1-compare-banner { flex-direction:column; align-items:flex-start; }
+    .d1-compare-visual { width:100%; justify-content:flex-start; flex-wrap:wrap; }
     .d1-section-eyebrow { display: none; }
     .d1-latest-section-meta {
       width: 100%;
