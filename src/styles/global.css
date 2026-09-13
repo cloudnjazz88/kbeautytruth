@@ -969,7 +969,7 @@ a {
    Article Prose & Callouts (For Post Pages)
    ========================================================================== */
 .prose {
-  max-width: 52.8rem; /* ~10% wider than 48rem for article body */
+  max-width: 51.36rem; /* ~7% wider than 48rem for article body */
   margin-inline: auto;
 }
 
@@ -1541,7 +1541,7 @@ a {
     margin-inline: auto;
   }
   .article-body {
-    width: min(100% - 2rem, 52.8rem);
+    width: min(100% - 2rem, 51.36rem);
   }
   .verdict {
     border-top: 1px solid var(--line);
