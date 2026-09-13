@@ -393,7 +393,7 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     transform: scale(1.08);
     transform-origin: 60% 50%;
     /* Soft lift so the gel reads as lit, not underexposed */
-    filter: brightness(1.24) contrast(1.06);
+    filter: var(--media-lift, brightness(1.24) contrast(1.06));
   }
   .d1-media-shade {
     position: absolute;
@@ -613,6 +613,7 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: var(--media-lift, brightness(1.24) contrast(1.06));
   }
   .d1-prod-body {
     flex: 1;
@@ -891,7 +892,7 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     flex-shrink: 0;
     overflow: hidden;
   }
-  .d1-latest-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .d1-latest-thumb img { width:100%; height:100%; object-fit:cover; display:block; filter: var(--media-lift, brightness(1.24) contrast(1.06)); }
   .d1-latest-thumb-empty span {
     font-family: var(--d1-serif);
     font-size: 0.75rem;

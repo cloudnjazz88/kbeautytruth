@@ -16,6 +16,9 @@
   --sage-light: #E7EFE9;
   --gold-tint: #D6A856;
 
+  /* Soft lift for product photos/videos (matches homepage hero media) */
+  --media-lift: brightness(1.24) contrast(1.06);
+
   /* Typography */
   --font-serif: "Playfair Display", "Newsreader", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -1053,6 +1056,7 @@ a {
   object-fit: cover;
   border-radius: 1.4rem 1.4rem 5rem 1.4rem;
   box-shadow: 0 22px 55px rgba(31, 36, 33, 0.12);
+  filter: var(--media-lift);
 }
 
 .article-hero-media figcaption {
@@ -1246,6 +1250,7 @@ a {
   height: auto;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  filter: var(--media-lift);
 }
 
 .post-photo figcaption {
@@ -1263,6 +1268,7 @@ a {
   border-radius: var(--radius-md);
   background: var(--bg-subtle);
   box-shadow: var(--shadow-sm);
+  filter: var(--media-lift);
 }
 
 .post-photo .post-video {
