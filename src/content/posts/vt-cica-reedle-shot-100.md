@@ -11,6 +11,8 @@ testedFor: "3-4 Months (1 Full Bottle Finished)"
 status: repurchased
 draft: false
 publishedAt: 2026-09-10
+heroImage: /media/products/vt-cica-reedle-shot-100/front.jpg
+heroImageAlt: "VT CICA Reedle Shot 100 bottle held in hand, showing the front label"
 relatedPosts:
   - sensitive-skin-barrier-routine
   - medicube-collagen-jelly-cream
@@ -22,8 +24,10 @@ I bought VT COSMETICS CICA Reedle Shot 100 myself after seeing countless recomme
 
 I finished that entire first bottle over roughly 3 to 4 months, and I repurchased it. Here is my honest experience with how it felt, how I layered it, and why I decided it was worth buying a second time.
 
-<!-- PHOTO SLOT: Product bottle & packaging shot -->
-<!-- <img src="/images/posts/vt-reedle-shot-bottle.jpg" alt="VT CICA Reedle Shot 100 bottle on bathroom counter" class="post-image" /> -->
+<figure class="post-photo">
+  <img src="/media/products/vt-cica-reedle-shot-100/back.jpg" alt="Back label of a VT Reedle Shot 100 bottle held in hand" loading="lazy" />
+  <figcaption>The back label of my VT Reedle Shot 100 bottle.</figcaption>
+</figure>
 
 ## How the First Use Actually Felt (The Prickle Factor)
 
@@ -43,8 +47,26 @@ It feels unusual at first, but for me, it was a tolerable, prickly sensation rat
 * **Bottle lifespan:** It took me about 3 to 4 months to completely empty the first bottle using this schedule.
 * **Layering sequence:** Reedle Shot 100 &rarr; Hydrating Toner &rarr; Essence/Serum &rarr; Nourishing Cream / Barrier Moisturizer.
 
-<!-- PHOTO SLOT: Texture close-up / Spreading GIF -->
-<!-- <img src="/images/posts/vt-reedle-shot-texture.gif" alt="Pumping 3 drops of VT Reedle Shot 100 and spreading texture on hand" class="post-image" /> -->
+<figure class="post-photo">
+  <video class="post-video" autoplay loop muted playsinline preload="metadata" aria-label="Dispensing Reedle Shot 100 onto the back of my hand">
+    <source src="/media/products/vt-cica-reedle-shot-100/dispense.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Dispensing Reedle Shot 100 onto the back of my hand.</figcaption>
+</figure>
+
+<figure class="post-photo">
+  <video class="post-video" autoplay loop muted playsinline preload="metadata" aria-label="How the product spreads on my hand">
+    <source src="/media/products/vt-cica-reedle-shot-100/spreading.mp4" type="video/mp4" />
+  </video>
+  <figcaption>How the product spreads on my hand.</figcaption>
+</figure>
+
+<figure class="post-photo">
+  <video class="post-video" autoplay loop muted playsinline preload="metadata" aria-label="The finish on my hand after application">
+    <source src="/media/products/vt-cica-reedle-shot-100/finish.mp4" type="video/mp4" />
+  </video>
+  <figcaption>The finish on my hand after application.</figcaption>
+</figure>
 
 ### When I Skipped It
 Because my skin is sensitive, consistency didn't mean forcing it every 3rd day without exception. On days when my skin felt irritated, sensitized, or compromised, I intentionally skipped Reedle Shot and focused purely on basic gentle barrier care until my skin calmed down.
