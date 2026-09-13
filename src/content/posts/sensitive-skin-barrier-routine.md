@@ -33,13 +33,13 @@ These are in use:
 - Medicube PDRN Pink Peptide Serum
 - Mixsoon Centella Asiatica Toner
 - Medicube Booster Pro X2
+- AESTURA ATOBARRIER365 Cream with Ceramides
 
 <p class="experience-needed">[EXPERIENCE NEEDED: Exact full name of the Torriden DIVE IN hyaluronic acid product]</p>
 
 ## Finished and bought again
 
 - VT COSMETICS CICA Reedle Shot 100
-- AESTURA ATOBARRIER365 Cream with Ceramides
 - Mixsoon Cica Hyal Deep Soothing Cream
 
 ## Stopped
@@ -65,7 +65,7 @@ Reedle Shot, vitamin C, masks, and the Medicube Booster Pro X2 are on my shelf s
 
 ## What I liked
 
-I keep buying barrier-minded products and I have repurchased three of them. I have not written a routine-level “like” list beyond that.
+I keep buying barrier-minded products and I have repurchased two of them. I have not written a routine-level “like” list beyond that.
 
 <p class="experience-needed">[EXPERIENCE NEEDED: What do you like about this shelf as a routine, once the order is known?]</p>
 
@@ -75,7 +75,7 @@ The confirmed miss is Medicube Collagen Jelly Cream, which I stopped after a bre
 
 ## Did I repurchase?
 
-Some items on this list were repurchased: Reedle Shot 100, AESTURA ATOBARRIER365 Cream, and Mixsoon Cica Hyal Deep Soothing Cream. That does not mean every product here is a repurchase.
+Some items on this list were repurchased: Reedle Shot 100 and Mixsoon Cica Hyal Deep Soothing Cream. That does not mean every product here is a repurchase.
 
 ## Who it may suit
 
