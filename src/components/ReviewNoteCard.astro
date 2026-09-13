@@ -1,5 +1,6 @@
 ---
 import { getPostUrl, type Post } from '../lib/posts';
+import { formatShortDate } from '../lib/dates';
 
 interface Props {
   post: Post;
@@ -9,12 +10,6 @@ interface Props {
 const { post, headingLevel = 3 } = Astro.props;
 const href = getPostUrl(post);
 const Heading = headingLevel === 2 ? 'h2' : 'h3';
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
-  timeZone: 'UTC',
-});
 ---
 
 <a class="review-note-card" href={href}>
@@ -33,7 +28,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
     <div class="review-note-meta">
       <span class="review-note-kicker">Review Note</span>
       <span class="review-note-date">
-        {post.data.publishedAt ? dateFormatter.format(post.data.publishedAt) : 'Recently added'}
+        {post.data.publishedAt ? formatShortDate(post.data.publishedAt) : 'Recently added'}
       </span>
     </div>
     <Heading class="review-note-title">{post.data.productName ?? post.data.title}</Heading>

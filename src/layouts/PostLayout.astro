@@ -6,6 +6,7 @@ import SkinProfile from '../components/SkinProfile.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import VerdictBox from '../components/VerdictBox.astro';
 import { getPostUrl, getRelatedPosts, type Post } from '../lib/posts';
+import { formatLongDate } from '../lib/dates';
 import { getCategoryLabel, site } from '../site';
 
 interface Heading {
@@ -97,11 +98,7 @@ const breadcrumbLd = {
                 <>
                   {' '}
                   · <time datetime={data.publishedAt.toISOString()}>
-                    {data.publishedAt.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
+                    {formatLongDate(data.publishedAt)}
                   </time>
                 </>
               )

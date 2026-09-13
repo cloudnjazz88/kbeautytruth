@@ -5,6 +5,7 @@ import {
   getPublishedPosts,
   getRepurchasedPosts,
 } from '../lib/posts';
+import { formatShortDate } from '../lib/dates';
 import { site } from '../site';
 
 const publishedPosts = await getPublishedPosts();
@@ -14,12 +15,6 @@ const compareProducts = [
   publishedPosts.find((post) => post.data.slug === 'torriden-dive-in-soothing-cream'),
   publishedPosts.find((post) => post.data.slug === 'aestura-atobarrier365-cream-review'),
 ].filter((post): post is NonNullable<typeof post> => Boolean(post));
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
-  timeZone: 'UTC',
-});
 const reviewPosts = publishedPosts
   .filter((post) => post.data.category === 'reviews')
   .slice(0, 4);
@@ -136,7 +131,7 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
                 <span class="d1-prod-kicker">Review Note</span>
                 <span class="d1-prod-date">
                   {post.data.publishedAt
-                    ? dateFormatter.format(post.data.publishedAt)
+                    ? formatShortDate(post.data.publishedAt)
                     : 'Recently added'}
                 </span>
               </div>
@@ -174,7 +169,7 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
                 </span>
                 <span class="d1-column-date">
                   {post.data.publishedAt
-                    ? dateFormatter.format(post.data.publishedAt)
+                    ? formatShortDate(post.data.publishedAt)
                     : 'Recently added'}
                 </span>
               </div>
