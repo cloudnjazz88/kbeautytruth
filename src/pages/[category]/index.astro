@@ -80,6 +80,25 @@ if (category === 'repurchased') {
 } else {
   posts = await getPublishedPosts();
 }
+
+function topicHasPublishedPost(topic: string, ingredientPosts: Post[]): boolean {
+  const needle = topic.toLowerCase();
+  return ingredientPosts.some((post) => {
+    const haystack = [
+      post.data.slug,
+      post.data.title,
+      post.data.productName ?? '',
+    ]
+      .join(' ')
+      .toLowerCase();
+    return haystack.includes(needle);
+  });
+}
+
+const remainingPlannedTopics =
+  category === 'ingredients'
+    ? ingredientTopics.filter((topic) => !topicHasPublishedPost(topic, posts))
+    : [];
 ---
 
 <BaseLayout
@@ -93,15 +112,18 @@ if (category === 'repurchased') {
       <h1 class="page-title">{page.title}</h1>
       <p class="lede">{page.intro}</p>
       {
-        posts.length > 0 ? (
+        posts.length > 0 && (
           <div class="card-grid" style="margin-top: 2rem;">
             {posts.map((post) => (
               <PostCard post={post} headingLevel={2} />
             ))}
           </div>
-        ) : category === 'ingredients' ? (
-          <div class="ingredient-topic-grid">
-            {ingredientTopics.map((topic) => (
+        )
+      }
+      {
+        remainingPlannedTopics.length > 0 && (
+          <div class="ingredient-topic-grid" style={posts.length > 0 ? 'margin-top: 1.5rem;' : undefined}>
+            {remainingPlannedTopics.map((topic) => (
               <article class="ingredient-topic-card">
                 <span>PLANNED COLUMN</span>
                 <h2>{topic}</h2>
@@ -109,7 +131,10 @@ if (category === 'repurchased') {
               </article>
             ))}
           </div>
-        ) : (
+        )
+      }
+      {
+        posts.length === 0 && remainingPlannedTopics.length === 0 && category !== 'ingredients' && (
           <p class="empty-copy">No published notes in this section yet.</p>
         )
       }
