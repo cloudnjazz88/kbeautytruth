@@ -38,19 +38,33 @@ const path = Astro.url.pathname;
           <span aria-hidden="true">🔍</span>
         </button>
         <div class="header-search-panel" id="header-search-panel" data-search-panel hidden>
-          <label class="visually-hidden" for="header-search-input">Search notes and products</label>
+          <form class="header-search-form" action="/search/" method="get" role="search">
+            <label class="visually-hidden" for="header-search-input">Search notes and products</label>
+            <input
+              id="header-search-input"
+              class="header-search-input"
+              type="search"
+              name="q"
+              placeholder="Search notes, products..."
+              autocomplete="off"
+              enterkeyhint="search"
+            />
+            <button class="header-search-submit" type="submit">Search</button>
+          </form>
+        </div>
+        <form class="header-search-desktop" action="/search/" method="get" role="search">
+          <label class="visually-hidden" for="header-search-desktop-input">Search notes and products</label>
+          <span aria-hidden="true">🔍</span>
           <input
-            id="header-search-input"
-            class="header-search-input"
+            id="header-search-desktop-input"
+            class="header-search-desktop-input"
             type="search"
+            name="q"
             placeholder="Search notes, products..."
             autocomplete="off"
+            enterkeyhint="search"
           />
-        </div>
-        <div class="header-search-desktop" aria-hidden="true">
-          <span>🔍</span>
-          <span>Search notes, products...</span>
-        </div>
+        </form>
       </div>
       <a class="btn-header-journal" href="/about/">My Journal</a>
       <button

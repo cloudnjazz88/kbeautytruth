@@ -1,0 +1,269 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSearchDocuments } from '../lib/search';
+
+const documents = await getSearchDocuments();
+---
+
+<BaseLayout
+  title="Search"
+  description="Search published notes on K-Beauty Truth: reviews, ingredients, trends, comparisons, and what didn’t work."
+  canonicalPath="/search/"
+  noindex={true}
+>
+  <section class="search-page">
+    <div class="wrap search-page-inner">
+      <p class="search-eyebrow">SITE SEARCH</p>
+      <h1 class="search-title">Search notes</h1>
+      <p class="search-intro">
+        Look through published reviews, ingredient notes, trends, comparisons, and what didn’t work.
+      </p>
+
+      <form class="search-form" action="/search/" method="get" role="search">
+        <label class="visually-hidden" for="search-page-input">Search notes and products</label>
+        <input
+          id="search-page-input"
+          class="search-page-input"
+          type="search"
+          name="q"
+          placeholder="Search notes, products..."
+          autocomplete="off"
+          enterkeyhint="search"
+        />
+        <button class="search-page-submit" type="submit">Search</button>
+      </form>
+
+      <div class="search-status" data-search-status aria-live="polite"></div>
+      <ol class="search-results" data-search-results></ol>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="application/json" id="search-index" set:html={JSON.stringify(documents)} />
+
+<script>
+  type SearchDocument = {
+    id: string;
+    title: string;
+    description: string;
+    productName: string;
+    category: string;
+    categoryLabel: string;
+    url: string;
+  };
+
+  function readDocuments(): SearchDocument[] {
+    const el = document.getElementById('search-index');
+    if (!el?.textContent) return [];
+    try {
+      const parsed = JSON.parse(el.textContent) as SearchDocument[];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  const documents = readDocuments();
+  const statusEl = document.querySelector('[data-search-status]');
+  const resultsEl = document.querySelector('[data-search-results]');
+  const inputEl = document.querySelector('#search-page-input');
+
+  function normalizeQuery(raw: string): string {
+    return raw.trim().replace(/\s+/g, ' ').toLowerCase();
+  }
+
+  function matchDocuments(queryRaw: string): SearchDocument[] {
+    const query = normalizeQuery(queryRaw);
+    if (!query) return [];
+    const tokens = query.split(' ').filter(Boolean);
+    return documents.filter((doc) => {
+      const haystack = [doc.title, doc.description, doc.productName, doc.categoryLabel]
+        .join(' ')
+        .toLowerCase();
+      return tokens.every((token) => haystack.includes(token));
+    });
+  }
+
+  function setStatus(text: string) {
+    if (statusEl) statusEl.textContent = text;
+  }
+
+  function clearResults() {
+    if (resultsEl) resultsEl.replaceChildren();
+  }
+
+  function renderResults(queryRaw: string) {
+    const trimmed = queryRaw.trim().replace(/\s+/g, ' ');
+    clearResults();
+
+    if (!trimmed) {
+      setStatus('Type a search term above to find published notes.');
+      return;
+    }
+
+    const matches = matchDocuments(trimmed);
+    if (matches.length === 0) {
+      setStatus(`No published notes matched “${trimmed}”. Try another product, ingredient, or title.`);
+      return;
+    }
+
+    setStatus(
+      matches.length === 1
+        ? `1 published note matched “${trimmed}”.`
+        : `${matches.length} published notes matched “${trimmed}”.`,
+    );
+
+    if (!(resultsEl instanceof HTMLOListElement)) return;
+
+    for (const doc of matches) {
+      const item = document.createElement('li');
+      item.className = 'search-result';
+
+      const link = document.createElement('a');
+      link.href = doc.url;
+      link.className = 'search-result-link';
+
+      const type = document.createElement('span');
+      type.className = 'search-result-type';
+      type.textContent = doc.categoryLabel;
+
+      const title = document.createElement('span');
+      title.className = 'search-result-title';
+      title.textContent = doc.title;
+
+      const description = document.createElement('span');
+      description.className = 'search-result-description';
+      description.textContent = doc.description;
+
+      link.append(type, title, description);
+      item.append(link);
+      resultsEl.append(item);
+    }
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const initialQuery = params.get('q') ?? '';
+  if (inputEl instanceof HTMLInputElement) {
+    inputEl.value = initialQuery;
+  }
+  renderResults(initialQuery);
+</script>
+
+<style>
+  .search-page {
+    padding: 2.5rem 0 4rem;
+  }
+
+  .search-page-inner {
+    max-width: 46rem;
+  }
+
+  .search-eyebrow {
+    margin: 0 0 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .search-title {
+    margin: 0 0 0.65rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 3vw, 2.35rem);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .search-intro {
+    margin: 0 0 1.35rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .search-page-input {
+    flex: 1 1 14rem;
+    min-width: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 0.7rem 1rem;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .search-page-submit {
+    border: 0;
+    border-radius: var(--radius-pill);
+    padding: 0.7rem 1.2rem;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--sage-dark);
+    cursor: pointer;
+  }
+
+  .search-page-input:focus-visible,
+  .search-page-submit:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+  }
+
+  .search-status {
+    margin: 0 0 1rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .search-result-link {
+    display: grid;
+    gap: 0.3rem;
+    padding: 0.95rem 0;
+    border-top: 1px solid var(--line-subtle);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .search-result-link:hover .search-result-title {
+    color: var(--sage-dark);
+  }
+
+  .search-result-type {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .search-result-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .search-result-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+</style>

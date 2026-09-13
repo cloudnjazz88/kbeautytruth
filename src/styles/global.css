@@ -192,6 +192,46 @@ a {
   width: 14rem;
 }
 
+.header-search-desktop-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+.header-search-desktop-input::placeholder {
+  color: var(--muted);
+}
+
+.header-search-desktop-input:focus {
+  outline: none;
+}
+
+.header-search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.header-search-submit {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 0.8rem;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--sage-dark);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
 .header-search-toggle {
   display: none;
   align-items: center;
@@ -207,6 +247,9 @@ a {
 }
 
 .header-search-toggle:focus-visible,
+.header-search-input:focus-visible,
+.header-search-desktop:focus-within,
+.header-search-submit:focus-visible,
 .nav-toggle:focus-visible,
 .nav-links a:focus-visible,
 .btn-header-journal:focus-visible {
