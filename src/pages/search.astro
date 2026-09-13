@@ -42,15 +42,7 @@ const documents = await getSearchDocuments();
 <script type="application/json" id="search-index" set:html={JSON.stringify(documents)} />
 
 <script>
-  type SearchDocument = {
-    id: string;
-    title: string;
-    description: string;
-    productName: string;
-    category: string;
-    categoryLabel: string;
-    url: string;
-  };
+  import { matchSearchDocuments, type SearchDocument } from '../lib/search-match';
 
   function readDocuments(): SearchDocument[] {
     const el = document.getElementById('search-index');
@@ -67,22 +59,6 @@ const documents = await getSearchDocuments();
   const statusEl = document.querySelector('[data-search-status]');
   const resultsEl = document.querySelector('[data-search-results]');
   const inputEl = document.querySelector('#search-page-input');
-
-  function normalizeQuery(raw: string): string {
-    return raw.trim().replace(/\s+/g, ' ').toLowerCase();
-  }
-
-  function matchDocuments(queryRaw: string): SearchDocument[] {
-    const query = normalizeQuery(queryRaw);
-    if (!query) return [];
-    const tokens = query.split(' ').filter(Boolean);
-    return documents.filter((doc) => {
-      const haystack = [doc.title, doc.description, doc.productName, doc.categoryLabel]
-        .join(' ')
-        .toLowerCase();
-      return tokens.every((token) => haystack.includes(token));
-    });
-  }
 
   function setStatus(text: string) {
     if (statusEl) statusEl.textContent = text;
@@ -101,7 +77,7 @@ const documents = await getSearchDocuments();
       return;
     }
 
-    const matches = matchDocuments(trimmed);
+    const matches = matchSearchDocuments(documents, trimmed);
     if (matches.length === 0) {
       setStatus(`No published notes matched “${trimmed}”. Try another product, ingredient, or title.`);
       return;

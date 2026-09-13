@@ -1,5 +1,18 @@
 import { getCategoryLabel, type PostCategory } from '../site';
 import { getPostUrl, getPublishedPosts, type Post } from './posts';
+import {
+  matchSearchDocuments,
+  normalizeSearchQuery,
+  searchAllResultsHref,
+  type SearchDocument,
+} from './search-match';
+
+export type { SearchDocument };
+export {
+  matchSearchDocuments,
+  normalizeSearchQuery,
+  searchAllResultsHref,
+};
 
 /** Categories included in site search results. */
 export const searchableCategories = [
@@ -12,16 +25,6 @@ export const searchableCategories = [
 
 export type SearchableCategory = (typeof searchableCategories)[number];
 
-export interface SearchDocument {
-  id: string;
-  title: string;
-  description: string;
-  productName: string;
-  category: SearchableCategory;
-  categoryLabel: string;
-  url: string;
-}
-
 const searchableSet = new Set<string>(searchableCategories);
 
 export function isSearchableCategory(category: PostCategory): category is SearchableCategory {
@@ -33,7 +36,7 @@ export function toSearchDocument(post: Post): SearchDocument | null {
     return null;
   }
 
-  return {
+  const doc: SearchDocument = {
     id: post.data.slug,
     title: post.data.title,
     description: post.data.description,
@@ -42,6 +45,13 @@ export function toSearchDocument(post: Post): SearchDocument | null {
     categoryLabel: getCategoryLabel(post.data.category),
     url: getPostUrl(post),
   };
+
+  if (post.data.heroImage) {
+    doc.imageUrl = post.data.heroImage;
+    doc.imageAlt = post.data.heroImageAlt || post.data.productName || post.data.title;
+  }
+
+  return doc;
 }
 
 export async function getSearchDocuments(): Promise<SearchDocument[]> {
@@ -55,25 +65,4 @@ export async function getSearchDocuments(): Promise<SearchDocument[]> {
   }
 
   return [...byUrl.values()];
-}
-
-export function normalizeSearchQuery(raw: string): string {
-  return raw.trim().replace(/\s+/g, ' ').toLowerCase();
-}
-
-export function matchSearchDocuments(
-  documents: SearchDocument[],
-  rawQuery: string,
-): SearchDocument[] {
-  const query = normalizeSearchQuery(rawQuery);
-  if (!query) return [];
-
-  const tokens = query.split(' ').filter(Boolean);
-
-  return documents.filter((doc) => {
-    const haystack = [doc.title, doc.description, doc.productName, doc.categoryLabel]
-      .join(' ')
-      .toLowerCase();
-    return tokens.every((token) => haystack.includes(token));
-  });
 }

@@ -1,5 +1,8 @@
 ---
+import { getSearchDocuments } from '../lib/search';
+
 const path = Astro.url.pathname;
+const searchDocuments = await getSearchDocuments();
 ---
 
 <a class="skip-link" href="#main">Skip to content</a>
@@ -38,7 +41,7 @@ const path = Astro.url.pathname;
           <span aria-hidden="true">🔍</span>
         </button>
         <div class="header-search-panel" id="header-search-panel" data-search-panel hidden>
-          <form class="header-search-form" action="/search/" method="get" role="search">
+          <form class="header-search-form" action="/search/" method="get" role="search" data-header-search-form>
             <label class="visually-hidden" for="header-search-input">Search notes and products</label>
             <input
               id="header-search-input"
@@ -48,23 +51,45 @@ const path = Astro.url.pathname;
               placeholder="Search notes, products..."
               autocomplete="off"
               enterkeyhint="search"
+              data-header-search-input
+              aria-autocomplete="list"
+              aria-controls="header-search-suggest-mobile"
+              aria-expanded="false"
             />
             <button class="header-search-submit" type="submit">Search</button>
           </form>
+          <div
+            class="header-search-suggest"
+            id="header-search-suggest-mobile"
+            data-search-suggest
+            hidden
+          ></div>
         </div>
-        <form class="header-search-desktop" action="/search/" method="get" role="search">
-          <label class="visually-hidden" for="header-search-desktop-input">Search notes and products</label>
-          <span aria-hidden="true">🔍</span>
-          <input
-            id="header-search-desktop-input"
-            class="header-search-desktop-input"
-            type="search"
-            name="q"
-            placeholder="Search notes, products..."
-            autocomplete="off"
-            enterkeyhint="search"
-          />
-        </form>
+        <div class="header-search-desktop-wrap">
+          <form class="header-search-desktop" action="/search/" method="get" role="search" data-header-search-form>
+            <label class="visually-hidden" for="header-search-desktop-input">Search notes and products</label>
+            <span aria-hidden="true">🔍</span>
+            <input
+              id="header-search-desktop-input"
+              class="header-search-desktop-input"
+              type="search"
+              name="q"
+              placeholder="Search notes, products..."
+              autocomplete="off"
+              enterkeyhint="search"
+              data-header-search-input
+              aria-autocomplete="list"
+              aria-controls="header-search-suggest"
+              aria-expanded="false"
+            />
+          </form>
+          <div
+            class="header-search-suggest"
+            id="header-search-suggest"
+            data-search-suggest
+            hidden
+          ></div>
+        </div>
       </div>
       <a class="btn-header-journal" href="/about/">My Journal</a>
       <button
@@ -81,13 +106,39 @@ const path = Astro.url.pathname;
   </div>
 </header>
 
+<script type="application/json" id="header-search-index" set:html={JSON.stringify(searchDocuments)} />
+
 <script>
+  import {
+    matchSearchDocuments,
+    searchAllResultsHref,
+    type SearchDocument,
+  } from '../lib/search-match';
+
   const nav = document.querySelector('[data-site-nav]');
   const navToggle = document.querySelector('[data-nav-toggle]');
   const searchRoot = document.querySelector('[data-header-search]');
   const searchToggle = document.querySelector('[data-search-toggle]');
-  const searchPanel = document.querySelector('[data-search-panel]');
-  const searchInput = document.querySelector('#header-search-input');
+  const searchPanel = document.querySelector<HTMLElement>('[data-search-panel]');
+  const mobileSearchInput = document.querySelector('#header-search-input');
+  const searchInputs = document.querySelectorAll<HTMLInputElement>('[data-header-search-input]');
+
+  const SUGGEST_LIMIT = 5;
+  let activeIndex = -1;
+  let activeInput: HTMLInputElement | null = null;
+
+  function readDocuments(): SearchDocument[] {
+    const el = document.getElementById('header-search-index');
+    if (!el?.textContent) return [];
+    try {
+      const parsed = JSON.parse(el.textContent) as SearchDocument[];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  const documents = readDocuments();
 
   function setNavOpen(open: boolean) {
     nav?.classList.toggle('is-open', open);
@@ -103,9 +154,198 @@ const path = Astro.url.pathname;
     }
     searchToggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
     searchToggle?.setAttribute('aria-label', open ? 'Close search' : 'Open search');
-    if (open && searchInput instanceof HTMLInputElement) {
-      searchInput.focus();
+    if (open && mobileSearchInput instanceof HTMLInputElement) {
+      mobileSearchInput.focus();
+      updateSuggest(mobileSearchInput);
+    } else {
+      closeSuggest();
     }
+  }
+
+  function visibleSuggest(): HTMLElement | null {
+    const nodes = document.querySelectorAll<HTMLElement>('[data-search-suggest]');
+    for (const node of nodes) {
+      const desktopWrap = node.closest('.header-search-desktop-wrap');
+      if (desktopWrap) {
+        if (getComputedStyle(desktopWrap).display !== 'none') {
+          return node;
+        }
+        continue;
+      }
+      if (searchRoot?.classList.contains('is-open') && searchPanel && !searchPanel.hidden) {
+        return node;
+      }
+    }
+    return null;
+  }
+
+  function closeSuggest() {
+    activeIndex = -1;
+    document.querySelectorAll<HTMLElement>('[data-search-suggest]').forEach((el) => {
+      el.hidden = true;
+      el.replaceChildren();
+      el.removeAttribute('role');
+    });
+    searchInputs.forEach((input) => {
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
+    });
+  }
+
+  function setActiveOption(index: number) {
+    const suggest = visibleSuggest();
+    if (!suggest) return;
+    const options = [...suggest.querySelectorAll<HTMLElement>('[data-suggest-option]')];
+    const footer = suggest.querySelector<HTMLElement>('[data-suggest-all]');
+    const total = options.length + (footer ? 1 : 0);
+    if (total === 0) {
+      activeIndex = -1;
+      return;
+    }
+
+    activeIndex = ((index % total) + total) % total;
+    options.forEach((option, i) => {
+      const on = i === activeIndex;
+      option.classList.toggle('is-active', on);
+      option.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (on && activeInput) {
+        activeInput.setAttribute('aria-activedescendant', option.id);
+      }
+    });
+    if (footer) {
+      const on = activeIndex === options.length;
+      footer.classList.toggle('is-active', on);
+      if (on && activeInput) {
+        activeInput.setAttribute('aria-activedescendant', footer.id);
+      }
+    }
+  }
+
+  function renderSuggest(input: HTMLInputElement, queryRaw: string) {
+    const suggest = visibleSuggest();
+    if (!suggest) {
+      closeSuggest();
+      return;
+    }
+
+    const trimmed = queryRaw.trim().replace(/\s+/g, ' ');
+    if (!trimmed) {
+      closeSuggest();
+      return;
+    }
+
+    // Hide the inactive suggest box so only one is open.
+    document.querySelectorAll<HTMLElement>('[data-search-suggest]').forEach((el) => {
+      if (el !== suggest) {
+        el.hidden = true;
+        el.replaceChildren();
+      }
+    });
+
+    const matches = matchSearchDocuments(documents, trimmed).slice(0, SUGGEST_LIMIT);
+    activeIndex = -1;
+    suggest.replaceChildren();
+    suggest.hidden = false;
+    suggest.setAttribute('role', 'listbox');
+    suggest.setAttribute('aria-label', 'Search suggestions');
+    input.setAttribute('aria-expanded', 'true');
+    input.removeAttribute('aria-activedescendant');
+
+    if (matches.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'header-search-suggest-empty';
+      empty.textContent = 'No matching notes.';
+
+      const all = document.createElement('a');
+      all.className = 'header-search-suggest-all';
+      all.href = searchAllResultsHref(trimmed);
+      all.id = 'header-suggest-all';
+      all.dataset.suggestAll = '';
+      all.textContent = 'View all results';
+      all.setAttribute('role', 'option');
+      all.setAttribute('aria-selected', 'false');
+
+      suggest.append(empty, all);
+      return;
+    }
+
+    const list = document.createElement('ul');
+    list.className = 'header-search-suggest-list';
+
+    matches.forEach((doc, index) => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = doc.url;
+      link.className = 'header-search-suggest-item';
+      link.id = `header-suggest-option-${index}`;
+      link.dataset.suggestOption = '';
+      link.setAttribute('role', 'option');
+      link.setAttribute('aria-selected', 'false');
+
+      if (doc.imageUrl) {
+        const img = document.createElement('img');
+        img.className = 'header-search-suggest-thumb';
+        img.src = doc.imageUrl;
+        img.alt = '';
+        img.width = 40;
+        img.height = 40;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        link.append(img);
+      }
+
+      const text = document.createElement('span');
+      text.className = 'header-search-suggest-text';
+
+      const type = document.createElement('span');
+      type.className = 'header-search-suggest-type';
+      type.textContent = doc.categoryLabel;
+
+      const title = document.createElement('span');
+      title.className = 'header-search-suggest-title';
+      title.textContent = doc.title;
+
+      text.append(type, title);
+      link.append(text);
+      item.append(link);
+      list.append(item);
+    });
+
+    const all = document.createElement('a');
+    all.className = 'header-search-suggest-all';
+    all.href = searchAllResultsHref(trimmed);
+    all.id = 'header-suggest-all';
+    all.dataset.suggestAll = '';
+    all.textContent = 'View all results';
+    all.setAttribute('role', 'option');
+    all.setAttribute('aria-selected', 'false');
+
+    suggest.append(list, all);
+  }
+
+  function updateSuggest(input: HTMLInputElement) {
+    activeInput = input;
+    renderSuggest(input, input.value);
+  }
+
+  function activateCurrentOption(): boolean {
+    const suggest = visibleSuggest();
+    if (!suggest || suggest.hidden) return false;
+    const options = [...suggest.querySelectorAll<HTMLElement>('[data-suggest-option]')];
+    const footer = suggest.querySelector<HTMLAnchorElement>('[data-suggest-all]');
+    if (activeIndex < 0) return false;
+    if (activeIndex < options.length) {
+      const link = options[activeIndex];
+      if (link instanceof HTMLAnchorElement) {
+        window.location.assign(link.href);
+        return true;
+      }
+    }
+    if (footer && activeIndex === options.length) {
+      window.location.assign(footer.href);
+      return true;
+    }
+    return false;
   }
 
   navToggle?.addEventListener('click', () => {
@@ -120,14 +360,62 @@ const path = Astro.url.pathname;
     if (open) setNavOpen(false);
   });
 
+  searchInputs.forEach((input) => {
+    input.addEventListener('input', () => updateSuggest(input));
+    input.addEventListener('focus', () => updateSuggest(input));
+    input.addEventListener('keydown', (event) => {
+      const suggest = visibleSuggest();
+      const open = Boolean(suggest && !suggest.hidden);
+      const optionCount = suggest
+        ? suggest.querySelectorAll('[data-suggest-option]').length
+        : 0;
+      const hasAll = Boolean(suggest?.querySelector('[data-suggest-all]'));
+      const total = optionCount + (hasAll ? 1 : 0);
+
+      if (event.key === 'ArrowDown' && open && total > 0) {
+        event.preventDefault();
+        setActiveOption(activeIndex < 0 ? 0 : activeIndex + 1);
+        return;
+      }
+      if (event.key === 'ArrowUp' && open && total > 0) {
+        event.preventDefault();
+        setActiveOption(activeIndex < 0 ? total - 1 : activeIndex - 1);
+        return;
+      }
+      if (event.key === 'Enter' && open && activeIndex >= 0) {
+        if (activateCurrentOption()) {
+          event.preventDefault();
+        }
+        return;
+      }
+      if (event.key === 'Escape') {
+        if (open) {
+          event.preventDefault();
+          closeSuggest();
+          return;
+        }
+      }
+    });
+  });
+
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+      closeSuggest();
       setNavOpen(false);
       setSearchOpen(false);
     }
   });
 
+  document.addEventListener('pointerdown', (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (searchRoot?.contains(target)) return;
+    closeSuggest();
+  });
+
   nav?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => setNavOpen(false));
   });
+
+  searchRoot?.setAttribute('data-search-ready', 'true');
 </script>
