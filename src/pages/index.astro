@@ -474,11 +474,17 @@ const homeTabs: {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* ~8% crop-zoom on the glossy formula, slightly right of center */
+    object-position: 60% 50%;
+    transform: scale(1.08);
+    transform-origin: 60% 50%;
+    /* Soft lift so the gel reads as lit, not underexposed */
+    filter: brightness(1.24) contrast(1.06);
   }
   .d1-media-shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(20,24,20,0.15), transparent 52%, rgba(20,24,20,0.08));
+    background: linear-gradient(90deg, rgba(20,24,20,0.06), transparent 52%, rgba(20,24,20,0.03));
     pointer-events: none;
   }
   .d1-media-script {
