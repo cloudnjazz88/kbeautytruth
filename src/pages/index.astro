@@ -17,7 +17,8 @@ const compareProducts = [
 ].filter((post): post is NonNullable<typeof post> => Boolean(post));
 const reviewPosts = publishedPosts
   .filter((post) => post.data.category === 'reviews')
-  .slice(0, 4);
+  .slice(0, 7);
+const showReviewNav = reviewPosts.length > 4;
 const ingredientPosts = publishedPosts
   .filter((post) => post.data.category === 'ingredients')
   .slice(0, 2);
@@ -109,48 +110,174 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
       </div>
     </div>
 
-    <div class="d1-notes-row">
-      <div class="d1-notes-row-head">
-        <h3 class="d1-notes-row-title">Reviews</h3>
-        <a class="d1-latest-viewall" href="/reviews/">View All &rarr;</a>
-      </div>
+    <div class="d1-notes-row" data-reviews-row>
       {reviewPosts.length === 0 && (
-        <p class="d1-empty-notes">No product reviews published yet.</p>
+        <>
+          <div class="d1-notes-row-head">
+            <h3 class="d1-notes-row-title">Reviews</h3>
+            <a class="d1-latest-viewall" href="/reviews/">View All &rarr;</a>
+          </div>
+          <p class="d1-empty-notes">No product reviews published yet.</p>
+        </>
       )}
-      <div class="d1-cards-grid">
-        {reviewPosts.map((post) => (
-          <a class="d1-prod-card" href={getPostUrl(post)}>
-            {post.data.heroImage && (
-              <div class="d1-prod-img">
-                <img
-                  src={post.data.heroImage}
-                  alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
-                  loading="lazy"
-                />
+      {
+        reviewPosts.length > 0 && (
+          <div class="d1-cards-grid d1-cards-grid-controls">
+            <div class="d1-reviews-control-row">
+              <div class="d1-reviews-control-main">
+                <h3 class="d1-notes-row-title d1-reviews-heading">Reviews</h3>
+                {
+                  showReviewNav && (
+                    <div class="d1-reviews-toolbar" data-reviews-nav>
+                      <p class="d1-reviews-eyebrow">REAL USE. HONEST NOTES.</p>
+                      <div class="d1-reviews-nav">
+                        <button
+                          type="button"
+                          class="d1-reviews-nav-btn"
+                          data-reviews-prev
+                          aria-label="Previous reviews"
+                          disabled
+                        >
+                          <span aria-hidden="true">←</span>
+                        </button>
+                        <button
+                          type="button"
+                          class="d1-reviews-nav-btn"
+                          data-reviews-next
+                          aria-label="Next reviews"
+                        >
+                          <span aria-hidden="true">→</span>
+                        </button>
+                      </div>
+                    </div>
+                  )
+                }
               </div>
-            )}
-            <div class="d1-prod-body">
-              <div class="d1-prod-meta-row">
-                <span class="d1-prod-kicker">Review Note</span>
-                <span class="d1-prod-date">
-                  {post.data.publishedAt
-                    ? formatShortDate(post.data.publishedAt)
-                    : 'Recently added'}
-                </span>
-              </div>
-              <h3 class="d1-prod-title">{post.data.productName ?? post.data.title}</h3>
-              <p class="d1-prod-desc">{post.data.description}</p>
+              <a class="d1-latest-viewall d1-reviews-viewall" href="/reviews/">View All &rarr;</a>
             </div>
-            <div class="d1-prod-arrow" aria-hidden="true">&#8594;</div>
-          </a>
-        ))}
-        <div class="d1-quote-banner" aria-hidden="true">
-          <h3 class="d1-quote-text">Good skin is a long-term relationship.</h3>
-          <span class="d1-quote-rule" aria-hidden="true"></span>
-          <p class="d1-quote-footer">SAME PRODUCTS. A CALMER YOU.</p>
-        </div>
-      </div>
+            <div
+              class="d1-reviews-carousel"
+              data-reviews-carousel
+              data-review-count={String(reviewPosts.length)}
+            >
+              <div class="d1-reviews-track" data-reviews-track>
+                {reviewPosts.map((post) => (
+                  <a class="d1-prod-card" href={getPostUrl(post)}>
+                    {post.data.heroImage && (
+                      <div class="d1-prod-img">
+                        <img
+                          src={post.data.heroImage}
+                          alt={post.data.heroImageAlt ?? `${post.data.productName ?? post.data.title} product photo`}
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                    <div class="d1-prod-body">
+                      <div class="d1-prod-meta-row">
+                        <span class="d1-prod-kicker">Review Note</span>
+                        <span class="d1-prod-date">
+                          {post.data.publishedAt
+                            ? formatShortDate(post.data.publishedAt)
+                            : 'Recently added'}
+                        </span>
+                      </div>
+                      <h3 class="d1-prod-title">{post.data.productName ?? post.data.title}</h3>
+                      <p class="d1-prod-desc">{post.data.description}</p>
+                    </div>
+                    <div class="d1-prod-arrow" aria-hidden="true">&#8594;</div>
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div class="d1-quote-banner" aria-hidden="true">
+              <h3 class="d1-quote-text">Good skin is a long-term relationship.</h3>
+              <span class="d1-quote-rule" aria-hidden="true"></span>
+              <p class="d1-quote-footer">SAME PRODUCTS. A CALMER YOU.</p>
+            </div>
+          </div>
+        )
+      }
     </div>
+    {
+      reviewPosts.length > 0 && (
+        <script is:inline>
+          (function initReviewsCarousel() {
+            const row = document.querySelector('[data-reviews-row]');
+            if (!row) return;
+            const carousel = row.querySelector('[data-reviews-carousel]');
+            const track = row.querySelector('[data-reviews-track]');
+            const prev = row.querySelector('[data-reviews-prev]');
+            const next = row.querySelector('[data-reviews-next]');
+            const nav = row.querySelector('[data-reviews-nav]');
+            if (!carousel || !track) return;
+
+            const cards = Array.prototype.slice.call(track.querySelectorAll('.d1-prod-card'));
+            const total = cards.length;
+            let start = 0;
+
+            function visibleCount() {
+              if (window.matchMedia('(max-width: 768px)').matches) return 1;
+              if (window.matchMedia('(max-width: 1199px)').matches) return 2;
+              return 4;
+            }
+
+            function maxStart() {
+              return Math.max(0, total - visibleCount());
+            }
+
+            function apply() {
+              const visible = visibleCount();
+              const max = maxStart();
+              if (start > max) start = max;
+              if (start < 0) start = 0;
+
+              const styles = getComputedStyle(track);
+              const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+              const carouselWidth = carousel.clientWidth;
+              const cardWidth = Math.max(0, (carouselWidth - (visible - 1) * gap) / visible);
+
+              cards.forEach(function (card, index) {
+                card.style.flex = '0 0 ' + cardWidth + 'px';
+                card.style.width = cardWidth + 'px';
+                card.style.height = '100%';
+                const onScreen = index >= start && index < start + visible;
+                if (onScreen) card.removeAttribute('inert');
+                else card.setAttribute('inert', '');
+              });
+
+              track.style.transform = 'translate3d(' + -(start * (cardWidth + gap)) + 'px, 0, 0)';
+              if (prev) prev.disabled = start <= 0;
+              if (next) next.disabled = start >= max;
+            }
+
+            function go(delta) {
+              start += delta;
+              apply();
+            }
+
+            if (prev && next) {
+              prev.addEventListener('click', function () { go(-1); });
+              next.addEventListener('click', function () { go(1); });
+              if (nav) {
+                nav.addEventListener('keydown', function (event) {
+                  if (event.key === 'ArrowLeft' && !prev.disabled) {
+                    event.preventDefault();
+                    go(-1);
+                  }
+                  if (event.key === 'ArrowRight' && !next.disabled) {
+                    event.preventDefault();
+                    go(1);
+                  }
+                });
+              }
+            }
+
+            window.addEventListener('resize', apply);
+            apply();
+          })();
+        </script>
+      )
+    }
 
     <div class="d1-notes-row d1-notes-row-columns">
       {ingredientPosts.length === 0 && trendPosts.length === 0 ? (
@@ -617,6 +744,96 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     gap: 0.85rem 1.15rem;
     min-width: 0;
   }
+  .d1-notes-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  .d1-reviews-control-row {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 0.82fr);
+    column-gap: 1.25rem;
+    align-items: center;
+    min-width: 0;
+  }
+  .d1-reviews-control-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+    min-width: 0;
+  }
+  .d1-reviews-heading {
+    margin: 0;
+    line-height: 1.15;
+  }
+  .d1-reviews-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.65rem 0.85rem;
+    flex-wrap: wrap;
+    min-width: 0;
+    width: auto;
+    margin: 0 0 0 auto;
+    flex-shrink: 0;
+  }
+  .d1-reviews-viewall {
+    justify-self: end;
+    align-self: center;
+    white-space: nowrap;
+  }
+  .d1-reviews-eyebrow {
+    margin: 0;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--d1-muted);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .d1-reviews-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+  .d1-reviews-nav-btn {
+    box-sizing: border-box;
+    width: 1.7rem;
+    height: 1.7rem;
+    min-width: 1.7rem;
+    min-height: 1.7rem;
+    padding: 0;
+    border: 1px solid var(--d1-line);
+    border-radius: 50%;
+    background: var(--d1-card);
+    color: var(--d1-ink2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s, opacity 0.2s;
+  }
+  .d1-reviews-nav-btn:hover:not(:disabled) {
+    border-color: #d0d0c8;
+    color: var(--d1-terra);
+  }
+  .d1-reviews-nav-btn:focus-visible {
+    outline: 2px solid var(--d1-sage);
+    outline-offset: 2px;
+  }
+  .d1-reviews-nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
   .d1-empty-notes {
     margin: 0;
     padding: 1.5rem 0 0.5rem;
@@ -628,11 +845,52 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     font-size: 0.85rem;
   }
 
-  /* ===== CARDS GRID (reviews + quote) ===== */
+  /* ===== CARDS GRID (control row + shared card row) ===== */
   .d1-cards-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 0.82fr);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 0.82fr);
+    gap: 0.65rem 1.25rem;
+    align-items: stretch;
+    min-width: 0;
+  }
+  .d1-cards-grid-controls {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .d1-cards-grid-controls .d1-reviews-carousel {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .d1-cards-grid-controls .d1-quote-banner {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .d1-reviews-carousel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    align-self: stretch;
+  }
+  .d1-reviews-track {
+    display: flex;
+    align-items: stretch;
     gap: 1.25rem;
+    min-width: 0;
+    min-height: 0;
+    flex: 1 1 auto;
+    height: 100%;
+    transition: transform 0.35s var(--d1-ease);
+    will-change: transform;
+  }
+  .d1-reviews-track > .d1-prod-card {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    height: 100%;
+    align-self: stretch;
   }
   .d1-prod-card {
     background: var(--d1-card);
@@ -735,7 +993,7 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
   }
   .d1-prod-card:hover .d1-prod-arrow { transform:scale(1.1); }
 
-  /* Quote Banner (5th column) */
+  /* Quote Banner (same card row as reviews) */
   .d1-quote-banner {
     background:
       linear-gradient(180deg, rgba(255,255,255,0.02), rgba(244,236,222,0.08)),
@@ -747,12 +1005,9 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     align-items: flex-start;
     box-shadow: 0 2px 8px rgba(25,27,26,0.04);
     overflow: hidden;
-    min-height: 100%;
-  }
-  @media (min-width: 1200px) {
-    .d1-cards-grid > .d1-quote-banner {
-      grid-column: 5;
-    }
+    min-height: 0;
+    height: 100%;
+    align-self: stretch;
   }
   .d1-quote-text {
     font-family: var(--d1-serif);
@@ -1027,8 +1282,53 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
       gap: 2.5rem;
     }
-    .d1-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .d1-quote-banner { grid-column: span 2; min-height: 18rem; }
+    .d1-cards-grid,
+    .d1-cards-grid-controls {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: none;
+    }
+    .d1-reviews-control-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'title viewall'
+        'tools tools';
+      column-gap: 0.75rem;
+      row-gap: 0.4rem;
+      align-items: center;
+      grid-column: 1;
+      grid-row: auto;
+      min-width: 0;
+      width: 100%;
+    }
+    .d1-reviews-control-main {
+      display: contents;
+    }
+    .d1-reviews-heading {
+      grid-area: title;
+      min-width: 0;
+    }
+    .d1-reviews-toolbar {
+      grid-area: tools;
+      justify-self: end;
+      width: auto;
+      max-width: 100%;
+      margin: 0;
+    }
+    .d1-reviews-viewall {
+      grid-area: viewall;
+      justify-self: end;
+      flex-shrink: 0;
+    }
+    .d1-reviews-carousel,
+    .d1-quote-banner,
+    .d1-cards-grid-controls .d1-reviews-carousel,
+    .d1-cards-grid-controls .d1-quote-banner {
+      grid-column: 1;
+      grid-row: auto;
+      height: auto;
+    }
+    .d1-quote-banner { min-height: 18rem; }
     .d1-columns-split { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .d1-bottom-grid { grid-template-columns: 1fr; }
     .d1-latest-section-meta { width: 100%; order: 2; }
@@ -1039,8 +1339,14 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
     .d1-hero-title { font-size:clamp(2.6rem, 13vw, 3.5rem); }
     .d1-hero-right { display:block; }
     .d1-cards-grid { grid-template-columns: minmax(0, 1fr); }
+    .d1-reviews-eyebrow {
+      white-space: nowrap;
+      letter-spacing: 0.1em;
+      font-size: 0.58rem;
+      max-width: none;
+    }
     .d1-quote-banner {
-      grid-column: span 1;
+      grid-column: auto;
       min-height: 16rem;
     }
     .d1-columns-split {
@@ -1076,5 +1382,6 @@ const columnTypeLabel: Record<'ingredients' | 'trends', string> = {
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation:none !important; transition:none !important; }
+    .d1-reviews-track { transition: none !important; }
   }
 </style>
