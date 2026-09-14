@@ -27,6 +27,8 @@ const related = await getRelatedPosts(post);
 const categoryLabel = getCategoryLabel(data.category);
 const isRoutine = data.category === 'routines';
 const isLongRoutineTitle = data.slug === 'my-morning-and-evening-skincare-routine';
+const isGlassSkinNote = data.slug === 'what-is-glass-skin';
+const isProductReviewCopy = !isRoutine && !isGlassSkinNote;
 
 const articleLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -90,11 +92,11 @@ const breadcrumbLd = {
     <header class:list={["article-header", { "article-header-with-image": data.heroImage }]}>
       <div class="article-header-inner">
         <div class="article-header-copy">
-          <p class="section-kicker">{isRoutine ? 'Honest note' : 'Honest review'} · {categoryLabel}</p>
+          <p class="section-kicker">{isProductReviewCopy ? 'Honest review' : 'Honest note'} · {categoryLabel}</p>
           <h1 class="article-title">{data.title}</h1>
           <p class="article-dek">{data.description}</p>
           <p class="article-meta">
-            Tested and written by {data.author}
+            {isProductReviewCopy ? `Tested and written by ${data.author}` : `Written by ${data.author}`}
             {
               data.publishedAt && (
                 <>
@@ -133,6 +135,11 @@ const breadcrumbLd = {
               uses in her own routine. If this page later includes affiliate links, that will be stated
               here. Skin responses vary.
             </>
+          ) : isGlassSkinNote ? (
+            <>
+              This is a short editorial note, not medical advice. If this page later includes affiliate
+              links, that will be stated here. Skin responses vary.
+            </>
           ) : (
             <>
               This is a personal-use note, not medical advice. {data.author} bought this product herself.
@@ -142,12 +149,16 @@ const breadcrumbLd = {
         }
       </p>
       <div class="review-snapshot">
-        <SkinProfile
-          skinType={data.skinType}
-          testedFor={data.testedFor}
-          showShopping={!isRoutine}
-        />
-        <VerdictBox verdict={data.verdict} />
+        {
+          !isGlassSkinNote && (
+            <SkinProfile
+              skinType={data.skinType}
+              testedFor={data.testedFor}
+              showShopping={!isRoutine}
+            />
+          )
+        }
+        <VerdictBox verdict={data.verdict} title={isGlassSkinNote ? 'Takeaway' : undefined} />
       </div>
       <TableOfContents headings={headings} />
       <slot />

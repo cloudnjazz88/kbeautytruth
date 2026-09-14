@@ -1,16 +1,17 @@
 ---
 interface Props {
   verdict?: string;
+  title?: string;
 }
 
-const { verdict } = Astro.props;
+const { verdict, title = 'My verdict' } = Astro.props;
 ---
 
 {
   verdict && (
     <section class="verdict" aria-labelledby="verdict-title">
       <p class="snapshot-kicker">The short answer</p>
-      <h2 class="verdict-title" id="verdict-title">My verdict</h2>
+      <h2 class="verdict-title" id="verdict-title">{title}</h2>
       <p>{verdict}</p>
     </section>
   )
