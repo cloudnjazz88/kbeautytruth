@@ -25,6 +25,8 @@ const { data } = post;
 const path = getPostUrl(post);
 const related = await getRelatedPosts(post);
 const categoryLabel = getCategoryLabel(data.category);
+const isRoutine = data.category === 'routines';
+const isLongRoutineTitle = data.slug === 'my-morning-and-evening-skincare-routine';
 
 const articleLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -84,11 +86,11 @@ const breadcrumbLd = {
   jsonLd={[articleLd, breadcrumbLd]}
   noindex={data.draft}
 >
-  <article class="article-page">
+  <article class:list={["article-page", { "article-page-long-routine-title": isLongRoutineTitle }]}>
     <header class:list={["article-header", { "article-header-with-image": data.heroImage }]}>
       <div class="article-header-inner">
         <div class="article-header-copy">
-          <p class="section-kicker">Honest review · {categoryLabel}</p>
+          <p class="section-kicker">{isRoutine ? 'Honest note' : 'Honest review'} · {categoryLabel}</p>
           <h1 class="article-title">{data.title}</h1>
           <p class="article-dek">{data.description}</p>
           <p class="article-meta">
@@ -124,11 +126,27 @@ const breadcrumbLd = {
 
     <div class="article-body prose">
       <p class="disclosure">
-        This is a personal-use note, not medical advice. {data.author} bought this product herself.
-        If this page later includes affiliate links, that will be stated here. Skin responses vary.
+        {
+          isRoutine ? (
+            <>
+              This is a personal-use note, not medical advice. {data.author} wrote this from products she
+              uses in her own routine. If this page later includes affiliate links, that will be stated
+              here. Skin responses vary.
+            </>
+          ) : (
+            <>
+              This is a personal-use note, not medical advice. {data.author} bought this product herself.
+              If this page later includes affiliate links, that will be stated here. Skin responses vary.
+            </>
+          )
+        }
       </p>
       <div class="review-snapshot">
-        <SkinProfile skinType={data.skinType} testedFor={data.testedFor} />
+        <SkinProfile
+          skinType={data.skinType}
+          testedFor={data.testedFor}
+          showShopping={!isRoutine}
+        />
         <VerdictBox verdict={data.verdict} />
       </div>
       <TableOfContents headings={headings} />

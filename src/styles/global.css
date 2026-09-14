@@ -1169,6 +1169,14 @@ a {
   color: var(--ink);
 }
 
+/* Long routine title only: keep H1 text, soften desktop wrapping */
+.article-page-long-routine-title .article-title {
+  font-size: clamp(2.05rem, 3.6vw, 3.3rem);
+  letter-spacing: -0.03em;
+  line-height: 1.14;
+  max-width: 38rem;
+}
+
 .article-dek {
   max-width: 39rem;
   margin: 0 0 1.25rem;
@@ -1745,5 +1753,102 @@ a {
   }
   .tab-subtext {
     display: none;
+  }
+}
+
+/* ==========================================================================
+   Routine glance cards (routines articles)
+   ========================================================================== */
+
+.routine-glance {
+  margin: 0 0 2.25rem;
+}
+
+.routine-glance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.routine-glance-card {
+  min-width: 0;
+  padding: 1.15rem 1.2rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.routine-glance-heading {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.routine-glance-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: routine-step;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.routine-glance-steps > li {
+  counter-increment: routine-step;
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  column-gap: 0.55rem;
+  row-gap: 0.2rem;
+  align-items: start;
+  min-width: 0;
+}
+
+.routine-glance-steps > li::before {
+  content: counter(routine-step);
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.6rem;
+  text-align: center;
+}
+
+.routine-glance-step {
+  min-width: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.routine-glance-note {
+  grid-column: 2;
+  justify-self: start;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prose .routine-glance-card h3 {
+  margin: 0 0 0.85rem;
+}
+
+.prose .routine-glance-card h3::before {
+  content: none;
+}
+
+@media (max-width: 768px) {
+  .routine-glance-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

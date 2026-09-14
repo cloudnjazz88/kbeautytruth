@@ -4,9 +4,10 @@ import { site } from '../site';
 interface Props {
   skinType?: string;
   testedFor?: string;
+  showShopping?: boolean;
 }
 
-const { skinType, testedFor } = Astro.props;
+const { skinType, testedFor, showShopping = true } = Astro.props;
 ---
 
 <section class="skin-profile" aria-labelledby="skin-profile-title">
@@ -21,10 +22,14 @@ const { skinType, testedFor } = Astro.props;
       <dt>Goals</dt>
       <dd>{site.author.goals}</dd>
     </div>
-    <div class="profile-fact">
-      <dt>Bought from</dt>
-      <dd>{site.author.shopping}</dd>
-    </div>
+    {
+      showShopping && (
+        <div class="profile-fact">
+          <dt>Bought from</dt>
+          <dd>{site.author.shopping}</dd>
+        </div>
+      )
+    }
     <div class="profile-fact">
       <dt>K-beauty use</dt>
       <dd>
