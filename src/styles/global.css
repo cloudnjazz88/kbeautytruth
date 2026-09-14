@@ -1852,3 +1852,20 @@ a {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.prose a.routine-desk-link {
+  color: var(--terracotta);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.prose a.routine-desk-link:hover {
+  color: var(--terracotta-hover);
+  text-decoration-thickness: 2px;
+}
+
+.prose a.routine-desk-link:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 2px;
+}

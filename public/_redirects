@@ -1,0 +1,3 @@
+# Permanent redirects for Cloudflare Workers static assets
+/routines/my-morning-and-evening-skincare-routine /routines/ 301
+/routines/my-morning-and-evening-skincare-routine/ /routines/ 301

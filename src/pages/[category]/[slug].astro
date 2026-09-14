@@ -1,17 +1,19 @@
 ---
 import { render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
-import { getRenderablePosts } from '../../lib/posts';
+import { getRenderablePosts, isRoutinesHubPost } from '../../lib/posts';
 
 export async function getStaticPaths() {
   const posts = await getRenderablePosts();
-  return posts.map((post) => ({
-    params: {
-      category: post.data.category,
-      slug: post.data.slug,
-    },
-    props: { post },
-  }));
+  return posts
+    .filter((post) => !isRoutinesHubPost(post))
+    .map((post) => ({
+      params: {
+        category: post.data.category,
+        slug: post.data.slug,
+      },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;

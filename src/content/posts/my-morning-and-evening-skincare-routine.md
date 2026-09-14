@@ -83,4 +83,4 @@ For the last cream, I rotate [Torriden DIVE-IN Soothing Cream](/reviews/torriden
 
 I am not trying to win at step count. Some days my routine is shorter. Some evenings I add the optional pieces. What matters for my dry, somewhat sensitive skin is choosing what fits that day, then stopping when my face feels comfortable—not forcing a longer or shorter routine because a trend says I should.
 
-Want a starting point for your own routine? Try the [Find Your K-Beauty Routine tool](https://kbeautydesk.com/find-your-routine) on my other site, K Beauty Desk.
+Want a starting point for your own routine? Try the <a class="routine-desk-link" href="https://kbeautydesk.com/find-your-routine">Find Your K-Beauty Routine tool</a> on my other site, K Beauty Desk.

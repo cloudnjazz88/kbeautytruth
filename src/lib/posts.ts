@@ -3,7 +3,17 @@ import { postPath, type PostCategory } from '../site';
 
 export type Post = CollectionEntry<'posts'>;
 
+/** Canonical hub URL for the published morning/evening routine note. */
+export const ROUTINES_HUB_SLUG = 'my-morning-and-evening-skincare-routine';
+
+export function isRoutinesHubPost(post: Post): boolean {
+  return post.data.category === 'routines' && post.data.slug === ROUTINES_HUB_SLUG;
+}
+
 export function getPostUrl(post: Post): string {
+  if (isRoutinesHubPost(post)) {
+    return '/routines/';
+  }
   return postPath(post.data.category, post.data.slug);
 }
 

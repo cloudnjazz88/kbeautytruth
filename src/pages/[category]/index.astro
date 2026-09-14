@@ -11,9 +11,11 @@ import {
 import { postCategories, type PostCategory } from '../../site';
 
 export function getStaticPaths() {
-  return [...postCategories, 'repurchased'].map((category) => ({
-    params: { category },
-  }));
+  return [...postCategories, 'repurchased']
+    .filter((category) => category !== 'routines')
+    .map((category) => ({
+      params: { category },
+    }));
 }
 
 const { category } = Astro.params;
