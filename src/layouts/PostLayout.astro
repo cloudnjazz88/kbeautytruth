@@ -28,7 +28,11 @@ const categoryLabel = getCategoryLabel(data.category);
 const isRoutine = data.category === 'routines';
 const isLongRoutineTitle = data.slug === 'my-morning-and-evening-skincare-routine';
 const isGlassSkinNote = data.slug === 'what-is-glass-skin';
-const isProductReviewCopy = !isRoutine && !isGlassSkinNote;
+const isNiacinamideGuide = data.slug === 'niacinamide-for-skin';
+const isProductReviewCopy = !isRoutine && !isGlassSkinNote && !isNiacinamideGuide;
+const documentTitle = isNiacinamideGuide
+  ? 'Niacinamide for Skin: Benefits, How to Use, Retinol'
+  : data.title;
 
 const articleLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -81,7 +85,7 @@ const breadcrumbLd = {
 ---
 
 <BaseLayout
-  title={data.title}
+  title={documentTitle}
   description={data.description}
   canonicalPath={path}
   ogType="article"
@@ -92,7 +96,13 @@ const breadcrumbLd = {
     <header class:list={["article-header", { "article-header-with-image": data.heroImage }]}>
       <div class="article-header-inner">
         <div class="article-header-copy">
-          <p class="section-kicker">{isProductReviewCopy ? 'Honest review' : 'Honest note'} · {categoryLabel}</p>
+          <p class="section-kicker">
+            {
+              isNiacinamideGuide
+                ? 'Ingredient guide · Niacinamide'
+                : `${isProductReviewCopy ? 'Honest review' : 'Honest note'} · ${categoryLabel}`
+            }
+          </p>
           <h1 class="article-title">{data.title}</h1>
           <p class="article-dek">{data.description}</p>
           <p class="article-meta">
@@ -140,6 +150,11 @@ const breadcrumbLd = {
               This is a short editorial note, not medical advice. If this page later includes affiliate
               links, that will be stated here. Skin responses vary.
             </>
+          ) : isNiacinamideGuide ? (
+            <>
+              This is a personal experience note and educational ingredient guide, not medical advice. If
+              this page later includes affiliate links, that will be stated here. Skin responses vary.
+            </>
           ) : (
             <>
               This is a personal-use note, not medical advice. {data.author} bought this product herself.
@@ -150,12 +165,24 @@ const breadcrumbLd = {
       </p>
       <div class="review-snapshot">
         {
-          !isGlassSkinNote && (
+          isNiacinamideGuide ? (
             <SkinProfile
-              skinType={data.skinType}
-              testedFor={data.testedFor}
-              showShopping={!isRoutine}
+              title="My skin & context"
+              facts={[
+                { label: 'Skin', value: data.skinType ?? 'Dry / Somewhat Sensitive' },
+                { label: 'Goals', value: 'Smoother Texture / More Even-Looking Tone' },
+                { label: 'Concentration I Use', value: '10%' },
+                { label: 'Experience', value: 'No Irritation So Far' },
+              ]}
             />
+          ) : (
+            !isGlassSkinNote && (
+              <SkinProfile
+                skinType={data.skinType}
+                testedFor={data.testedFor}
+                showShopping={!isRoutine}
+              />
+            )
           )
         }
         <VerdictBox verdict={data.verdict} title={isGlassSkinNote ? 'Takeaway' : undefined} />

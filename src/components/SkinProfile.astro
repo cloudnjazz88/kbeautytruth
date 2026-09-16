@@ -1,50 +1,79 @@
 ---
 import { site } from '../site';
 
+interface ProfileFact {
+  label: string;
+  value: string;
+  multiline?: boolean;
+  wide?: boolean;
+}
+
 interface Props {
   skinType?: string;
   testedFor?: string;
   showShopping?: boolean;
+  title?: string;
+  goals?: string;
+  showKBeauty?: boolean;
+  facts?: ProfileFact[];
 }
 
-const { skinType, testedFor, showShopping = true } = Astro.props;
+const {
+  skinType,
+  testedFor,
+  showShopping = true,
+  title = 'My skin & test',
+  goals,
+  showKBeauty = true,
+  facts,
+} = Astro.props;
+
+const defaultFacts: ProfileFact[] = [
+  { label: 'Skin', value: skinType ?? site.author.skinType },
+  { label: 'Goals', value: goals ?? site.author.goals },
+];
+
+if (showShopping) {
+  defaultFacts.push({ label: 'Bought from', value: site.author.shopping });
+}
+
+if (showKBeauty) {
+  defaultFacts.push({
+    label: 'K-beauty use',
+    value: `${site.author.experience}\n${site.author.experienceSupporting}`,
+    multiline: true,
+  });
+}
+
+if (testedFor) {
+  defaultFacts.push({ label: 'Tested For', value: testedFor, wide: true });
+}
+
+const profileFacts = facts ?? defaultFacts;
 ---
 
 <section class="skin-profile" aria-labelledby="skin-profile-title">
   <p class="snapshot-kicker">The context</p>
-  <h2 class="skin-profile-title" id="skin-profile-title">My skin &amp; test</h2>
+  <h2 class="skin-profile-title" id="skin-profile-title">{title}</h2>
   <dl class="profile-facts">
-    <div class="profile-fact">
-      <dt>Skin</dt>
-      <dd>{skinType ?? site.author.skinType}</dd>
-    </div>
-    <div class="profile-fact">
-      <dt>Goals</dt>
-      <dd>{site.author.goals}</dd>
-    </div>
     {
-      showShopping && (
-        <div class="profile-fact">
-          <dt>Bought from</dt>
-          <dd>{site.author.shopping}</dd>
+      profileFacts.map((fact) => (
+        <div class:list={['profile-fact', { 'profile-fact-wide': fact.wide || fact.multiline }]}>
+          <dt>{fact.label}</dt>
+          <dd>
+            {
+              fact.multiline
+                ? fact.value.split('\n').map((line, index) => (
+                    <>
+                      {index > 0 && <br />}
+                      {line}
+                    </>
+                  ))
+                : fact.value
+            }
+          </dd>
         </div>
-      )
-    }
-    <div class="profile-fact">
-      <dt>K-beauty use</dt>
-      <dd>
-        {site.author.experience}
-        <br />
-        {site.author.experienceSupporting}
-      </dd>
-    </div>
-    {
-      testedFor && (
-        <div class="profile-fact profile-fact-wide">
-          <dt>Tested For</dt>
-          <dd>{testedFor}</dd>
-        </div>
-      )
+      ))
     }
   </dl>
 </section>
