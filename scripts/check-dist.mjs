@@ -101,6 +101,49 @@ for (const file of htmlFiles) {
   }
 }
 
+/** Category/hub pages: empty hubs stay noindex; hubs with published notes must be indexable. */
+const hubChecks = [
+  { file: 'ingredients/index.html', path: '/ingredients/', expectIndexable: true },
+  { file: 'trends/index.html', path: '/trends/', expectIndexable: true },
+  { file: 'routines/index.html', path: '/routines/', expectIndexable: true },
+  { file: 'breakouts/index.html', path: '/breakouts/', expectIndexable: true },
+  { file: 'reviews/index.html', path: '/reviews/', expectIndexable: true },
+  { file: 'comparisons/index.html', path: '/comparisons/', expectIndexable: true },
+  { file: 'beyond-k-beauty/index.html', path: '/beyond-k-beauty/', expectIndexable: false },
+];
+
+for (const hub of hubChecks) {
+  const full = path.join(distDir, hub.file);
+  let text;
+  try {
+    text = await readFile(full, 'utf8');
+  } catch {
+    failures.push(`${hub.file}: missing hub page`);
+    continue;
+  }
+
+  const isNoindex = text.includes('<meta name="robots" content="noindex, follow"');
+  const canonical = text.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+  const expectedCanonical = `https://kbeautytruth.com${hub.path}`;
+
+  if (canonical !== expectedCanonical) {
+    failures.push(`${hub.file}: expected canonical ${expectedCanonical}, got ${canonical ?? '(missing)'}`);
+  }
+
+  if (hub.expectIndexable) {
+    if (isNoindex) {
+      failures.push(`${hub.file}: populated hub must not be noindex`);
+    }
+    if (!sitemap.includes(`<loc>${expectedCanonical}</loc>`)) {
+      failures.push(`${hub.file}: populated hub missing from sitemap.xml`);
+    }
+  } else if (!isNoindex) {
+    failures.push(`${hub.file}: empty placeholder hub should remain noindex`);
+  } else if (sitemap.includes(`<loc>${expectedCanonical}</loc>`)) {
+    failures.push(`${hub.file}: empty noindex hub must not appear in sitemap.xml`);
+  }
+}
+
 if (failures.length) {
   console.error('Dist check failed:\n' + failures.map((item) => `- ${item}`).join('\n'));
   process.exit(1);
