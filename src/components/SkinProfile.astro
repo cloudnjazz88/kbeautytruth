@@ -11,6 +11,7 @@ interface ProfileFact {
 interface Props {
   skinType?: string;
   testedFor?: string;
+  boughtFrom?: string;
   showShopping?: boolean;
   title?: string;
   goals?: string;
@@ -21,6 +22,7 @@ interface Props {
 const {
   skinType,
   testedFor,
+  boughtFrom,
   showShopping = true,
   title = 'My skin & test',
   goals,
@@ -34,7 +36,7 @@ const defaultFacts: ProfileFact[] = [
 ];
 
 if (showShopping) {
-  defaultFacts.push({ label: 'Bought from', value: site.author.shopping });
+  defaultFacts.push({ label: 'Bought from', value: boughtFrom ?? site.author.shopping });
 }
 
 if (showKBeauty) {

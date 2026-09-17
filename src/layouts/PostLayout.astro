@@ -30,9 +30,9 @@ const isLongRoutineTitle = data.slug === 'my-morning-and-evening-skincare-routin
 const isGlassSkinNote = data.slug === 'what-is-glass-skin';
 const isNiacinamideGuide = data.slug === 'niacinamide-for-skin';
 const isProductReviewCopy = !isRoutine && !isGlassSkinNote && !isNiacinamideGuide;
-const documentTitle = isNiacinamideGuide
-  ? 'Niacinamide for Skin: Benefits, How to Use, Retinol'
-  : data.title;
+const documentTitle =
+  data.seoTitle ??
+  (isNiacinamideGuide ? 'Niacinamide for Skin: Benefits, How to Use, Retinol' : data.title);
 
 const articleLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -180,6 +180,7 @@ const breadcrumbLd = {
               <SkinProfile
                 skinType={data.skinType}
                 testedFor={data.testedFor}
+                boughtFrom={data.boughtFrom}
                 showShopping={!isRoutine}
               />
             )
