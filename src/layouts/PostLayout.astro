@@ -27,9 +27,20 @@ const related = await getRelatedPosts(post);
 const categoryLabel = getCategoryLabel(data.category);
 const isRoutine = data.category === 'routines';
 const isLongRoutineTitle = data.slug === 'my-morning-and-evening-skincare-routine';
-const isGlassSkinNote = data.slug === 'what-is-glass-skin';
+const trendGuideBySlug: Record<string, { eyebrow: string; verdictTitle: string }> = {
+  'what-is-glass-skin': {
+    eyebrow: 'Honest note · Trends',
+    verdictTitle: 'Takeaway',
+  },
+  'mochi-skin-vs-glass-skin': {
+    eyebrow: 'Trend guide · Mochi Skin',
+    verdictTitle: 'Takeaway',
+  },
+};
+const trendGuide = trendGuideBySlug[data.slug];
+const isTrendGuide = Boolean(trendGuide);
 const isNiacinamideGuide = data.slug === 'niacinamide-for-skin';
-const isProductReviewCopy = !isRoutine && !isGlassSkinNote && !isNiacinamideGuide;
+const isProductReviewCopy = !isRoutine && !isTrendGuide && !isNiacinamideGuide;
 const documentTitle =
   data.seoTitle ??
   (isNiacinamideGuide ? 'Niacinamide for Skin: Benefits, How to Use, Retinol' : data.title);
@@ -100,11 +111,13 @@ const breadcrumbLd = {
             {
               isNiacinamideGuide
                 ? 'Ingredient guide · Niacinamide'
-                : `${isProductReviewCopy ? 'Honest review' : 'Honest note'} · ${categoryLabel}`
+                : trendGuide
+                  ? trendGuide.eyebrow
+                  : `${isProductReviewCopy ? 'Honest review' : 'Honest note'} · ${categoryLabel}`
             }
           </p>
           <h1 class="article-title">{data.title}</h1>
-          <p class="article-dek">{data.description}</p>
+          <p class="article-dek">{data.dek ?? data.description}</p>
           <p class="article-meta">
             {isProductReviewCopy ? `Tested and written by ${data.author}` : `Written by ${data.author}`}
             {
@@ -145,7 +158,7 @@ const breadcrumbLd = {
               uses in her own routine. If this page later includes affiliate links, that will be stated
               here. Skin responses vary.
             </>
-          ) : isGlassSkinNote ? (
+          ) : isTrendGuide ? (
             <>
               This is a short editorial note, not medical advice. If this page later includes affiliate
               links, that will be stated here. Skin responses vary.
@@ -176,7 +189,7 @@ const breadcrumbLd = {
               ]}
             />
           ) : (
-            !isGlassSkinNote && (
+            !isTrendGuide && (
               <SkinProfile
                 skinType={data.skinType}
                 testedFor={data.testedFor}
@@ -186,7 +199,7 @@ const breadcrumbLd = {
             )
           )
         }
-        <VerdictBox verdict={data.verdict} title={isGlassSkinNote ? 'Takeaway' : undefined} />
+        <VerdictBox verdict={data.verdict} title={trendGuide?.verdictTitle} />
       </div>
       <TableOfContents headings={headings} />
       <slot />
