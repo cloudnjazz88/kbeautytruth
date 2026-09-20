@@ -8,6 +8,7 @@ author: Kay
 featured: false
 skinType: Dry + Somewhat Sensitive
 testedFor: "Three months; currently using the second tube from an original two-pack"
+boughtFrom: Amazon
 status: using
 draft: false
 publishedAt: 2026-09-11T23:55:00Z

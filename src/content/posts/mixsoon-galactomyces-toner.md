@@ -8,6 +8,7 @@ author: Kay
 featured: false
 skinType: Dry / Somewhat Sensitive
 testedFor: "Second Bottle; Used Daily"
+boughtFrom: Amazon
 status: repurchased
 draft: false
 publishedAt: 2026-09-10T16:00:00Z

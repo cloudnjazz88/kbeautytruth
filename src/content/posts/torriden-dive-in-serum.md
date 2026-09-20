@@ -8,6 +8,7 @@ author: Kay
 featured: false
 skinType: Dry / Somewhat Sensitive
 testedFor: "Half of First Bottle; Usually Used at Night"
+boughtFrom: Amazon
 status: using
 draft: false
 publishedAt: 2026-09-11T23:30:00Z

@@ -8,6 +8,7 @@ author: Kay
 featured: false
 skinType: Dry / Somewhat Sensitive
 testedFor: "About two months; used regularly, often alternating with Torriden DIVE-IN Soothing Cream"
+boughtFrom: Amazon
 status: using
 draft: false
 publishedAt: 2026-09-13T17:30:00Z

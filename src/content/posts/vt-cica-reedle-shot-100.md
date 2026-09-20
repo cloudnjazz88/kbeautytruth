@@ -8,6 +8,7 @@ author: Kay
 featured: true
 skinType: Dry / Somewhat Sensitive
 testedFor: "3-4 Months (1 Full Bottle Finished)"
+boughtFrom: Amazon
 status: repurchased
 draft: false
 publishedAt: 2026-09-10
