@@ -190,12 +190,33 @@ const breadcrumbLd = {
             />
           ) : (
             !isTrendGuide && (
-              <SkinProfile
-                skinType={data.skinType}
-                testedFor={data.testedFor}
-                boughtFrom={data.boughtFrom}
-                showShopping={!isRoutine}
-              />
+              data.frequency ? (
+                <SkinProfile
+                  title="My skin & test"
+                  facts={[
+                    { label: 'Skin', value: data.skinType ?? site.author.skinType },
+                    ...(data.testedFor
+                      ? [{ label: 'Tested For', value: data.testedFor, wide: true as const }]
+                      : []),
+                    { label: 'Frequency', value: data.frequency },
+                    ...(!isRoutine
+                      ? [
+                          {
+                            label: 'Bought from',
+                            value: data.boughtFrom ?? site.author.shopping,
+                          },
+                        ]
+                      : []),
+                  ]}
+                />
+              ) : (
+                <SkinProfile
+                  skinType={data.skinType}
+                  testedFor={data.testedFor}
+                  boughtFrom={data.boughtFrom}
+                  showShopping={!isRoutine}
+                />
+              )
             )
           )
         }

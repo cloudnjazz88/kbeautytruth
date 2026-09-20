@@ -18,6 +18,7 @@ const posts = defineCollection({
     featured: z.boolean().default(false),
     skinType: z.string().optional(),
     testedFor: z.string().optional(),
+    frequency: z.string().optional(),
     boughtFrom: z.string().optional(),
     seoTitle: z.string().optional(),
     status: z.enum(['using', 'repurchased', 'discontinued', 'routine', 'notes']),

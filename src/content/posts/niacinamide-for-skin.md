@@ -11,13 +11,14 @@ status: notes
 draft: false
 publishedAt: 2026-09-16T13:25:00-04:00
 relatedPosts:
+  - the-ordinary-niacinamide-10-zinc-1-review
   - retinol-for-beginners
   - my-morning-and-evening-skincare-routine
 verdict: "Niacinamide helped my skin look smoother and more even, without irritation for me. The right concentration and pace matter more than chasing the highest percentage."
 repurchase: unknown
 ---
 
-I started looking into niacinamide because I wanted a more even-looking skin tone and smoother texture. I have dry, somewhat sensitive skin, and I currently use The Ordinary Niacinamide 10% + Zinc 1% as one example of a 10% formula. This is a guide to the ingredient, not a full product review.
+I started looking into niacinamide because I wanted a more even-looking skin tone and smoother texture. I have dry, somewhat sensitive skin, and I currently use The Ordinary Niacinamide 10% + Zinc 1% as one example of a 10% formula. For the long-term product notes on that bottle, see [my The Ordinary Niacinamide 10% + Zinc 1% review](/reviews/the-ordinary-niacinamide-10-zinc-1-review/). This page stays focused on the ingredient, not a full repurchase review.
 
 ## What is niacinamide?
 
