@@ -8,20 +8,39 @@ import { site } from '../site';
   description="How to reach Kay at K-Beauty Truth."
   canonicalPath="/contact/"
 >
-  <section class="stack-page">
+  <section class="stack-page contact-page">
     <div class="wrap prose">
       <h1 class="page-title">Contact</h1>
       <p>
-        The most reliable way to reach this site is email. There is no contact form on this page
-        because a form is not connected to a working mail service yet.
+        For questions, feedback, corrections, or collaboration inquiries, please email:
       </p>
       <p>
-        Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
       </p>
       <p>
-        Please do not write for medical advice. Kay can talk about her own routine and product
-        notes. She cannot tell you what your skin will do.
+        Please note that I cannot provide personal medical advice or diagnose skin concerns. I'm happy
+        to answer questions about my own skincare experiences and the products featured on this site.
       </p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Contact-only spacing: keep short copy compact so the footer follows without a large empty gap. */
+  .contact-page {
+    padding: 2.75rem 0 1.5rem;
+  }
+
+  .contact-page .page-title {
+    margin: 0 0 1rem;
+  }
+
+  .contact-page .prose > p {
+    margin-top: 0;
+    margin-bottom: 0.9rem;
+  }
+
+  .contact-page .prose > p:last-child {
+    margin-bottom: 0;
+  }
+</style>
