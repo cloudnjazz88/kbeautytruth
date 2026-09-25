@@ -21,7 +21,7 @@ I have dry, somewhat sensitive skin. I use The Ordinary Retinol 0.2% in Squalane
 
 ## What can retinol do?
 
-Retinol is a form of vitamin A used in skincare for concerns such as uneven texture, fine lines, and acne. Results are not immediate, and a product that works for one person may feel too irritating for another.
+Retinol is a form of vitamin A used in over-the-counter skincare for concerns such as uneven texture, fine lines, and acne. It sits in the broader retinoid family with stronger prescription options such as tretinoin and oral isotretinoin, but a cosmetic retinol serum is not the same product, strength, or exposure as a prescription retinoid. Results are not immediate, and a product that works for one person may feel too irritating for another.
 
 That delay is where it gets tricky. Not seeing a result after a few uses does not mean you need a thicker layer or a stronger product.
 
@@ -47,8 +47,22 @@ If your skin is getting increasingly uncomfortable, red, or visibly peeling, do 
 
 I also make room for moisturizer in my routine and use sun protection during the day. Retinol does not replace those basics.
 
+## Pregnancy, trying to conceive, and breastfeeding
+
+This is not personalized medical advice. If you are pregnant, trying to conceive, or breastfeeding, ask your own clinician before using retinol or other retinoids.
+
+Authoritative clinical sources treat retinoids cautiously in pregnancy. The American Academy of Dermatology advises avoiding retinoids while pregnant, including prescription options and over-the-counter retinol products. ACOG similarly notes that topical retinoids are in the same vitamin A family as oral isotretinoin, that systemic absorption from topical use is generally low, and that avoidance during pregnancy is still generally recommended. Oral isotretinoin is a separate, high-risk prescription medicine and is not the same exposure as a cosmetic topical retinol serum.
+
+I am not making a categorical claim about breastfeeding here. Medication decisions while breastfeeding belong with your clinician and up-to-date clinical references.
+
 ## Kay’s take
 
 I think retinol is worth considering, but patience is part of using it well. I use a low-strength product about every three days because that has worked comfortably for my dry, somewhat sensitive skin. My aunt’s experience reminds me why I do not want to turn “I cannot see results yet” into “I should use more tonight.”
 
 Start cautiously. Pay attention to how your skin feels. You can decide whether to adjust your routine later, but you cannot rush past irritation and expect your skin to thank you for it.
+
+## Sources
+
+- American Academy of Dermatology, [*Dermatologist-approved pregnancy skin care*](https://www.aad.org/public/everyday-care/skin-care-secrets/routine/pregnancy-skin-care): public guidance to avoid retinoids during pregnancy, including prescription retinoids and over-the-counter retinol products.
+- American Academy of Dermatology, [*Retinoid or retinol?*](https://www.aad.org/public/everyday-care/skin-care-secrets/anti-aging/retinoid-retinol): overview distinguishing retinol from stronger retinoids, plus the note that retinoids should not be used during pregnancy.
+- American College of Obstetricians and Gynecologists, [*Skin Conditions During Pregnancy*](https://www.acog.org/womens-health/faqs/skin-conditions-during-pregnancy): explains that topical retinoids are vitamin A derivatives related to isotretinoin, that absorption from topical use is generally low, and that avoidance in pregnancy is generally recommended; separately flags oral isotretinoin as a high-risk prescription medicine.

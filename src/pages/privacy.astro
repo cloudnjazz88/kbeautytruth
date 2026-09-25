@@ -29,9 +29,15 @@ import { site } from '../site';
       {
         site.features.analytics ? (
           <p>
-            This site uses Google Analytics 4 (measurement ID {site.gaMeasurementId}) to understand
-            how pages are used. Google may process usage data according to Google&apos;s privacy
-            policy.
+            This site currently uses Google Analytics 4 (measurement ID {site.gaMeasurementId})
+            to understand traffic and improve the site. Google Analytics may collect information
+            such as pages viewed, approximate location, device or browser type, referral source,
+            and interaction data. Cookies or similar technologies may be involved. Kay uses this
+            for aggregate site-improvement purposes and does not use Analytics to identify you as
+            an individual. You can limit Analytics through browser controls and Google&apos;s
+            advertising and analytics privacy tools, including the Google Analytics opt-out
+            browser add-on where available. Google may process usage data according to
+            Google&apos;s privacy policy.
           </p>
         ) : (
           <p>This site does not currently embed an analytics script.</p>
@@ -60,8 +66,8 @@ import { site } from '../site';
       <p>This site is not directed at children under 13.</p>
       <h2>Changes</h2>
       <p>
-        If the site starts using analytics, ads, or an email service, this page will be updated to
-        match what is actually installed.
+        If ads, an email service, or other trackers are added later, or if Analytics settings
+        change, this page will be updated to match what is actually installed.
       </p>
       <h2>Contact</h2>
       <p>Questions: <a href={`mailto:${site.email}`}>{site.email}</a></p>

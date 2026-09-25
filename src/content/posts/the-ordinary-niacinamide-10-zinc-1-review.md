@@ -12,7 +12,7 @@ skinType: Slightly Dry / Slightly Sensitive
 testedFor: "More Than One Year"
 frequency: "About 3 to 4 Times a Week"
 boughtFrom: Amazon
-status: using
+status: repurchased
 draft: false
 publishedAt: 2026-09-19T20:05:00-04:00
 heroImage: /media/products/the-ordinary-niacinamide-10-zinc-1/front.jpg
