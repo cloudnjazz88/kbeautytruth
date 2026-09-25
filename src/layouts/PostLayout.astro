@@ -39,11 +39,46 @@ const trendGuideBySlug: Record<string, { eyebrow: string; verdictTitle: string }
 };
 const trendGuide = trendGuideBySlug[data.slug];
 const isTrendGuide = Boolean(trendGuide);
-const isNiacinamideGuide = data.slug === 'niacinamide-for-skin';
-const isProductReviewCopy = !isRoutine && !isTrendGuide && !isNiacinamideGuide;
-const documentTitle =
-  data.seoTitle ??
-  (isNiacinamideGuide ? 'Niacinamide for Skin: Benefits, How to Use, Retinol' : data.title);
+const ingredientGuideBySlug: Record<
+  string,
+  {
+    eyebrow: string;
+    seoTitle?: string;
+    disclosure: 'personal-experience' | 'research-only';
+    contextTitle: string;
+    facts: { label: string; value: string }[];
+    verdictTitle?: string;
+  }
+> = {
+  'niacinamide-for-skin': {
+    eyebrow: 'Ingredient guide · Niacinamide',
+    seoTitle: 'Niacinamide for Skin: Benefits, How to Use, Retinol',
+    disclosure: 'personal-experience',
+    contextTitle: 'My skin & context',
+    facts: [
+      { label: 'Skin', value: data.skinType ?? 'Dry / Somewhat Sensitive' },
+      { label: 'Goals', value: 'Smoother Texture / More Even-Looking Tone' },
+      { label: 'Concentration I Use', value: '10%' },
+      { label: 'Experience', value: 'No Irritation So Far' },
+    ],
+  },
+  'copper-peptides-for-skin': {
+    eyebrow: 'Ingredient guide · Copper Peptides',
+    disclosure: 'research-only',
+    contextTitle: 'What this guide covers',
+    facts: [
+      { label: 'Topic', value: 'Copper Peptides' },
+      { label: 'Common INCI', value: 'Copper Tripeptide-1' },
+      { label: 'Evidence', value: 'Promising but Limited' },
+      { label: 'Personal Use', value: 'Not Personally Tested' },
+    ],
+    verdictTitle: 'The short answer',
+  },
+};
+const ingredientGuide = ingredientGuideBySlug[data.slug];
+const isIngredientGuide = Boolean(ingredientGuide);
+const isProductReviewCopy = !isRoutine && !isTrendGuide && !isIngredientGuide;
+const documentTitle = data.seoTitle ?? ingredientGuide?.seoTitle ?? data.title;
 
 const articleLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -109,8 +144,8 @@ const breadcrumbLd = {
         <div class="article-header-copy">
           <p class="section-kicker">
             {
-              isNiacinamideGuide
-                ? 'Ingredient guide · Niacinamide'
+              ingredientGuide
+                ? ingredientGuide.eyebrow
                 : trendGuide
                   ? trendGuide.eyebrow
                   : `${isProductReviewCopy ? 'Honest review' : 'Honest note'} · ${categoryLabel}`
@@ -163,10 +198,16 @@ const breadcrumbLd = {
               This is a short editorial note, not medical advice. If this page later includes affiliate
               links, that will be stated here. Skin responses vary.
             </>
-          ) : isNiacinamideGuide ? (
+          ) : ingredientGuide?.disclosure === 'personal-experience' ? (
             <>
               This is a personal experience note and educational ingredient guide, not medical advice. If
               this page later includes affiliate links, that will be stated here. Skin responses vary.
+            </>
+          ) : ingredientGuide?.disclosure === 'research-only' ? (
+            <>
+              This is an educational ingredient guide, not medical advice. It summarizes published research
+              rather than personal product testing. If this page later includes affiliate links, that will
+              be stated here. Skin responses vary.
             </>
           ) : (
             <>
@@ -178,16 +219,8 @@ const breadcrumbLd = {
       </p>
       <div class="review-snapshot">
         {
-          isNiacinamideGuide ? (
-            <SkinProfile
-              title="My skin & context"
-              facts={[
-                { label: 'Skin', value: data.skinType ?? 'Dry / Somewhat Sensitive' },
-                { label: 'Goals', value: 'Smoother Texture / More Even-Looking Tone' },
-                { label: 'Concentration I Use', value: '10%' },
-                { label: 'Experience', value: 'No Irritation So Far' },
-              ]}
-            />
+          ingredientGuide ? (
+            <SkinProfile title={ingredientGuide.contextTitle} facts={ingredientGuide.facts} />
           ) : (
             !isTrendGuide && (
               data.frequency ? (
@@ -220,7 +253,7 @@ const breadcrumbLd = {
             )
           )
         }
-        <VerdictBox verdict={data.verdict} title={trendGuide?.verdictTitle} />
+        <VerdictBox verdict={data.verdict} title={ingredientGuide?.verdictTitle ?? trendGuide?.verdictTitle} />
       </div>
       <TableOfContents headings={headings} />
       <slot />
