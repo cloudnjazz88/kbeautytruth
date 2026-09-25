@@ -56,7 +56,7 @@ const ingredientGuideBySlug: Record<
     disclosure: 'personal-experience',
     contextTitle: 'My skin & context',
     facts: [
-      { label: 'Skin', value: data.skinType ?? 'Dry / Somewhat Sensitive' },
+      { label: 'Skin', value: data.skinType ?? site.author.skinType },
       { label: 'Goals', value: 'Smoother Texture / More Even-Looking Tone' },
       { label: 'Concentration I Use', value: '10%' },
       { label: 'Experience', value: 'No Irritation So Far' },
