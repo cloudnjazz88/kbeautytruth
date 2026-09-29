@@ -14,8 +14,7 @@ draft: false
 publishedAt: 2026-09-10T16:00:00Z
 heroImage: /media/products/mixsoon-galactomyces-toner/front.jpg
 heroImageAlt: "A bottle of mixsoon Galactomyces Toner held in hand, showing the front label"
-relatedPosts:
-  - sensitive-skin-barrier-routine
+relatedPosts: []
 verdict: "A simple, watery toner that absorbs quickly but still leaves my skin feeling well hydrated and noticeably smoother. I am already on my second bottle and expect to buy it again."
 repurchase: yes
 ---

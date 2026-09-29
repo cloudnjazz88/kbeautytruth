@@ -14,9 +14,7 @@ draft: false
 publishedAt: 2026-09-10
 heroImage: /media/products/vt-cica-reedle-shot-100/front.jpg
 heroImageAlt: "VT CICA Reedle Shot 100 bottle held in hand, showing the front label"
-relatedPosts:
-  - sensitive-skin-barrier-routine
-  - medicube-collagen-jelly-cream
+relatedPosts: []
 verdict: "A solid booster I still repurchase. The prickling sensation is real and intensifies for me when I layer toner and creams, but on my dry, somewhat sensitive skin the rest of my routine felt more intense after using it."
 repurchase: yes
 ---

@@ -17,7 +17,6 @@ heroImageAlt: "A half-used bottle of Torriden DIVE-IN Low Molecular Hyaluronic A
 relatedPosts:
   - torriden-dive-in-soothing-cream
   - mixsoon-galactomyces-toner
-  - sensitive-skin-barrier-routine
 verdict: "A light, slightly slippery hydration serum that absorbs quickly without stickiness. It helps my dry skin feel comfortable for longer, but I still need a cream on top to hold onto that moisture."
 repurchase: yes
 ---

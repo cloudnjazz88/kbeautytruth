@@ -29,22 +29,6 @@ URL after publish: `/reviews/vt-cica-reedle-shot-100/`
 - The specific reason you bought it again
 - Anything that bothered you even though you repurchased
 
-## Medicube Collagen Jelly Cream
-
-File: `src/content/posts/medicube-collagen-jelly-cream.md`  
-URL after publish: `/breakouts/medicube-collagen-jelly-cream/`
-
-- How long and how often did you use it?
-- How much did you apply?
-- Where did the breakout show up, and what did it look like?
-- What else were you using at the time?
-- What changed after you stopped?
-- What did you use instead?
-- Anything you liked before or besides the breakout
-
-Do not add a “day 4” timeline unless you remember that timing.  
-Do not name an ingredient as the cause unless you have a reason you can stand behind.
-
 ## COSRX Vitamin C 23%
 
 File: `src/content/posts/cosrx-vitamin-c-23.md`  
@@ -61,18 +45,3 @@ URL after publish: `/reviews/cosrx-vitamin-c-23/`
 - How long you used each vitamin C, only if both were used
 
 Do not publish this as a comparison or name a winner until the The Ordinary side is confirmed.
-
-## Barrier-focused routine
-
-File: `src/content/posts/sensitive-skin-barrier-routine.md`  
-URL after publish: `/routines/sensitive-skin-barrier-routine/`
-
-- Exact morning order
-- Exact evening order
-- Daily products versus occasional products
-- When you use Reedle Shot, vitamin C, masks, and Medicube Booster Pro X2
-- Products you do not combine
-- Any pilling, with the pair named
-- Wait time between steps, if you wait
-
-Do not call it a 5-step routine unless that is the count you actually use.
