@@ -60,13 +60,11 @@ Medicube instructs users to shake the bottle before each use so the oil and jell
 
 ## Mist or serum depends on the distance
 
-This is one of the more useful features of the product.
+The spray is not a fine, cloud-like mist. The droplets are noticeably larger, and the product lands with more of a wet spritz than an even veil.
 
-When I spray it from farther away, it spreads across my face like a mist. When I hold it closer, more product lands in one area and it feels closer to applying a light serum.
+That makes the formula feel more substantial than a watery mist, but it also means the coverage is not perfectly uniform. Some areas can receive more product than others, especially if I hold the bottle too close.
 
-The spray is not the finest cloud-like mist I have tried. The droplets feel slightly fuller and more moisturizing than a very watery face mist. They are still dispersed well enough that I can use the product without rubbing my face afterward when I spray from a reasonable distance.
-
-I prefer the distant application because it is quick and evenly covers my skin. The closer method makes more sense when I want concentrated hydration and plan to press the product into my skin.
+I prefer spraying it from a distance because that helps distribute the larger droplets more evenly. Holding it closer does create a wetter, more serum-like application, but it is not the method I would choose when I want light, even coverage.
 
 <video class="post-video" autoplay loop muted playsinline preload="metadata" aria-label="Spraying medicube PDRN Pink Collagen Glow Jelly Mist Serum onto the back of a hand">
   <source src="/media/products/medicube-pdrn-pink-collagen-jelly-mist/spray.mp4" type="video/mp4" />
@@ -124,11 +122,11 @@ I cannot separate the effects of every ingredient or this one product from the r
 
 I have also used this mist over makeup.
 
-I spray it from a distance only two or three times. Applied that way, it has not made my makeup lift, separate, or require correction.
+Because the droplets are larger than I would prefer, I hold the bottle farther away and limit myself to two or three sprays. Used carefully that way, it has not made my makeup lift, separate, or require correction.
 
-It adds moisture and glow without soaking one area of my face. I would avoid spraying it too closely over makeup because the larger droplets could leave the surface wetter than intended.
+It adds moisture and glow, but the spray itself is not perfectly even. I would not use it close to my face over makeup because too much product could collect in one area.
 
-I also would not say that finely broken collagen is what makes it work over makeup. What I can observe is simpler: the mist spreads evenly enough from a distance, settles quickly, and has not disturbed my makeup when I use a small amount.
+I also would not say that finely broken collagen is what makes it work over makeup. What I can observe is simpler: a small amount sprayed from a distance settles without disturbing my makeup, even though the mist is not especially fine.
 
 ## Irritation and sensitive skin
 
@@ -150,11 +148,15 @@ I do not see the mist as a replacement for the serum. The serum provides a more 
 
 ## What I would change
 
-The spray is slightly fuller than an ultra-fine aerosol-like mist, and the formula feels a little tacky before it absorbs.
+My main complaint is the spray itself.
 
-Neither issue bothers me. The fuller droplets are part of what makes it feel more substantial than a watery mist, and the tackiness disappears completely after absorption.
+I prefer a face mist that comes out as a very fine cloud and settles evenly across the skin. This one sprays in larger droplets with more of a wet spritz, so the coverage can feel uneven.
 
-Still, someone looking for a completely weightless, invisible spray may notice the difference.
+Spraying from farther away helps, but it does not completely turn the formula into an ultra-fine mist. I have to pay more attention to the distance and the number of sprays than I would with a finer nozzle.
+
+The formula also feels slightly tacky at first, although that part does not bother me because the tackiness disappears completely after it absorbs.
+
+I like what the product does once it is on my skin. I just wish the nozzle delivered it in a finer and more even layer.
 
 ## Is it worth it?
 
@@ -162,9 +164,9 @@ For me, yes.
 
 I bought it because I wanted convenient hydration, and it performs that role better than the quick-drying face mists I have used before.
 
-I like that I can change the application by adjusting the distance. I can use it as a light finishing mist, a more concentrated serum-like spray, or a quick moisture boost over makeup.
-
 The immediate glow is attractive, but the lasting hydration is what makes me want to repurchase it. The softer texture and brighter-looking complexion I noticed over the month are additional benefits.
+
+The imperfect spray keeps it from being an ideal face mist, but the lasting hydration is good enough that I still plan to repurchase it.
 
 I would recommend it most to someone who wants:
 
@@ -180,11 +182,11 @@ I would be more cautious if you dislike any temporary tackiness, prefer complete
 
 The medicube PDRN Pink Collagen Glow Jelly Mist Serum gives me an immediate glow, but it does more than make my skin look temporarily wet.
 
-Its slightly richer mist leaves my skin hydrated, soft, and comfortable for longer than most face mists I have tried. After about one month of daily use, I also think my complexion looks brighter and my skin feels smoother and bouncier.
+Its slightly richer formula leaves my skin hydrated, soft, and comfortable for longer than most face mists I have tried. After about one month of daily use, I also think my complexion looks brighter and my skin feels smoother and bouncier.
 
-The spray is not ultra-fine, and it feels slightly tacky for a moment before absorbing. Once it settles, however, the tackiness disappears completely.
+Its clearest weakness is the nozzle. The mist comes out in larger droplets rather than a fine, even cloud, so I need to spray it from farther away and use a light hand. It also feels slightly tacky for a moment, although the tackiness disappears completely after absorption.
 
-The lasting hydration is what makes this feel like a mist that actually does something rather than one that simply evaporates.
+The delivery could be better, but the lasting hydration is what makes this feel like a mist that actually does something rather than one that simply evaporates.
 
 ## Sources
 
