@@ -1,0 +1,170 @@
+---
+import { getPostUrl, type Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+  products: Post[];
+  headingLevel?: 2 | 3;
+}
+
+const { post, products, headingLevel = 2 } = Astro.props;
+const href = getPostUrl(post);
+const pair = products.slice(0, 2);
+const Heading = headingLevel === 2 ? 'h2' : 'h3';
+const categoryLabel = post.data.category.replaceAll('-', ' ');
+---
+
+<a class="comparison-card" href={href}>
+  {
+    pair.length > 0 && (
+      <div class="comparison-visual">
+        <div class="comparison-photos">
+          {
+            pair[0] && (
+              <span class="comparison-photo">
+                <img
+                  src={pair[0].data.heroImage}
+                  alt={pair[0].data.heroImageAlt ?? `${pair[0].data.productName ?? pair[0].data.title} product photo`}
+                  loading="lazy"
+                />
+              </span>
+            )
+          }
+          {pair.length > 1 && <span class="comparison-vs">VS</span>}
+          {
+            pair[1] && (
+              <span class="comparison-photo">
+                <img
+                  src={pair[1].data.heroImage}
+                  alt={pair[1].data.heroImageAlt ?? `${pair[1].data.productName ?? pair[1].data.title} product photo`}
+                  loading="lazy"
+                />
+              </span>
+            )
+          }
+        </div>
+        <div class="comparison-names">
+          {pair.map((product) => (
+            <span>{product.data.productName ?? product.data.title}</span>
+          ))}
+        </div>
+      </div>
+    )
+  }
+  <div class="comparison-card-meta">
+    <span class="comparison-card-badge">{categoryLabel}</span>
+    {post.data.status === 'repurchased' && <span>• Repurchased</span>}
+  </div>
+  <Heading class="comparison-card-title">{post.data.title}</Heading>
+  <p class="comparison-card-excerpt">{post.data.description}</p>
+</a>
+
+<style>
+  .comparison-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 1.15rem 1.2rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .comparison-photos,
+  .comparison-names {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.4rem minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .comparison-names {
+    align-items: start;
+  }
+
+  .comparison-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    min-width: 0;
+    border-radius: 14px;
+    background: var(--bg-subtle, #f3f3f0);
+    overflow: hidden;
+  }
+
+  .comparison-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    filter: var(--media-lift, brightness(1.24) contrast(1.06));
+  }
+
+  .comparison-vs {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--sage-dark, #24382a);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .comparison-names span {
+    min-width: 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .comparison-names span:nth-child(2) {
+    grid-column: 3;
+  }
+
+  .comparison-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.6rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .comparison-card-badge {
+    color: var(--terracotta);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .comparison-card-title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .comparison-card-excerpt {
+    margin: 0;
+    color: var(--ink-secondary);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+</style>

@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ComparisonCard from '../../components/ComparisonCard.astro';
 import PostCard from '../../components/PostCard.astro';
 import ReviewNoteCard from '../../components/ReviewNoteCard.astro';
 import {
+  getComparisonProducts,
   getPostsByCategory,
   getPublishedPosts,
   getRepurchasedPosts,
@@ -37,7 +39,7 @@ const copy: Record<string, { title: string; description: string; intro: string }
   comparisons: {
     title: 'Comparisons',
     description: 'Side-by-side notes written only after both products have been used.',
-    intro: 'A comparison page will not go up until both products have confirmed use notes.',
+    intro: 'Side-by-side notes on products I’ve used, what felt different, and which I’d choose again.',
   },
   routines: {
     title: 'Routines',
@@ -98,6 +100,16 @@ function topicHasPublishedPost(topic: string, ingredientPosts: Post[]): boolean 
   });
 }
 
+const comparisonCards =
+  category === 'comparisons'
+    ? await Promise.all(
+        posts.map(async (post) => ({
+          post,
+          products: await getComparisonProducts(post),
+        })),
+      )
+    : [];
+
 const remainingPlannedTopics =
   category === 'ingredients'
     ? ingredientTopics.filter((topic) => !topicHasPublishedPost(topic, posts))
@@ -125,7 +137,16 @@ const remainingPlannedTopics =
         )
       }
       {
-        posts.length > 0 && category !== 'reviews' && (
+        posts.length > 0 && category === 'comparisons' && (
+          <div class="comparison-grid" style="margin-top: 2rem;">
+            {comparisonCards.map(({ post, products }) => (
+              <ComparisonCard post={post} products={products} headingLevel={2} />
+            ))}
+          </div>
+        )
+      }
+      {
+        posts.length > 0 && category !== 'reviews' && category !== 'comparisons' && (
           <div class="card-grid" style="margin-top: 2rem;">
             {posts.map((post) => (
               <PostCard post={post} headingLevel={2} />
@@ -156,6 +177,15 @@ const remainingPlannedTopics =
 </BaseLayout>
 
 <style>
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .review-note-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -206,6 +236,10 @@ const remainingPlannedTopics =
 
   @media (max-width: 900px) {
     .ingredient-topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 768px) {
+    .comparison-grid { grid-template-columns: minmax(0, 1fr); }
   }
 
   @media (max-width: 640px) {

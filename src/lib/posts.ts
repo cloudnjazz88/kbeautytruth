@@ -58,6 +58,14 @@ export async function getRelatedPosts(post: Post): Promise<Post[]> {
     .filter((entry): entry is Post => Boolean(entry));
 }
 
+/** Product reviews pictured in a comparison, in the related-post order used by that article. */
+export async function getComparisonProducts(post: Post): Promise<Post[]> {
+  const related = await getRelatedPosts(post);
+  return related
+    .filter((entry) => entry.data.category === 'reviews' && Boolean(entry.data.heroImage))
+    .slice(0, 2);
+}
+
 function sortPosts(a: Post, b: Post): number {
   const aTime = a.data.publishedAt?.getTime() ?? 0;
   const bTime = b.data.publishedAt?.getTime() ?? 0;
