@@ -32,22 +32,46 @@ import { site } from '../site';
             This site currently uses Google Analytics 4 (measurement ID {site.gaMeasurementId})
             to understand traffic and improve the site. Google Analytics may collect information
             such as pages viewed, approximate location, device or browser type, referral source,
-            and interaction data. Cookies or similar technologies may be involved. Kay uses this
-            for aggregate site-improvement purposes and does not use Analytics to identify you as
-            an individual. You can limit Analytics through browser controls and Google&apos;s
-            advertising and analytics privacy tools, including the Google Analytics opt-out
-            browser add-on where available. Google may process usage data according to
-            Google&apos;s privacy policy.
+            and interaction data. It uses cookies or similar technologies. Kay uses this for
+            aggregate site-improvement purposes and does not use Analytics to identify you as an
+            individual. You can limit Analytics through your browser and Google&apos;s{' '}
+            <a href="https://tools.google.com/dlpage/gaoptout">Analytics opt-out browser add-on</a>
+            , where it is available. Google&apos;s handling of that data is described in the{' '}
+            <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.
           </p>
         ) : (
           <p>This site does not currently embed an analytics script.</p>
         )
       }
+      <p>
+        <a href="https://policies.google.com/technologies/partner-sites">
+          How Google uses data when you use our partners&apos; sites or apps
+        </a>
+      </p>
       {
         site.features.adsense ? (
-          <p>Advertising scripts may set cookies as described by the ad provider.</p>
+          <>
+            <p>
+              This site uses Google advertising. Third-party vendors, including Google, use cookies
+              to serve ads based on a visitor&apos;s prior visits to this site or other sites.
+              Google&apos;s use of advertising cookies lets Google and its partners serve ads based
+              on those visits. This site has not added a separate advertising network, so it does
+              not list other ad vendors here.
+            </p>
+            <p>
+              You can opt out of personalized advertising in{' '}
+              <a href="https://adssettings.google.com/">Google Ads Settings</a>. You can also opt
+              out of some third-party cookies used for personalized advertising at{' '}
+              <a href="https://www.aboutads.info/">aboutads.info</a>.
+            </p>
+          </>
         ) : (
-          <p>This site does not currently embed advertising scripts.</p>
+          <p>
+            This site does not currently embed advertising scripts. It does not serve Google ads,
+            set advertising cookies, or offer personalized ads. If advertising scripts are added,
+            this page will be updated before they run, including a link to Google Ads Settings for
+            visitors who want to opt out of personalized advertising.
+          </p>
         )
       }
       {
