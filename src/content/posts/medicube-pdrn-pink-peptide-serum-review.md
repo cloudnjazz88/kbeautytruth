@@ -164,6 +164,8 @@ Some post-acne marks appeared a little lighter, especially during the period whe
 
 I experienced no stinging, redness, or breakouts. I would buy it again for hydration, brighter-looking skin, and the subtle plumping effect, while keeping expectations realistic for deeper wrinkles.
 
+I compared this serum with the Medicube PDRN jelly mist in [Medicube PDRN Serum vs Jelly Mist: Which Would I Buy Again?](/comparisons/medicube-pdrn-serum-vs-jelly-mist/).
+
 ## Sources
 
 * [Medicube, PDRN Pink Peptide Serum](https://medicube.us/products/rose-pdrn-pink-peptide-serum)

@@ -146,6 +146,8 @@ The Pink Peptide Serum feels thicker and more nourishing, so I use it as a plann
 
 I do not see the mist as a replacement for the serum. The serum provides a more concentrated skincare step, while the mist is easier to use throughout the day.
 
+I compared the two in [Medicube PDRN Serum vs Jelly Mist: Which Would I Buy Again?](/comparisons/medicube-pdrn-serum-vs-jelly-mist/).
+
 ## What I would change
 
 My main complaint is the spray itself.
