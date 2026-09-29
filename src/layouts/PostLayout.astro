@@ -27,7 +27,15 @@ const related = await getRelatedPosts(post);
 const categoryLabel = getCategoryLabel(data.category);
 const isRoutine = data.category === 'routines';
 const isLongRoutineTitle = data.slug === 'my-morning-and-evening-skincare-routine';
-const trendGuideBySlug: Record<string, { eyebrow: string; verdictTitle: string }> = {
+const trendGuideBySlug: Record<
+  string,
+  {
+    eyebrow: string;
+    verdictTitle: string;
+    contextTitle?: string;
+    facts?: { label: string; value: string }[];
+  }
+> = {
   'what-is-glass-skin': {
     eyebrow: 'Honest note · Trends',
     verdictTitle: 'Takeaway',
@@ -35,6 +43,17 @@ const trendGuideBySlug: Record<string, { eyebrow: string; verdictTitle: string }
   'mochi-skin-vs-glass-skin': {
     eyebrow: 'Trend guide · Mochi Skin',
     verdictTitle: 'Takeaway',
+  },
+  'what-are-capsule-creams': {
+    eyebrow: 'Trend guide · Capsule Creams',
+    verdictTitle: 'The short answer',
+    contextTitle: 'What this trend means',
+    facts: [
+      { label: 'Format', value: 'Moisturizer with visible capsules' },
+      { label: 'Main appeal', value: 'Texture and customization' },
+      { label: 'Evidence', value: 'Depends on the complete formula' },
+      { label: 'Need one?', value: 'No' },
+    ],
   },
 };
 const trendGuide = trendGuideBySlug[data.slug];
@@ -219,7 +238,9 @@ const breadcrumbLd = {
       </p>
       <div class="review-snapshot">
         {
-          ingredientGuide ? (
+          trendGuide?.facts ? (
+            <SkinProfile title={trendGuide.contextTitle} facts={trendGuide.facts} />
+          ) : ingredientGuide ? (
             <SkinProfile title={ingredientGuide.contextTitle} facts={ingredientGuide.facts} />
           ) : (
             !isTrendGuide && (
