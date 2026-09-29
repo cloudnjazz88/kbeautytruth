@@ -92,18 +92,20 @@ const categoryLabel = post.data.category.replaceAll('-', ' ');
   .comparison-photo {
     display: block;
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 3 / 4;
     min-width: 0;
+    padding: 0;
     border-radius: 14px;
-    background: var(--bg-subtle, #f3f3f0);
+    background: transparent;
     overflow: hidden;
   }
 
   .comparison-photo img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center;
+    margin: 0;
+    object-fit: cover;
+    object-position: center center;
     display: block;
     filter: var(--media-lift, brightness(1.24) contrast(1.06));
   }
