@@ -44,6 +44,10 @@ const trendGuideBySlug: Record<
     eyebrow: 'Trend guide · Mochi Skin',
     verdictTitle: 'Takeaway',
   },
+  'do-you-need-a-10-step-korean-skincare-routine': {
+    eyebrow: 'Trend guide · Routine Length',
+    verdictTitle: 'Takeaway',
+  },
   'what-are-capsule-creams': {
     eyebrow: 'Trend guide · Capsule Creams',
     verdictTitle: 'The short answer',
@@ -91,6 +95,28 @@ const ingredientGuideBySlug: Record<
       { label: 'Concentration I Use', value: '10%' },
       { label: 'Experience', value: 'No Irritation So Far' },
     ],
+  },
+  'does-pdrn-skincare-work': {
+    eyebrow: 'Ingredient guide · PDRN',
+    disclosure: 'personal-experience',
+    contextTitle: 'My skin & context',
+    facts: [
+      { label: 'Skin', value: data.skinType ?? site.author.skinType },
+      { label: 'Products tried', value: 'Two medicube PDRN formulas' },
+      { label: 'Focus', value: 'What I noticed, not a miracle claim' },
+    ],
+    verdictTitle: 'Kay’s take',
+  },
+  'retinol-for-beginners': {
+    eyebrow: 'Ingredient guide · Retinol',
+    disclosure: 'personal-experience',
+    contextTitle: 'My skin & context',
+    facts: [
+      { label: 'Skin', value: data.skinType ?? site.author.skinType },
+      { label: 'Product I use', value: 'The Ordinary Retinol 0.2% in Squalane' },
+      { label: 'Pace', value: 'About once every three days' },
+    ],
+    verdictTitle: 'Kay’s take',
   },
   'copper-peptides-for-skin': {
     eyebrow: 'Ingredient guide · Copper Peptides',
@@ -146,6 +172,16 @@ const stopNoteBySlug: Record<
       { label: 'Skin', value: data.skinType ?? site.author.skinType },
       { label: 'Product', value: 'COSRX Advanced Snail 96 Mucin Power Essence' },
       { label: 'Result', value: 'Stopped after overnight reaction' },
+    ],
+    verdictTitle: 'Kay’s take',
+  },
+  'why-i-stopped-using-medicube-collagen-jelly-cream': {
+    eyebrow: "Honest note · What Didn't Work",
+    contextTitle: 'My skin & context',
+    facts: [
+      { label: 'Skin', value: data.skinType ?? site.author.skinType },
+      { label: 'Product', value: 'medicube Collagen Jelly Cream' },
+      { label: 'Result', value: 'Stopped after repeated reactions' },
     ],
     verdictTitle: 'Kay’s take',
   },

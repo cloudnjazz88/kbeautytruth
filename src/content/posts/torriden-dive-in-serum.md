@@ -6,7 +6,7 @@ slug: torriden-dive-in-serum
 category: reviews
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 testedFor: "Half of First Bottle; Usually Used at Night"
 boughtFrom: Amazon
 status: using

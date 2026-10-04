@@ -6,7 +6,7 @@ slug: my-morning-and-evening-skincare-routine
 category: routines
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 status: routine
 draft: false
 publishedAt: 2026-09-13T19:35:00-04:00

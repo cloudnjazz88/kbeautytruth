@@ -7,7 +7,7 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  canonicalPath: string;
+  canonicalPath?: string;
   ogType?: 'website' | 'article';
   jsonLd?: Record<string, unknown>[];
   noindex?: boolean;
@@ -22,7 +22,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonical = new URL(canonicalPath, site.url).href;
+const canonical = canonicalPath ? new URL(canonicalPath, site.url).href : undefined;
 const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
 
 const websiteLd = {
@@ -56,13 +56,13 @@ const gaMeasurementId = site.gaMeasurementId;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {canonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:url" content={canonical} />
+    {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />

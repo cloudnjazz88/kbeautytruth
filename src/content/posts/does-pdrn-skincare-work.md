@@ -6,7 +6,7 @@ slug: does-pdrn-skincare-work
 category: ingredients
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 status: notes
 draft: false
 publishedAt: 2026-09-13T19:00:00Z

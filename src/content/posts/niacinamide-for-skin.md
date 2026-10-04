@@ -6,7 +6,7 @@ slug: niacinamide-for-skin
 category: ingredients
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 status: notes
 draft: false
 publishedAt: 2026-09-16T13:25:00-04:00

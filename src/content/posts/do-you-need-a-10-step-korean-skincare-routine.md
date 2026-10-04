@@ -5,7 +5,7 @@ slug: do-you-need-a-10-step-korean-skincare-routine
 category: trends
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 status: notes
 draft: false
 publishedAt: 2026-09-13T01:30:00Z

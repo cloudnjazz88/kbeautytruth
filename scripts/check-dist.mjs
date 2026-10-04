@@ -76,6 +76,8 @@ for (const file of htmlFiles) {
 
   const canonical = text.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   const ogUrl = text.match(/<meta property="og:url" content="([^"]+)"/)?.[1];
+  const isNoindex = text.includes('<meta name="robots" content="noindex, follow"');
+  const isCustom404 = rel === '404.html';
   const requiredHeadMarkers = [
     '<title>',
     '<meta name="description"',
@@ -86,14 +88,21 @@ for (const file of htmlFiles) {
   for (const marker of requiredHeadMarkers) {
     if (!text.includes(marker)) failures.push(`${rel}: missing ${marker}`);
   }
-  if (!canonical) failures.push(`${rel}: missing canonical URL`);
-  if (!ogUrl) failures.push(`${rel}: missing Open Graph URL`);
-  if (canonical && ogUrl && canonical !== ogUrl) {
-    failures.push(`${rel}: canonical and Open Graph URL do not match`);
+  // Custom 404 HTML is reused for many missing URLs, so it must stay noindex and
+  // must not claim a homepage (or any other) canonical/og:url.
+  if (isCustom404) {
+    if (!isNoindex) failures.push(`${rel}: custom 404 must be noindex`);
+    if (canonical) failures.push(`${rel}: custom 404 must not set a canonical URL`);
+    if (ogUrl) failures.push(`${rel}: custom 404 must not set an Open Graph URL`);
+  } else {
+    if (!canonical) failures.push(`${rel}: missing canonical URL`);
+    if (!ogUrl) failures.push(`${rel}: missing Open Graph URL`);
+    if (canonical && ogUrl && canonical !== ogUrl) {
+      failures.push(`${rel}: canonical and Open Graph URL do not match`);
+    }
   }
 
-  const isNoindex = text.includes('<meta name="robots" content="noindex, follow"');
-  if (rel !== '404.html' && canonical && isNoindex && sitemap.includes(`<loc>${canonical}</loc>`)) {
+  if (!isCustom404 && canonical && isNoindex && sitemap.includes(`<loc>${canonical}</loc>`)) {
     failures.push(`${rel}: noindex URL is present in sitemap.xml`);
   }
   if (canonical && !isNoindex && !sitemap.includes(`<loc>${canonical}</loc>`)) {

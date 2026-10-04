@@ -6,7 +6,7 @@ slug: why-i-stopped-using-medicube-collagen-jelly-cream
 category: breakouts
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 status: discontinued
 draft: false
 publishedAt: 2026-09-13T19:15:00Z

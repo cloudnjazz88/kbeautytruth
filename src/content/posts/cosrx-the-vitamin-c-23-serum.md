@@ -7,7 +7,7 @@ slug: cosrx-the-vitamin-c-23-serum
 category: reviews
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 testedFor: "About one month"
 boughtFrom: Amazon
 status: using

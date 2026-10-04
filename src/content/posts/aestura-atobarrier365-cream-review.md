@@ -6,7 +6,7 @@ slug: aestura-atobarrier365-cream-review
 category: reviews
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 testedFor: "About two months; used regularly, often alternating with Torriden DIVE-IN Soothing Cream"
 boughtFrom: Amazon
 status: using

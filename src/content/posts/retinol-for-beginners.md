@@ -6,7 +6,7 @@ slug: retinol-for-beginners
 category: ingredients
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 status: notes
 draft: false
 publishedAt: 2026-09-13T00:05:00Z

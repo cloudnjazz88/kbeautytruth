@@ -6,7 +6,7 @@ slug: torriden-dive-in-soothing-cream-vs-aestura-atobarrier365-cream
 category: comparisons
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 testedFor: "Both creams used in regular rotation on dry, somewhat sensitive skin"
 status: notes
 draft: false

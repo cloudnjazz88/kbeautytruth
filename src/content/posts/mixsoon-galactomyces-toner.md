@@ -6,7 +6,7 @@ slug: mixsoon-galactomyces-toner
 category: reviews
 author: Kay
 featured: false
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 testedFor: "Second Bottle; Used Daily"
 boughtFrom: Amazon
 status: repurchased

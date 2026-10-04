@@ -6,7 +6,7 @@ slug: vt-cica-reedle-shot-100
 category: reviews
 author: Kay
 featured: true
-skinType: Dry / Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 testedFor: "3-4 Months (1 Full Bottle Finished)"
 boughtFrom: Amazon
 status: repurchased

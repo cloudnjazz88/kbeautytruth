@@ -13,8 +13,11 @@ import { site } from '../site';
           Skin responds differently from person to person.
         </p>
         <p class="footer-note">
-          Some pages may include affiliate links. If a purchase is made through one of those links,
-          the site may earn a commission at no extra cost to the reader.
+          {
+            site.features.affiliateNetwork
+              ? 'Some pages may include affiliate links. If a purchase is made through one of those links, the site may earn a commission at no extra cost to the reader.'
+              : 'No affiliate network is connected right now. If affiliate links are added later, those pages will say so.'
+          }
         </p>
       </div>
       <ul class="footer-links">

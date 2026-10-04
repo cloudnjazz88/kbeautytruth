@@ -6,7 +6,7 @@ slug: torriden-dive-in-soothing-cream
 category: reviews
 author: Kay
 featured: false
-skinType: Dry + Somewhat Sensitive
+skinType: Slightly Dry / Slightly Sensitive
 testedFor: "Three months; currently using the second tube from an original two-pack"
 boughtFrom: Amazon
 status: using
