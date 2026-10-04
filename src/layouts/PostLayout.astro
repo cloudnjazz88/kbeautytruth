@@ -130,7 +130,29 @@ const ingredientGuideBySlug: Record<
 };
 const ingredientGuide = ingredientGuideBySlug[data.slug];
 const isIngredientGuide = Boolean(ingredientGuide);
-const isProductReviewCopy = !isRoutine && !isTrendGuide && !isIngredientGuide;
+const stopNoteBySlug: Record<
+  string,
+  {
+    eyebrow: string;
+    contextTitle: string;
+    facts: { label: string; value: string }[];
+    verdictTitle?: string;
+  }
+> = {
+  'why-cosrx-snail-96-mucin-essence-didnt-work-for-me': {
+    eyebrow: "Honest note · What Didn't Work",
+    contextTitle: 'My skin & context',
+    facts: [
+      { label: 'Skin', value: data.skinType ?? site.author.skinType },
+      { label: 'Product', value: 'COSRX Advanced Snail 96 Mucin Power Essence' },
+      { label: 'Result', value: 'Stopped after overnight reaction' },
+    ],
+    verdictTitle: 'Kay’s take',
+  },
+};
+const stopNote = stopNoteBySlug[data.slug];
+const isStopNote = Boolean(stopNote);
+const isProductReviewCopy = !isRoutine && !isTrendGuide && !isIngredientGuide && !isStopNote;
 const documentTitle = data.seoTitle ?? ingredientGuide?.seoTitle ?? data.title;
 
 const articleLd: Record<string, unknown> = {
@@ -201,7 +223,9 @@ const breadcrumbLd = {
                 ? ingredientGuide.eyebrow
                 : trendGuide
                   ? trendGuide.eyebrow
-                  : `${isProductReviewCopy ? 'Honest review' : 'Honest note'} · ${categoryLabel}`
+                  : stopNote
+                    ? stopNote.eyebrow
+                    : `${isProductReviewCopy ? 'Honest review' : 'Honest note'} · ${categoryLabel}`
             }
           </p>
           <h1 class="article-title">{data.title}</h1>
@@ -262,6 +286,8 @@ const breadcrumbLd = {
               rather than personal product testing. If this page later includes affiliate links, that will
               be stated here. Skin responses vary.
             </>
+          ) : isStopNote ? (
+            <>Kay’s personal experience. Skin responses vary.</>
           ) : (
             <>
               This is a personal-use note, not medical advice. {data.author} bought this product herself.
@@ -276,6 +302,8 @@ const breadcrumbLd = {
             <SkinProfile title={trendGuide.contextTitle} facts={trendGuide.facts} />
           ) : ingredientGuide ? (
             <SkinProfile title={ingredientGuide.contextTitle} facts={ingredientGuide.facts} />
+          ) : stopNote ? (
+            <SkinProfile title={stopNote.contextTitle} facts={stopNote.facts} />
           ) : (
             !isTrendGuide && (
               data.frequency ? (
@@ -308,7 +336,10 @@ const breadcrumbLd = {
             )
           )
         }
-        <VerdictBox verdict={data.verdict} title={ingredientGuide?.verdictTitle ?? trendGuide?.verdictTitle} />
+        <VerdictBox
+          verdict={data.verdict}
+          title={ingredientGuide?.verdictTitle ?? trendGuide?.verdictTitle ?? stopNote?.verdictTitle}
+        />
       </div>
       <TableOfContents headings={headings} />
       <slot />
