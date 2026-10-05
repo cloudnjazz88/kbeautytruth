@@ -14,7 +14,7 @@ export const site = {
     experienceSupporting: 'Born in Korea and raised with Korean skincare',
   },
   features: {
-    adsense: false,
+    adsense: true,
     analytics: true,
     emailSubscribe: false,
     affiliateNetwork: false,

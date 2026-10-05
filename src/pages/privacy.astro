@@ -52,17 +52,25 @@ import { site } from '../site';
         site.features.adsense ? (
           <>
             <p>
-              This site uses Google advertising. Third-party vendors, including Google, use cookies
-              to serve ads based on a visitor&apos;s prior visits to this site or other sites.
-              Google&apos;s use of advertising cookies lets Google and its partners serve ads based
-              on those visits. This site has not added a separate advertising network, so it does
-              not list other ad vendors here.
+              This site has installed the Google AdSense script used for AdSense connection and site
+              review. Whether ads appear on these pages depends on Google&apos;s approval and any ad
+              settings added later.
+            </p>
+            <p>
+              Third-party vendors, including Google, may use cookies to serve ads based on a
+              visitor&apos;s prior visits to this site or other sites. Google&apos;s use of
+              advertising cookies lets Google and its partners serve ads based on those visits.
             </p>
             <p>
               You can opt out of personalized advertising in{' '}
-              <a href="https://adssettings.google.com/">Google Ads Settings</a>. You can also opt
-              out of some third-party cookies used for personalized advertising at{' '}
-              <a href="https://www.aboutads.info/">aboutads.info</a>.
+              <a href="https://adssettings.google.com/">Google Ads Settings</a>. How Google uses
+              data from partner sites is described at{' '}
+              <a href="https://policies.google.com/technologies/partner-sites">
+                Google&apos;s partner-sites page
+              </a>
+              . You can also learn about opting out of personalized advertising from some other ad
+              providers at{' '}
+              <a href="https://www.aboutads.info/choices/">aboutads.info/choices</a>.
             </p>
           </>
         ) : (
@@ -90,8 +98,9 @@ import { site } from '../site';
       <p>This site is not directed at children under 13.</p>
       <h2>Changes</h2>
       <p>
-        If ads, an email service, or other trackers are added later, or if Analytics settings
-        change, this page will be updated to match what is actually installed.
+        If an email service or other trackers are added later, if AdSense settings change after
+        approval, or if Analytics settings change, this page will be updated to match what is
+        actually installed.
       </p>
       <h2>Contact</h2>
       <p>Questions: <a href={`mailto:${site.email}`}>{site.email}</a></p>

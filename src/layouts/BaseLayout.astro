@@ -47,6 +47,7 @@ const graph = [websiteLd, personLd, ...jsonLd];
 const enableAnalytics =
   import.meta.env.PROD && site.features.analytics && Boolean(site.gaMeasurementId);
 const gaMeasurementId = site.gaMeasurementId;
+const enableAdsense = import.meta.env.PROD && site.features.adsense;
 ---
 
 <!doctype html>
@@ -94,6 +95,16 @@ const gaMeasurementId = site.gaMeasurementId;
             gtag('config', gaMeasurementId);
           </script>
         </>
+      )
+    }
+    {
+      enableAdsense && (
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9237217026636557"
+          crossorigin="anonymous"
+          is:inline
+        />
       )
     }
   </head>
