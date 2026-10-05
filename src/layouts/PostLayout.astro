@@ -32,13 +32,15 @@ const trendGuideBySlug: Record<
   {
     eyebrow: string;
     verdictTitle: string;
+    disclosure?: string;
     contextTitle?: string;
     facts?: { label: string; value: string }[];
   }
 > = {
   'what-is-glass-skin': {
-    eyebrow: 'Honest note · Trends',
+    eyebrow: 'Trend guide · Glass Skin',
     verdictTitle: 'Takeaway',
+    disclosure: 'This is an editorial trend guide with general skincare background, not medical advice. Personal routine observations are identified separately. If this page later includes affiliate links, that will be stated here. Skin responses vary.',
   },
   'mochi-skin-vs-glass-skin': {
     eyebrow: 'Trend guide · Mochi Skin',
@@ -308,8 +310,7 @@ const breadcrumbLd = {
             </>
           ) : isTrendGuide ? (
             <>
-              This is a short editorial note, not medical advice. If this page later includes affiliate
-              links, that will be stated here. Skin responses vary.
+              {trendGuide?.disclosure ?? 'This is a short editorial note, not medical advice. If this page later includes affiliate links, that will be stated here. Skin responses vary.'}
             </>
           ) : ingredientGuide?.disclosure === 'personal-experience' ? (
             <>
